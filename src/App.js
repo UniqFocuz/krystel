@@ -8,7 +8,6 @@ import options from './lib/particles';
 import "./index.css"
 function App() {
   const particlesInit = async (main) => {
-    console.log(main);
     await loadFull(main);
   };
   return (

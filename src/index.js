@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ChakraProvider>
-    <App />
+  <ChakraProvider toastOptions={{ defaultOptions: { position: 'bottom', duration: 3000 } }}>
+    <ColorModeProvider>
+      <App />
+    </ColorModeProvider>
   </ChakraProvider>
 );
 

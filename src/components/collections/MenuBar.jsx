@@ -1,6 +1,6 @@
-import { Box, Button, Card, Grid, GridItem } from "@chakra-ui/react"
+import { Button, Card, Grid, GridItem } from "@chakra-ui/react"
 import { BiBarChartSquare } from "react-icons/bi"
-import { HiCog6Tooth, HiMiniArrowsRightLeft, HiMiniShoppingBag, HiShoppingBag } from "react-icons/hi2"
+import { HiCog6Tooth, HiMiniArrowsRightLeft, HiMiniShoppingBag } from "react-icons/hi2"
 import { FaPeopleGroup } from "react-icons/fa6"
 import { primaryColour } from "../../lib/settings"
 import { MdOutlineAttachMoney } from "react-icons/md"

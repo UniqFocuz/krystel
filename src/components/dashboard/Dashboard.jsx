@@ -17,23 +17,13 @@ function Dashboard(){
           setDashboardItems(response.data)
         })
         .catch(error => {
-            localStorage.removeItem('accessToken')
-            localStorage.removeItem('refreshToken')
             if(error.response.status === 401){
                 toast({
-                  title: `Your session expired. Please Login again!`,
+                  title: error.response.data.message,
                   variant: 'subtle',
                   status: 'error',
                 })
-                navigate('/login')
-            }
-            if(error.response.status === 308){
-                toast({
-                  title: `Multi-Factor Authentication Required`,
-                  variant: 'subtle',
-                  status: 'error',
-                })
-                navigate('/login/mfa')
+                navigate(error.response.data.route)
             }
         });
     },[navigate, toast])

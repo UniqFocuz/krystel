@@ -24,11 +24,9 @@ function MFA() {
     useEffect(() => {
         const loadPage = async() => {
             await pingMfa().then((response) => {
-                console.log("success")
                 setIsLoading(false)
             }).catch((error) => {
                 if(error.response.status === 401){
-                    localStorage.removeItem('accessToken')
                     toast({
                     title: `Session Expired!`,
                     variant: 'subtle',

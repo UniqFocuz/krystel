@@ -141,7 +141,7 @@ function Login(){
                             <InputLeftElement pointerEvents='none'>
                                 <VscKey color={primaryColour}/>
                             </InputLeftElement>
-                            <Input type={showPassword ? 'text' : 'password'} value={cred.password} color={primaryColour} onChange={handlePasswordChange} placeholder='Password' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
+                            <Input type={showPassword ? 'text' : 'password'} value={cred.password} color={primaryColour} onChange={handlePasswordChange} placeholder='Password' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'}  isDisabled={isUsernameValid !== true} focusBorderColor={primaryColour}/>
                             <InputRightElement color={primaryColour}>
                             {showPassword ? <VscEyeClosed role="button" onClick={handleShowPassword}/> : <VscEye role="button" onClick={handleShowPassword}/> }
                             </InputRightElement>

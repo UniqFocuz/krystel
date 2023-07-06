@@ -5,8 +5,8 @@ import { primaryColour, primaryColourOpaced } from "../../lib/settings";
 import { AiOutlineUser } from "react-icons/ai";
 import { VscEye, VscEyeClosed, VscKey } from "react-icons/vsc";
 import { LiaCheckCircle, LiaTimesCircle } from "react-icons/lia";
-import { login, pingLogin, validateUsername } from "../../lib/api";
-import { BiSolidMoon, BiSolidSun } from "react-icons/bi";
+import { login, pingLogin, validatePreRegisterEmail, validateUsername } from "../../lib/api";
+import { BiCheck, BiInfoCircle, BiSolidMoon, BiSolidSun } from "react-icons/bi";
 
 function Login(){
     const navigate = useNavigate()
@@ -28,8 +28,13 @@ function Login(){
                 if (cred.username === '') {
                   setIsUsernameValid(null); // Reset to null when the username field is empty
                 } else {
-                  const response = await validateUsername(cred.username)
-                  setIsUsernameValid(response.data.exists);
+                    if(cred.username.includes('@') === true){
+                        const response = await validatePreRegisterEmail(cred.username)
+                        setIsUsernameValid(response.data.exists);
+                    } else {
+                        const response = await validateUsername(cred.username)
+                        setIsUsernameValid(response.data.exists);
+                    }
                 }
               } catch (error) {
                 setIsUsernameValid(false);
@@ -57,8 +62,9 @@ function Login(){
                 }
                 else{
                     localStorage.removeItem('accessToken')
-                    setIsLoading(false)
                 }
+            }).finally(() => {
+                setIsLoading(false)
             })
         }
         loadPage()
@@ -72,7 +78,7 @@ function Login(){
     };
     const handleLogin = async () => {
         setloader(true)
-          await login(cred)
+          await login(cred.username, cred.password)
           .then((response) => {
 
             localStorage.setItem('accessToken', response.data.accessToken);
@@ -124,16 +130,16 @@ function Login(){
                 </Button>
             </Box>
             <Flex height={'100vh'}>
-                <Card padding={10} width={{base: "70%", md: "45%", lg: "30%", xl: "20%"}} m="auto">
+                <Card padding={10} width={{base: "70%", md: "45%", lg: "35%", xl: "25%"}} m="auto">
                     <Text textAlign={'center'} color={primaryColour} fontSize={'2xl'} fontWeight={'bolder'}>log <sup>in</sup> </Text>
                     <Stack marginY={5} spacing={4}>
                         <InputGroup>
                             <InputLeftElement pointerEvents='none'>
                             <AiOutlineUser color={primaryColour} />
                             </InputLeftElement>
-                            <Input type='tel' color={primaryColour} value={cred.username} onChange={handleUsernameChange}  placeholder='Username' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
+                            <Input type='tel' color={primaryColour} value={cred.username} onChange={handleUsernameChange}  placeholder='Username or Email' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
                             <InputRightElement color={primaryColour}>
-                            {isUsernameValid == null ? '' : isUsernameValid ? <LiaCheckCircle role="button" color="green"/> : <LiaTimesCircle role="button" color="red"/> }
+                            {isUsernameValid == null ? '' : isUsernameValid ? <BiCheck role="button" color="green"/> : <BiInfoCircle role="button" color="red"/> }
                             </InputRightElement>
                         </InputGroup>
 
@@ -153,7 +159,7 @@ function Login(){
                     <Button size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={handleLogin} isDisabled={isUsernameValid !== true} isLoading={loader}>Login</Button>
                     <Divider marginY={5} color={'gray.300'}/>
                     <Box display={"flex"} gap={1} fontSize={'xs'} justifyContent={'center'}>
-                        <Text color={'gray.500'}>New to krystel.io?</Text> <Text color={primaryColour} fontWeight={'bold'} role="button">Register</Text>
+                        <Text color={'gray.500'}>New to krystel.io?</Text> <Text color={primaryColour} fontWeight={'bold'} role="button" onClick={() => navigate('/register')}>Register</Text>
                     </Box>
                 </Card>
             </Flex>

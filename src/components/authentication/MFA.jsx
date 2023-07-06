@@ -99,7 +99,7 @@ function MFA() {
             </Button>
         </Box>
       <Flex height={"100vh"}>
-        <Card padding={10} width={{ base: "70%", md: "45%", lg: "30%", xl: "20%" }} m="auto">
+      <Card padding={10} width={{base: "70%", md: "45%", lg: "35%", xl: "25%"}} m="auto">
           <Box>
             <Text fontSize={"2xl"} textAlign={"center"} fontWeight={"bold"} color={primaryColour}>
               multi-factor <sup>auth</sup>

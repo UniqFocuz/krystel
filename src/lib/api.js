@@ -12,12 +12,23 @@ else{
     baseURL = "http://localhost:8000/api"
 }
 
+// Support API
+
 export const validateUsername = (username) => {
     return axios.get(`${baseURL}/validate-username`, {
-        params: { username: username },
-      });
-  };
+            params: { username },
+        });
+    };
 
+export const validatePreRegisterEmail = (email) => {
+    return axios.get(`${baseURL}/validate-email`, {
+            params: { email },
+        });
+    };
+
+
+
+// Main API
 const params = () => {
     return {
         headers: {
@@ -26,20 +37,15 @@ const params = () => {
     }
 }
 
+// Auth API
+
 export const pingLogin = () => {
     return axios.get(`${baseURL}/auth/login`, params())
 
 }
 
-export const login = (creds) => {
-    return axios.post(`${baseURL}/auth/login`, {
-        username : creds.username,
-        password : creds.password,
-    })
-}
-
-export const dashboard = () => {
-    return axios.get(`${baseURL}/dashboard`, params())
+export const login = (username, password) => {
+    return axios.post(`${baseURL}/auth/login`, {username, password})
 }
 
 export const pingMfa = () => {
@@ -47,7 +53,14 @@ export const pingMfa = () => {
 }
 
 export const mfa = (otp) => {
-    return axios.post(`${baseURL}/auth/login/mfa`, {
-        otp: otp
-        }, params())
+    return axios.post(`${baseURL}/auth/login/mfa`, { otp }, params())
+}
+
+export const register = (email) => {
+    return axios.post(`${baseURL}/auth/register`, { email })
+}
+
+// Application API
+export const dashboard = () => {
+    return axios.get(`${baseURL}/dashboard`, params())
 }

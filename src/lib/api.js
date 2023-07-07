@@ -26,10 +26,8 @@ export const validatePreRegisterEmail = (email) => {
         });
     };
 
-
-
 // Main API
-const params = () => {
+const AccessParams = () => {
     return {
         headers: {
             Authorization : `Bearer ${localStorage.getItem('accessToken')}`
@@ -37,10 +35,18 @@ const params = () => {
     }
 }
 
+const RegistrationParams = () => {
+    return {
+        headers: {
+            Authorization : `Bearer ${localStorage.getItem('registrationToken')}`
+        }
+    }
+}
+
 // Auth API
 
 export const pingLogin = () => {
-    return axios.get(`${baseURL}/auth/login`, params())
+    return axios.get(`${baseURL}/auth/login`, AccessParams())
 
 }
 
@@ -49,18 +55,32 @@ export const login = (username, password) => {
 }
 
 export const pingMfa = () => {
-    return axios.get(`${baseURL}/auth/login/mfa`, params())
+    return axios.get(`${baseURL}/auth/login/mfa`, AccessParams())
 }
 
 export const mfa = (otp) => {
-    return axios.post(`${baseURL}/auth/login/mfa`, { otp }, params())
+    return axios.post(`${baseURL}/auth/login/mfa`, { otp }, AccessParams())
 }
 
 export const register = (email) => {
     return axios.post(`${baseURL}/auth/register`, { email })
 }
 
+export const pingProfileBuilder = () => {
+    return axios.get(`${baseURL}/auth/profile`, RegistrationParams())
+}
+
+export const setPassword = (password) => {
+    return axios.post(`${baseURL}/auth/set-password`, { password }, RegistrationParams())
+}
+
+export const sendVerificationLink = () => {
+    return axios.post(`${baseURL}/auth/send-verification`, {}, RegistrationParams())
+}
+
+
+
 // Application API
 export const dashboard = () => {
-    return axios.get(`${baseURL}/dashboard`, params())
+    return axios.get(`${baseURL}/dashboard`, AccessParams())
 }

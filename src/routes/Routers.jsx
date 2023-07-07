@@ -4,6 +4,7 @@ import HomePage from "../components/HomePage";
 import Login from "../components/authentication/Login";
 import Register from "../components/authentication/Register";
 import MFA from "../components/authentication/MFA";
+import ProfileBuilder from "../components/authentication/ProfileBuilder";
 
 function Routers(){
     return (
@@ -12,6 +13,7 @@ function Routers(){
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/welcome" element={<ProfileBuilder/>}/>
             <Route path="/login/mfa" element={<MFA/>}/>
         </Routes>
     )

@@ -1,5 +1,5 @@
 import { Box, Card, Flex, Text, Input, Button, useColorMode, useColorModeValue, useToast } from "@chakra-ui/react";
-import { primaryColour, primaryColourOpaced } from "../../lib/settings";
+import { maxWidthLayoutSm, primaryColour, primaryColourOpaced } from "../../lib/settings";
 import { useRef, useEffect, useState } from "react";
 import { mfa, pingMfa } from "../../lib/api";
 import { BiSolidMoon, BiSolidSun } from "react-icons/bi";
@@ -92,19 +92,13 @@ function MFA() {
         Loading...
     </>) :(
     <>
-        <Box display={"flex"} padding={5} position={'fixed'} width={"100%"}>
-            <Text fontSize={"2xl"} fontWeight={"bolder"} my="auto" mr="auto" color={primaryColour}>krystel.io</Text>
-            <Button gap={1} size={"sm"} my="auto" ml="auto" shadow={"md"} variant={'solid'} colorScheme={whiteColorModeValue} onClick={toggleColorMode}>
-                {colorMode === "light" ? <BiSolidMoon color={primaryColour} /> : <BiSolidSun color={primaryColour} />}
-            </Button>
-        </Box>
       <Flex height={"100vh"}>
-      <Card padding={10} width={{base: "70%", md: "45%", lg: "35%", xl: "25%"}} m="auto">
+      <Card padding={10} width="90%" maxWidth={maxWidthLayoutSm} m="auto">
           <Box>
             <Text fontSize={"2xl"} textAlign={"center"} fontWeight={"bold"} color={primaryColour}>
               multi-factor <sup>auth</sup>
             </Text>
-            <Text marginY={5} fontSize={"xs"} textAlign={"justify"} color={grayColorModeValue}>
+            <Text marginY={5} fontSize={"sm"} textAlign={"justify"} color={grayColorModeValue}>
               You are seeing this page since <b style={{ color: primaryColour }}>Multi-Factor Authentication(MFA)</b> is enabled in your account. Your account is now more secure. Please enter the code from your authenticator app.
             </Text>
           </Box>

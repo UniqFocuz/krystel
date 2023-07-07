@@ -1,19 +1,18 @@
-import { Box, Button, Card, Divider, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Stack, Text, useColorMode, useColorModeValue, useToast } from "@chakra-ui/react";
+import { Box, Button, Card, Divider, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Stack, Text, useColorMode, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { primaryColour, primaryColourOpaced } from "../../lib/settings";
+import { layout_md, maxWidthLayoutSm, primaryColour, primaryColourOpaced } from "../../lib/settings";
 import { AiOutlineUser } from "react-icons/ai";
 import { VscEye, VscEyeClosed, VscKey } from "react-icons/vsc";
-import { LiaCheckCircle, LiaTimesCircle } from "react-icons/lia";
 import { login, pingLogin, validatePreRegisterEmail, validateUsername } from "../../lib/api";
-import { BiCheck, BiInfoCircle, BiSolidMoon, BiSolidSun } from "react-icons/bi";
+import { BiCheck, BiInfoCircle } from "react-icons/bi";
 
 function Login(){
     const navigate = useNavigate()
     const { colorMode, toggleColorMode } = useColorMode();
     const [cred, setCred] = useState({
-        "username" : '',
-        "password" : ''
+        username : '',
+        password : ''
     })
     const toast = useToast()
     const [showPassword, setShowPassword] = useState(false)
@@ -21,7 +20,6 @@ function Login(){
     const [loader, setloader] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [isUsernameValid, setIsUsernameValid] = useState(null); // Initial validation status
-    const whiteColorModeValue = useColorModeValue("white")
     useEffect(() => {
         const validate = async () => {
             try {
@@ -123,21 +121,15 @@ function Login(){
         Loading ...
         </>) :(
         <>
-            <Box display={"flex"} padding={5} position={'fixed'} width={"100%"}>
-                <Text fontSize={"2xl"} fontWeight={"bolder"} my="auto" mr="auto" color={primaryColour}>krystel.io</Text>
-                <Button gap={1} size={"sm"} my="auto" ml="auto" shadow={"md"} variant={'solid'} colorScheme={whiteColorModeValue} onClick={toggleColorMode}>
-                    {colorMode === "light" ? <BiSolidMoon color={primaryColour} /> : <BiSolidSun color={primaryColour} />}
-                </Button>
-            </Box>
             <Flex height={'100vh'}>
-                <Card padding={10} width={{base: "70%", md: "45%", lg: "35%", xl: "25%"}} m="auto">
+                <Card padding={10} width="90%" maxWidth={maxWidthLayoutSm} m="auto">
                     <Text textAlign={'center'} color={primaryColour} fontSize={'2xl'} fontWeight={'bolder'}>log <sup>in</sup> </Text>
                     <Stack marginY={5} spacing={4}>
                         <InputGroup>
                             <InputLeftElement pointerEvents='none'>
                             <AiOutlineUser color={primaryColour} />
                             </InputLeftElement>
-                            <Input type='tel' color={primaryColour} value={cred.username} onChange={handleUsernameChange}  placeholder='Username or Email' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
+                            <Input type='text' color={primaryColour} value={cred.username} onChange={handleUsernameChange}  placeholder='Username or Email' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
                             <InputRightElement color={primaryColour}>
                             {isUsernameValid == null ? '' : isUsernameValid ? <BiCheck role="button" color="green"/> : <BiInfoCircle role="button" color="red"/> }
                             </InputRightElement>

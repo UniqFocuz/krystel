@@ -13,8 +13,13 @@ function EmailTab (props){
         if(regex.test(email)){
             validatePreRegisterEmail(email).then((response) => {
                 if(response.data.exists === true){
-                    props.setIsValid(false)
-                    setEmailFeedback('Ah, This email is already registered!')
+                    if(response.data.isActive === true){
+                        props.setIsValid(false)
+                        setEmailFeedback('Ah, This email is already registered!')
+                    } else{
+                        props.setIsValid(true)
+                        setEmailFeedback('')
+                    }
                 } else{
                     props.setIsValid(true)
                     setEmailFeedback('')
@@ -82,7 +87,7 @@ function EmailTab (props){
         </Box>
         <Flex mt={5} justifyContent={'space-between'}>
             <Button my={"auto"} size={'sm'} colorScheme='orange' variant='ghost' onClick={props.decrementStepper}>Back</Button>
-            <Button size={'sm'} ml={'auto'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={props.incrementStepper} isDisabled={!props.isValid} >Submit</Button>
+            <Button size={'sm'} ml={'auto'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={props.incrementStepper} isLoading={props.isLoading} isDisabled={!props.isValid} >Submit</Button>
         </Flex>
         </>
     )

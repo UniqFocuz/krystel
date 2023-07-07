@@ -2,6 +2,7 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { primaryColour, primaryColourOpaced } from "../../../lib/settings";
 
 function WelcomeTab(props){
+
     return (
         <>
         <Box>
@@ -11,7 +12,7 @@ function WelcomeTab(props){
             </Text>
             <Text fontSize={'sm'} fontWeight={'bold'} my={2} color={primaryColour}>Welcome to Krystel.io!</Text>
             <Flex justifyContent={'end'}>
-                <Button size={'sm'} ml={'auto'} mt={5} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={props.incrementStepper}>Register</Button>
+                <Button size={'sm'} ml={'auto'} mt={5} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} isLoading={props.isLoading} onClick={props.incrementStepper}>Register</Button>
             </Flex>
         </Box>
         </>

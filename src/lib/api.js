@@ -88,7 +88,29 @@ export const profileBuilder = (data) => {
     return axios.post(`${baseURL}/auth/profile`, data, RegistrationParams())
 }
 
+export const mfaSettingsPing = () => {
+    if(window.location.pathname == '/welcome'){
+        return axios.get(`${baseURL}/auth/mfa/settings`, RegistrationParams())
+    } else{
+        return axios.get(`${baseURL}/auth/mfa/settings`, AccessParams())
+    }
+}
 
+export const mfaAddNewDevice = () => {
+    if(window.location.pathname == '/welcome'){
+        return axios.post(`${baseURL}/auth/mfa/add`, {}, RegistrationParams())
+    } else{
+        return axios.post(`${baseURL}/auth/mfa/add`, {}, AccessParams())
+    }
+}
+
+export const confirmNewDevice = (otp, id) => {
+    if(window.location.pathname == '/welcome'){
+        return axios.post(`${baseURL}/auth/mfa/confirm`, { otp, id }, RegistrationParams())
+    } else{
+        return axios.post(`${baseURL}/auth/mfa/confirm`, { otp }, AccessParams())
+    }
+}
 
 // Application API
 export const dashboard = () => {

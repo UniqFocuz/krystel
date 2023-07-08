@@ -139,7 +139,7 @@ function PasswordSetup(props) {
                         <Flex mt={5} justifyContent={'space-between'}>
                             <Button my={"auto"} size={'sm'} colorScheme='orange' variant='ghost' onClick={props.decrementStepper}>Back</Button>
                             <Flex gap={3}>
-                                <Text my="auto" fontSize={"sm"} fontWeight={'medium'} color={"gray"}><b style={{ color: primaryColourOpaced }}>Set Password</b></Text><IconButton size={'md'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} rounded={"50%"} isLoading={props.isLoading} onClick={handleSubmitPassword} icon={<BiLockAlt />} />
+                                <Text my="auto" fontSize={"sm"} fontWeight={'medium'} color={"gray"}><b style={{ color: primaryColourOpaced }}>Set Password</b></Text><IconButton size={'md'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} rounded={"50%"} isLoading={props.isLoading} onClick={handleSubmitPassword} icon={<BiKey />} />
                             </Flex>
                         </Flex>
                     </Box>

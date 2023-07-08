@@ -7,8 +7,6 @@ import WelcomeTab from "./RegistrationTabs/WelcomeTab";
 import EmailTab from "./RegistrationTabs/EmailTab";
 import ConfirmationTab from "./RegistrationTabs/ConfirmationTab";
 
-
-
 function Register(){
     const [isLoading, setIsLoading] = useState(false)
     const [email, setEmail] = useState('');

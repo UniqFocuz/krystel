@@ -6,13 +6,11 @@ import { BiSolidMoon, BiSolidSun } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
 function MFA() {
-    const { colorMode, toggleColorMode } = useColorMode();
     const inputRefs = useRef([]);
     const [code, setCode] = useState([]);
     const [validate, setValidate] = useState(false)
     const navigate = useNavigate()
-    const [isLoading, setIsLoading] = useState(true);
-    const whiteColorModeValue = useColorModeValue("white")
+    const [isPageLoading, setIsPageLoading] = useState(true);
     const grayColorModeValue = useColorModeValue("gray")
     const toast = useToast()
     useEffect(() => {
@@ -24,7 +22,7 @@ function MFA() {
     useEffect(() => {
         const loadPage = async() => {
             await pingMfa().then((response) => {
-                setIsLoading(false)
+                setIsPageLoading(false)
             }).catch((error) => {
                 if(error.response.status === 401){
                     toast({
@@ -32,7 +30,7 @@ function MFA() {
                     variant: 'subtle',
                     status: 'error',
                     })
-                    setIsLoading(false)
+                    setIsPageLoading(false)
                     navigate('/login')
                 } else if(error.response.status === 308){
                     navigate('/dashboard')
@@ -87,7 +85,7 @@ function MFA() {
       }
 
   return (
-    isLoading ?(
+    isPageLoading ?(
     <>
         Loading...
     </>) :(

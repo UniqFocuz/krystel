@@ -9,16 +9,17 @@ import WalletAddress from "./ProfileBuilderTabs/WalletAddress"
 import { useEffect, useState } from "react"
 import { pingProfileBuilder } from "../../lib/api"
 import { useNavigate } from "react-router-dom"
+import TelegramSetup from "./ProfileBuilderTabs/TelegramSetup"
 
 
 function ProfileBuilder() {
-    const [pageLoader, setPageLoader] = useState(false)
+    const [isPageLoading, setIsPageLoading] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
     const toast = useToast()
     const [progress, setProgress] = useState({
         isPasswordSet: false,
-        isUsernameSet: false,
+        isPatronSet: false,
         isEmailVerified: false,
         data: {
             username: '',
@@ -32,7 +33,7 @@ function ProfileBuilder() {
     useEffect(() => {
         const loadPage = async() => {
             await pingProfileBuilder().then((response) => {
-                setPageLoader(false)
+                setIsPageLoading(false)
                 setProgress(response.data)
             }).catch((error) => {
                 navigate('/register')
@@ -42,7 +43,7 @@ function ProfileBuilder() {
                 status: 'error',
                 })
             }).finally(() => {
-                setPageLoader(false)
+                setIsPageLoading(false)
             })
         }
         loadPage()
@@ -71,6 +72,7 @@ function ProfileBuilder() {
         { component : <BasicDetails {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress, setProgress}} /> },
         { component : <MFASetup {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress}} /> },
         { component : <WalletAddress {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress}} /> },
+        { component : <TelegramSetup {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress}} /> },
     ]
 
     const { activeStep, setActiveStep } = useSteps({
@@ -79,7 +81,7 @@ function ProfileBuilder() {
     })
 
     return (
-        pageLoader ?(
+        isPageLoading ?(
         <>
         Loading ...
         </>) :(

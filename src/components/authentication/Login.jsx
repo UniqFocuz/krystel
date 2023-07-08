@@ -9,7 +9,6 @@ import { BiCheck, BiInfoCircle } from "react-icons/bi";
 
 function Login(){
     const navigate = useNavigate()
-    const { colorMode, toggleColorMode } = useColorMode();
     const [cred, setCred] = useState({
         username : '',
         password : ''
@@ -18,7 +17,7 @@ function Login(){
     const [showPassword, setShowPassword] = useState(false)
     const handleShowPassword = () => setShowPassword(!showPassword)
     const [loader, setloader] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
+    const [isPageLoading, setIsPageLoading] = useState(true)
     const [isUsernameValid, setIsUsernameValid] = useState(null); // Initial validation status
     useEffect(() => {
         const validate = async () => {
@@ -48,7 +47,7 @@ function Login(){
     useEffect(() => {
         const loadPage = async() => {
             await pingLogin().then((response) => {
-                setIsLoading(false)
+                setIsPageLoading(false)
             }).catch((error) => {
                 if(error.response.status === 308){
                     navigate('/dashboard')
@@ -62,14 +61,14 @@ function Login(){
                     localStorage.removeItem('accessToken')
                 }
             }).finally(() => {
-                setIsLoading(false)
+                setIsPageLoading(false)
             })
         }
         loadPage()
     }, [navigate, toast])
 
     const handleUsernameChange = (e) => {
-        setCred({ ...cred, username: e.target.value });
+        setCred({ ...cred, username: e.target.value.toUpperCase().replace('KY-', '') });
     };
     const handlePasswordChange = (e) => {
         setCred({ ...cred, password: e.target.value });
@@ -116,7 +115,7 @@ function Login(){
          
       };
     return(
-        isLoading ?(
+        isPageLoading ?(
         <>
         Loading ...
         </>) :(

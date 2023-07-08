@@ -82,14 +82,6 @@ function BasicDetails(props) {
             return false;
         }
     }
-    const handleUsernameChange = (e) => {
-        const username = e.target.value.toUpperCase()
-        props.setProgress({
-            ...props.progress, data: {
-                ...props.progress.data, username
-            }
-        })
-    };
     const handlePatronChange = (e) => {
         const patron = e.target.value.toUpperCase()
         props.setProgress({
@@ -133,7 +125,6 @@ function BasicDetails(props) {
     const handleSubmitDetails = async() => {
         props.setIsLoading(true)
         if(isAgeValid){
-            if(isUsernameValid){
                 if(isPatronValid){
                     await profileBuilder(props.progress.data)
                     .then((response) => {
@@ -143,7 +134,7 @@ function BasicDetails(props) {
                             status: 'success',
                         })
                         setTimeout(() => {
-                            props.setProgress({ ...props.progress, isUsernameSet: true })
+                            props.setProgress({ ...props.progress, isPatronSet: true })
                             props.setIsLoading(false)
                         }, 3000)
                     }) .catch((error) => {
@@ -160,13 +151,6 @@ function BasicDetails(props) {
                         status: 'error',
                     })
                 }
-            } else{
-                toast({
-                    title: `Username is Invalid!`,
-                    variant: 'subtle',
-                    status: 'error',
-                })
-            }
         } else{
             toast({
                 title: `As per our Policy, Users must be 18 years old!`,
@@ -179,7 +163,7 @@ function BasicDetails(props) {
         }, 3000)
     }
     return (
-        !props.progress.isUsernameSet ?
+        !props.progress.isPatronSet ?
         <>
             <Text fontSize='md' fontWeight='bold' color={primaryColour}>
                 Heads up for a Quick Start!
@@ -192,10 +176,7 @@ function BasicDetails(props) {
                     <InputLeftElement pointerEvents='none'>
                         <AiOutlineUser color={primaryColour} />
                     </InputLeftElement>
-                    <Input type='text' color={primaryColour} value={props.progress.data.username} onChange={handleUsernameChange} placeholder='Username' fontSize={"sm"} fontWeight={'medium'} _placeholder={{ fontSize: "sm", fontWeight: 'normal' }} variant={'flushed'} focusBorderColor={primaryColour} />
-                    <InputRightElement color={primaryColour}>
-                        {isUsernameValid == null ? '' : isUsernameValid ? <BiCheck role="button" color="green" /> : <BiInfoCircle role="button" color="red" />}
-                    </InputRightElement>
+                    <Input type='text' color={primaryColour} value={props.progress.data.username} fontSize={"sm"} fontWeight={'medium'} variant={'flushed'} focusBorderColor={primaryColour} readOnly />
                 </InputGroup>
                 <Flex justifyContent={'end'}>
                     <Text fontSize={'2xs'} width={"70%"} mt={1} textAlign={'end'} fontWeight={'bold'} color={primaryColour}>{
@@ -260,15 +241,18 @@ function BasicDetails(props) {
         </> :
         <>
         <Text fontSize='lg' fontWeight='bold' color={primaryColour}>
-            You are good to go!
+            Know Yourself as, {props.progress.data.username}!
         </Text>
         <Text marginY={5} fontSize={"sm"} textAlign={"justify"} color={grayColorModeValue}>
-            Your basic details are updated. A unique username is very important to identify yourself in the community. Now that we have completed most of the tasks, you can use your Username or Email to login <b style={{ color: primaryColour }} onClick={() => navigate('/login')}>here</b>
+            Your basic details are updated. A unique username is very important to identify yourself in the community. So we have given you a username - <b style={{color: primaryColour}}>{props.progress.data.username}</b>, which can be used to login.
+        </Text>
+        <Text marginY={5} fontSize={"sm"} textAlign={"justify"} color={grayColorModeValue}>
+            Now that we have completed most of the tasks, you can use your Username or Email to login <b style={{ color: primaryColour }} onClick={() => navigate('/login')}>here</b> or proceed further to complete your profile!
         </Text>
         <Flex mt={5} justifyContent={'space-between'}>
             <Button my={"auto"} size={'sm'} colorScheme='orange' variant='ghost' onClick={props.decrementStepper}>Back</Button>
             <Flex gap={3}>
-                <Text my="auto" fontSize={"sm"} fontWeight={'medium'} color={"gray"}>Next: <b style={{ color: primaryColourOpaced }}>Verify Email</b></Text><IconButton size={'md'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} rounded={"50%"} isLoading={props.isLoading} onClick={props.incrementStepper} icon={<BiChevronRight size={25} />} />
+                <Text my="auto" fontSize={"sm"} fontWeight={'medium'} color={"gray"}>Next: <b style={{ color: primaryColourOpaced }}>MFA</b></Text><IconButton size={'md'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} rounded={"50%"} isLoading={props.isLoading} onClick={props.incrementStepper} icon={<BiChevronRight size={25} />} />
             </Flex>
         </Flex>
         </>

@@ -28,7 +28,7 @@ function Dashboard(){
         });
     },[navigate, toast])
     return(
-        dashboardItems &&
+        !dashboardItems &&
         <>
             <Box width={{base: "90%", md: "45%", lg: "30%"}} mx="auto" pt={"80px"}>
                 <PrimaryCard/>

@@ -8,22 +8,25 @@ import MFASetup from "./ProfileBuilderTabs/MFASetup"
 import WalletAddress from "./ProfileBuilderTabs/WalletAddress"
 import { useEffect, useState } from "react"
 import { pingProfileBuilder } from "../../lib/api"
+import { useNavigate } from "react-router-dom"
 
 
 function ProfileBuilder() {
     const [pageLoader, setPageLoader] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const navigate = useNavigate()
+    const toast = useToast()
     const [progress, setProgress] = useState({
         isPasswordSet: false,
         isUsernameSet: false,
-        isFulNameSet: false,
         isEmailVerified: false,
         data: {
             username: '',
             firstName: '',
             lastName: '',
             dateOfBirth: new Date().toLocaleDateString('en-GB'),
-            sponsor: ''
+            patron: '',
+            nickname: '',
         }
     })
     useEffect(() => {
@@ -31,8 +34,13 @@ function ProfileBuilder() {
             await pingProfileBuilder().then((response) => {
                 setPageLoader(false)
                 setProgress(response.data)
-                console.log(response.data)
             }).catch((error) => {
+                navigate('/register')
+                toast({
+                title: `An error occured!`,
+                variant: 'subtle',
+                status: 'error',
+                })
             }).finally(() => {
                 setPageLoader(false)
             })

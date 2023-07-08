@@ -23,23 +23,18 @@ function PasswordSetup(props) {
     const lowerCase = (password) => {
         return password !== '' ? /[a-z]/.test(password) : null;
     };
-
     const lettersCount = (password) => {
         return password !== '' ? /^.{8,}$/.test(password) : null;
     };
-
     const numbers = (password) => {
         return password !== '' ? /\d/.test(password) : null;
     };
-
     const upperCase = (password) => {
         return password !== '' ? /[A-Z]/.test(password) : null;
     };
-
     const specialChars = (password) => {
         return password !== '' ? /[!@#$%^&*()]/.test(password) : null;
     };
-
     const handlePasswordChange = (e) => {
         const password = e.target.value
         setCred({ ...cred, password });
@@ -68,7 +63,6 @@ function PasswordSetup(props) {
             }
         }
     }
-
     const handleSubmitPassword = async () => {
         props.setIsLoading(true)
         await setPassword(cred.password)

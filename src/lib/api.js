@@ -20,6 +20,12 @@ export const validateUsername = (username) => {
         });
     };
 
+export const validatePatron = (patron) => {
+    return axios.get(`${baseURL}/validate-patron`, {
+            params: { patron },
+        });
+    };
+
 export const validatePreRegisterEmail = (email) => {
     return axios.get(`${baseURL}/validate-email`, {
             params: { email },
@@ -76,6 +82,10 @@ export const setPassword = (password) => {
 
 export const sendVerificationLink = () => {
     return axios.post(`${baseURL}/auth/send-verification`, {}, RegistrationParams())
+}
+
+export const profileBuilder = (data) => {
+    return axios.post(`${baseURL}/auth/profile`, data, RegistrationParams())
 }
 
 

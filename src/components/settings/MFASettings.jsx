@@ -1,11 +1,10 @@
-import { Box, Button, Center, Flex, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure, useToast } from "@chakra-ui/react";
+import { Button, Center, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
 import { primaryColour, primaryColourOpaced } from "../../lib/settings";
-import { BiCheck, BiLockAlt, BiSolidLockAlt, BiSolidLockOpenAlt, BiX } from "react-icons/bi";
-import { useEffect, useRef, useState } from "react";
+import { BiCheck, BiSolidLockAlt, BiSolidLockOpenAlt, BiX } from "react-icons/bi";
+import { useEffect, useState } from "react";
 import { mfaAddNewDevice, mfaSettingsPing } from "../../lib/api";
-import QRCode from 'qrcode.react';
-import { VscEye, VscEyeClosed } from "react-icons/vsc";
-import ViewKeyModal from "./Modal/ViewKeyModal";
+import { VscEye } from "react-icons/vsc";
+import MFASetupModal from "./Modal/MFASetupModal";
 
 function MFASetting(){
     const [devices, setDevices] = useState([])
@@ -40,6 +39,17 @@ function MFASetting(){
         setDevices(updatedDevices);
       };
       
+    const handleDeviceDeactivation = (id) => {
+        const updatedDevices = devices.map((device) =>
+            device.id === id ? { ...device, confirmed: false } : device
+        );
+        setDevices(updatedDevices);
+        };
+
+    const handleDeviceRemove = (id) => {
+        const updatedDevices = devices.filter((device) => device.id !== id);
+        setDevices(updatedDevices);
+        };
     const handleOpenModal = (obj) => {
         setCurrentDevice(obj)
         onOpen()
@@ -65,9 +75,7 @@ function MFASetting(){
                                     <Td>{device.name}</Td>
                                     <Td textAlign={'center'}>{device.step}s</Td>
                                     <Td>{device.confirmed === true ? (<Center><BiCheck mx={'auto'}/></Center>) : (<Center><BiX mx={'auto'}/></Center>)}</Td>
-                                    {device.confirmed !== true ? 
                                     <Td role="button" onClick={() => handleOpenModal(device)}><Center><VscEye mx={'auto'}/></Center></Td>
-                                    : (<Td><Center>-</Center></Td>)}
                                 </Tr>
                             )) : <Tr><Td colSpan={3} textAlign={'center'} color={'gray'}>No devices</Td></Tr>
                         }
@@ -77,15 +85,15 @@ function MFASetting(){
             <Flex justifyContent={'end'}>
                 <Button marginTop={5} size={'xs'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} onClick={handleAddNewDevice} isLoading={isLoading}>Add New Device</Button>
             </Flex>
-            <Text fontSize={'sm'} my={5} textAlign={'justify'}>Having atleast one Active Multi-Factor Authentication device enables MFA during the future logins. If you wish the remove this additional authentication, you can always disable it.</Text>
-            <Flex><Text fontSize={'sm'} fontWeight={'bolder'} color={"gray"}>Multi-Factor Authentication: </Text> { devices.some((device) => device.confirmed) ? <Center><BiSolidLockAlt color={primaryColour}/></Center> : <Center><BiSolidLockOpenAlt color={primaryColour}/></Center> } </Flex>
+            <Text fontSize={'sm'} my={5} textAlign={'justify'}>Having atleast one active Multi-Factor Authentication device enables MFA during the future logins. If you wish tp remove this additional authentication, you can always do it.</Text>
+            <Flex gap={2}><Text fontSize={'sm'} fontWeight={'bolder'} color={"gray"}>Multi-Factor Authentication: </Text> { devices.some((device) => device.confirmed) ? <Center gap={1}><BiSolidLockAlt color={primaryColour}/><Text fontSize={'sm'} color={"gray"}>Active</Text></Center> : <Center gap={1}><BiSolidLockOpenAlt color={primaryColour}/><Text fontSize={'sm'} color={"gray"}>Not Active</Text></Center> } </Flex>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                 <ModalHeader>Multi-Factor Authentication</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <ViewKeyModal {...{currentDevice, setCurrentDevice, onClose, handleDeviceConfirmation}} />
+                    <MFASetupModal {...{currentDevice, setCurrentDevice, onClose, handleDeviceConfirmation, handleDeviceDeactivation, handleDeviceRemove}} />
                 </ModalBody>
                 <ModalFooter></ModalFooter>
                 </ModalContent>

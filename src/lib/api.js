@@ -108,9 +108,18 @@ export const confirmNewDevice = (otp, id) => {
     if(window.location.pathname == '/welcome'){
         return axios.post(`${baseURL}/auth/mfa/confirm`, { otp, id }, RegistrationParams())
     } else{
-        return axios.post(`${baseURL}/auth/mfa/confirm`, { otp }, AccessParams())
+        return axios.post(`${baseURL}/auth/mfa/confirm`, { otp, id }, AccessParams())
     }
 }
+
+export const mfaDeviceAction = (id, action) => {
+    if(window.location.pathname == '/welcome'){
+        return axios.post(`${baseURL}/auth/mfa/action`, { id, action }, RegistrationParams())
+    } else{
+        return axios.post(`${baseURL}/auth/mfa/action`, { id, action }, AccessParams())
+    }
+}
+
 
 // Application API
 export const dashboard = () => {

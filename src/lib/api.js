@@ -120,6 +120,16 @@ export const mfaDeviceAction = (id, action) => {
     }
 }
 
+// Payment API
+
+export const createDepositInvoice = (amount, name) => {
+    if(window.location.pathname == '/welcome'){
+        return axios.post(`${baseURL}/deposit/invoice/create`, { amount, name }, RegistrationParams())
+    } else{
+        return axios.post(`${baseURL}/deposit/invoice/create`, { amount, name }, AccessParams())
+    }
+}
+
 
 // Application API
 export const dashboard = () => {

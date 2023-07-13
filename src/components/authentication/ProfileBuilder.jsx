@@ -66,12 +66,12 @@ function ProfileBuilder() {
     }
 
     const tabs = [
+        { component : <WalletAddress {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress}} /> },
         { component : <WelcomeTab {...{incrementStepper, isLoading, setIsLoading, progress }} /> },
         { component : <PasswordSetup {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress, setProgress}} /> },
         { component : <EmailVerify {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress}} /> },
         { component : <BasicDetails {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress, setProgress}} /> },
         { component : <MFASetup {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress}} /> },
-        { component : <WalletAddress {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress}} /> },
         { component : <TelegramSetup {...{incrementStepper, decrementStepper, isLoading, setIsLoading, progress}} /> },
     ]
 

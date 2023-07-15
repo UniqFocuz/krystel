@@ -3,6 +3,7 @@ import QRCode from "qrcode.react"
 import { primaryColour, primaryColourOpaced } from "../../../lib/settings"
 import { useRef, useState } from "react";
 import { confirmNewDevice, mfaDeviceAction } from "../../../lib/api";
+import { copyToClipboard } from "../../../lib/support";
 
 function ViewKeyModal(props) {
     const inputRefs = useRef([]);
@@ -87,17 +88,6 @@ function ViewKeyModal(props) {
 
         })
     }
-
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text)
-          .then(() => {
-                toast({
-                    title: `Copied to Clipboard!`,
-                    variant: 'subtle',
-                    status: 'info',
-                })
-          })
-    }
     return (
         !props.currentDevice.confirmed ?
         <>
@@ -139,7 +129,7 @@ function ViewKeyModal(props) {
                     <Flex gap={3}><b style={{color: primaryColour}}>Secret:</b> <Text>{props.currentDevice.secret}</Text> </Flex>
                     <Flex gap={3}><b style={{color: primaryColour}}>Time:</b> <Text>30s</Text></Flex>
                     <Flex gap={3}><b style={{color: primaryColour}}>Alogrithm:</b> <Text>SHA1</Text></Flex>
-                    <Flex justifyContent={'end'}><Button  size={'xs'} fontSize={'xs'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"}  onClick={() => {copyToClipboard(props.currentDevice.secret)}}>Copy Secret</Button></Flex>
+                    <Flex justifyContent={'end'}><Button  size={'xs'} fontSize={'xs'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"}  onClick={() => {copyToClipboard(props.currentDevice.secret, toast, 'Secret')}}>Copy Secret</Button></Flex>
                 </Box>
             </Box>
         </> :

@@ -7,7 +7,7 @@ import BasicDetails from "./ProfileBuilderTabs/BasicDetails"
 import MFASetup from "./ProfileBuilderTabs/MFASetup"
 import WalletAddress from "./ProfileBuilderTabs/WalletAddress"
 import { useEffect, useState } from "react"
-import { pingProfileBuilder } from "../../lib/api"
+import { profileBuilderPing } from "../../lib/api"
 import { useNavigate } from "react-router-dom"
 import TelegramSetup from "./ProfileBuilderTabs/TelegramSetup"
 
@@ -32,7 +32,7 @@ function ProfileBuilder() {
     })
     useEffect(() => {
         const loadPage = async() => {
-            await pingProfileBuilder().then((response) => {
+            await profileBuilderPing().then((response) => {
                 setIsPageLoading(false)
                 setProgress(response.data)
             }).catch((error) => {

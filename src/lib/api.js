@@ -72,7 +72,7 @@ export const register = (email) => {
     return axios.post(`${baseURL}/auth/register`, { email })
 }
 
-export const pingProfileBuilder = () => {
+export const profileBuilderPing = () => {
     return axios.get(`${baseURL}/auth/profile`, RegistrationParams())
 }
 
@@ -130,6 +130,37 @@ export const createDepositInvoice = (amount, name) => {
     }
 }
 
+export const depositPing = (type) => {
+    if(window.location.pathname == '/welcome'){
+        return axios.get(`${baseURL}/deposit/invoices?type=${type}`, RegistrationParams())
+    } else{
+        return axios.get(`${baseURL}/deposit/invoices?type=${type}`, AccessParams())
+    }
+}
+
+export const verifyDeposit = (id) => {
+    if(window.location.pathname == '/welcome'){
+        return axios.get(`${baseURL}/plisio/verify?txnId=${id}`, RegistrationParams())
+    } else{
+        return axios.get(`${baseURL}/plisio/verify?txnId=${id}`, AccessParams())
+    }
+}
+
+export const fetchWalletAddresFromNetwork = (id) => {
+    if(window.location.pathname == '/welcome'){
+        return axios.post(`${baseURL}/deposit/getAddress`, {id}, RegistrationParams())
+    } else{
+        return axios.post(`${baseURL}/deposit/getAddress`, {id}, AccessParams())
+    }
+}
+
+export const setWalletAddress = (address) => {
+    if(window.location.pathname == '/welcome'){
+        return axios.post(`${baseURL}/profile/setAddress`, {address}, RegistrationParams())
+    } else{
+        return axios.post(`${baseURL}/profile/setAddress`, {address}, AccessParams())
+    }
+}
 
 // Application API
 export const dashboard = () => {

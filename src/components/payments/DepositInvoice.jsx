@@ -1,16 +1,67 @@
-import { Box, Flex, Image, Input, Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/react";
-import QRCode from "qrcode.react";
+import { Box, Spinner, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, TabPanel, TabPanels, Tabs, Text, useSteps } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { primaryColour } from "../../lib/settings";
+import NewInvoice from "./status/New";
+import { GoDotFill } from "react-icons/go";
+import Finished from "./status/Finished";
+import Pending from "./status/Pending";
+import { verifyDeposit } from "../../lib/api";
+import Status from "./status/Status";
 
 function DepositInvoice(props){
-
     const [countdown, setCountdown] = useState('');
     const [targetTimestamp, setTargetTimeStamp] = useState(new Date().getTime());
     const [deposit, setDeposit] = useState({})
+    const [isRefreshLoading, setIsRefreshLoading] = useState(false)
+    const [settledAmount, setSettledAmount] = useState(0)
+    const verifyDepositStatus = async() => {
+        setIsRefreshLoading(true)
+        await verifyDeposit(props.currentDeposit.txnId)
+        .then((response) => {
+            let pending = (parseFloat(response.data.data.sum) - parseFloat(response.data.data.pending_sum)).toFixed(6)
+            setDeposit({...response.data.data, 
+                pending: pending,
+            })
+            setSettledAmount(parseFloat(response.data.data.pending_sum).toFixed(6))
+            switch(deposit === {} ? deposit : response.data.data.status) {
+                case "new":
+                setActiveStep(0)
+                break
+                case "pending":
+                (parseFloat(response.data.data.sum) - parseFloat(response.data.data.pending_sum)) !== 0 ? setActiveStep(1) : setActiveStep(2)
+                break
+                case "pending internal":
+                (parseFloat(response.data.data.sum) - parseFloat(response.data.data.pending_sum)) !== 0 ? setActiveStep(1) : setActiveStep(2)
+                break
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        .finally(() => {
+            setIsRefreshLoading(false)
+        })
+    }
+    const steps = [
+        { title: 'Intializing Deposit', component: <NewInvoice {...{deposit, countdown, verifyDepositStatus, isRefreshLoading, settledAmount}}/> },
+        { title: 'Awaiting Deposit', component: <Pending {...{deposit, countdown, verifyDepositStatus, isRefreshLoading, settledAmount}}/> },
+        { title: 'Finished', component: <Finished {...{deposit, verifyDepositStatus, isRefreshLoading, settledAmount}}/> },
+      ]
+    const { activeStep, setActiveStep } = useSteps({
+        index: 0,
+        count: steps.length,
+    })
     useEffect(() => {
-        props.deposit.walletHash && setDeposit(props.deposit)
-        props.deposit.walletHash && setTargetTimeStamp(new Date(props.deposit.createdAt).getTime() + 30 * 60 * 1000)
+        props.currentDeposit && setTargetTimeStamp(new Date(props.currentDeposit.createdAt).getTime() + 30 * 60 * 1000)
+        props.currentDeposit && setDeposit(props.currentDeposit)
+    }, [])
+
+    useEffect(() => {
+        verifyDepositStatus()
+        if(deposit.status === "new" || deposit.status === "pending" || deposit.status === "pending internal"){
+        const intervalId = setInterval(verifyDepositStatus, 5000);
+        return () => {
+            clearInterval(intervalId);
+        };}
     }, [])
 
     useEffect(() => {
@@ -29,23 +80,39 @@ function DepositInvoice(props){
         clearInterval(intervalId);
         };
     }, [targetTimestamp]);
+
     return (
+        deposit.status?
         <>
-        <Flex justifyContent={'center'} mt={10}>
-            <Flex gap={5}>
-                <QRCode fgColor={'red'} bgColor="#00000000" value={deposit.walletHash + '?amount=' + deposit.amount}/>
-                <Box marginY={'auto'}>
-                    <Stat>
-                    <StatLabel display={'flex'} gap={2}><Image name='Tron' src='https://cryptologos.cc/logos/tron-trx-logo.png' width={"20px"} />TRON</StatLabel>
-                    <StatNumber>{deposit.amount} TRX</StatNumber>
-                    <StatHelpText display={'flex'} fontSize={'xs'} gap={1}>Expires in <Box dangerouslySetInnerHTML={{ __html: countdown}} /></StatHelpText>
-                    </Stat>
-                </Box>
-            </Flex>
-        </Flex>
-        <Box textAlign={'center'} mt={5}>
-            <Input type='text' textAlign={'center'} color={'red'} maxWidth={'350px'} value={deposit.walletHash} fontSize={'sm'} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour} readOnly />
-        </Box>
+        {
+            deposit.status === "new" || deposit.status === "pending" || deposit.status === "prnding internal" ?
+            <Stepper size={'sm'} colorScheme={'red'} index={activeStep} orientation='vertical'  gap='0'>
+            {steps.map((step, index) => (
+                <Step key={index}>
+                    <StepIndicator>
+                        <StepStatus
+                        complete={<StepIcon />}
+                        incomplete={<GoDotFill />}
+                        active={<Spinner size={'xs'}  />}
+                        />
+                    </StepIndicator>
+                    <Box flexShrink='0'>
+                        <StepTitle fontWeight={"bold"} >{step.title}</StepTitle>
+                        { activeStep === index ? <StepDescription p={5}>{step.component}</StepDescription> : <Box p={5}></Box> }
+                    </Box>
+                    <StepSeparator />
+                </Step>
+            ))}
+            </Stepper>
+            :
+            <Status {...{deposit}}/>
+
+
+        }
+        <Box p={3} textAlign={'end'}>{deposit.params && <Text as="i" fontSize={'xs'}>For {deposit.params.order_name} </Text>}</Box>
+        </> :
+        <>
+            Loading...
         </>
     )
 }

@@ -6,11 +6,12 @@ import { useState } from "react";
 
 function NewInvoice(props){
     const toast = useToast()
+    console.log(props.deposit)
     return (
         <>
             <Flex justifyContent={'center'}>
                 <Flex gap={5}>
-                    <QRCode fgColor={'red'} bgColor="#00000000" value={props.deposit.walletHash + '?amount=' + props.deposit.pending}/>
+                    <QRCode fgColor={'red'} bgColor="#00000000" value={props.deposit.wallet_hash + '?amount=' + props.deposit.pending}/>
                     <Box marginY={'auto'}>
                         <Stat>
                         <StatLabel display={'flex'} gap={2}><Image name='Tron' src='https://cryptologos.cc/logos/tron-trx-logo.png' width={"20px"} />TRON</StatLabel>

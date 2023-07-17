@@ -8,7 +8,7 @@ import { fetchWalletAddresFromNetwork, setWalletAddress } from "../../../lib/api
 function Status(props){
     const [isFetching, setIsFetching] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const [data, setData] = useState()
+    const [data, setData] = useState([])
     const [currentAddress, setCurrentAddress] = useState('')
     const { isOpen, onOpen, onClose } = useDisclosure();
     const toast = useToast()
@@ -63,7 +63,7 @@ function Status(props){
 
                         <Box textAlign={'justify'} color={'gray'} mt={5}>
                             <Text fontSize={'xs'}>Your deposit is now successful. To update your profile with your Payout Address, please click the below button to verify the list of Addresses we received your deposit from. Please be careful in choosing the Payout address as you can set it only once. Any update or change may require another Withdraw Verification deposit!</Text>
-                            <Box mt={3}>{ !data
+                            <Box mt={3}>{ data.length === 0
                                 ?<Flex justifyContent={'end'}><Button size={'xs'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={() => fetchWalletAddres()} isLoading={isFetching} >Fetch</Button></Flex>
                                 : <Box>
                                     {

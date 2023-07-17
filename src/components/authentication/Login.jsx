@@ -130,7 +130,7 @@ function Login(){
                             </InputLeftElement>
                             <Input type='text' color={primaryColour} value={cred.username} onChange={handleUsernameChange}  placeholder='Username or Email' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
                             <InputRightElement color={primaryColour}>
-                            {isUsernameValid == null ? '' : isUsernameValid ? <BiCheck role="button" color="green"/> : <BiInfoCircle role="button" color="red"/> }
+                            {isUsernameValid === null ? '' : isUsernameValid ? <BiCheck role="button" color="green"/> : <BiInfoCircle role="button" color="red"/> }
                             </InputRightElement>
                         </InputGroup>
 

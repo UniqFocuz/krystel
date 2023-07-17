@@ -181,7 +181,7 @@ function BasicDetails(props) {
                 <Flex justifyContent={'end'}>
                     <Text fontSize={'2xs'} width={"70%"} mt={1} textAlign={'end'} fontWeight={'bold'} color={primaryColour}>{
                         isUsernameValid === null
-                            ? '' : hasSplChars == null ? '' : hasSplChars === true
+                            ? '' : hasSplChars === null ? '' : hasSplChars === true
                                 ? 'Username must be atleast 6 chars and only be combination of letters and numbers. Other characters are not allowed!'
                                 : ''}</Text>
                 </Flex>
@@ -191,7 +191,7 @@ function BasicDetails(props) {
                     </InputLeftElement>
                     <Input type='text' color={primaryColour} value={props.progress.data.patron} onChange={handlePatronChange} placeholder='Patron' fontSize={"sm"} fontWeight={'medium'} _placeholder={{ fontSize: "sm", fontWeight: 'normal' }} variant={'flushed'} focusBorderColor={primaryColour} />
                     <InputRightElement color={primaryColour}>
-                        {isPatronValid == null ? '' : isPatronValid ? <BiCheck role="button" color="green" /> : <BiInfoCircle role="button" color="red" />}
+                        {isPatronValid === null ? '' : isPatronValid ? <BiCheck role="button" color="green" /> : <BiInfoCircle role="button" color="red" />}
                     </InputRightElement>
                 </InputGroup>
                 <Flex justifyContent={'end'}>

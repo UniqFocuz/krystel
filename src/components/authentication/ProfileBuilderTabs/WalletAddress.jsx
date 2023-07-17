@@ -120,7 +120,7 @@ function WalletAddress(props){
                 </Tbody>
             </Table>
         </TableContainer>
-        <Flex mt={5} justifyContent={'end'}>
+        <Flex my={5} justifyContent={'end'}>
             <Button size={'xs'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} isLoading={isDepositLoading} onClick={handleCreateDeposit} color={"white"}>New Deposit</Button>
         </Flex>
         <Box>

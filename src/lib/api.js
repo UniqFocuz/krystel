@@ -89,7 +89,7 @@ export const profileBuilder = (data) => {
 }
 
 export const mfaSettingsPing = () => {
-    if(window.location.pathname == '/welcome'){
+    if(window.location.pathname === '/welcome'){
         return axios.get(`${baseURL}/auth/mfa/settings`, RegistrationParams())
     } else{
         return axios.get(`${baseURL}/auth/mfa/settings`, AccessParams())
@@ -97,7 +97,7 @@ export const mfaSettingsPing = () => {
 }
 
 export const mfaAddNewDevice = () => {
-    if(window.location.pathname == '/welcome'){
+    if(window.location.pathname === '/welcome'){
         return axios.post(`${baseURL}/auth/mfa/add`, {}, RegistrationParams())
     } else{
         return axios.post(`${baseURL}/auth/mfa/add`, {}, AccessParams())
@@ -105,7 +105,7 @@ export const mfaAddNewDevice = () => {
 }
 
 export const confirmNewDevice = (otp, id) => {
-    if(window.location.pathname == '/welcome'){
+    if(window.location.pathname === '/welcome'){
         return axios.post(`${baseURL}/auth/mfa/confirm`, { otp, id }, RegistrationParams())
     } else{
         return axios.post(`${baseURL}/auth/mfa/confirm`, { otp, id }, AccessParams())
@@ -113,7 +113,7 @@ export const confirmNewDevice = (otp, id) => {
 }
 
 export const mfaDeviceAction = (id, action) => {
-    if(window.location.pathname == '/welcome'){
+    if(window.location.pathname === '/welcome'){
         return axios.post(`${baseURL}/auth/mfa/action`, { id, action }, RegistrationParams())
     } else{
         return axios.post(`${baseURL}/auth/mfa/action`, { id, action }, AccessParams())
@@ -123,7 +123,7 @@ export const mfaDeviceAction = (id, action) => {
 // Payment API
 
 export const createDepositInvoice = (amount, name) => {
-    if(window.location.pathname == '/welcome'){
+    if(window.location.pathname === '/welcome'){
         return axios.post(`${baseURL}/deposit/invoice/create`, { amount, name }, RegistrationParams())
     } else{
         return axios.post(`${baseURL}/deposit/invoice/create`, { amount, name }, AccessParams())
@@ -131,7 +131,7 @@ export const createDepositInvoice = (amount, name) => {
 }
 
 export const depositPing = (type) => {
-    if(window.location.pathname == '/welcome'){
+    if(window.location.pathname === '/welcome'){
         return axios.get(`${baseURL}/deposit/invoices?type=${type}`, RegistrationParams())
     } else{
         return axios.get(`${baseURL}/deposit/invoices?type=${type}`, AccessParams())
@@ -139,7 +139,7 @@ export const depositPing = (type) => {
 }
 
 export const verifyDeposit = (id) => {
-    if(window.location.pathname == '/welcome'){
+    if(window.location.pathname === '/welcome'){
         return axios.get(`${baseURL}/plisio/verify?txnId=${id}`, RegistrationParams())
     } else{
         return axios.get(`${baseURL}/plisio/verify?txnId=${id}`, AccessParams())
@@ -147,7 +147,7 @@ export const verifyDeposit = (id) => {
 }
 
 export const fetchWalletAddresFromNetwork = (id) => {
-    if(window.location.pathname == '/welcome'){
+    if(window.location.pathname === '/welcome'){
         return axios.post(`${baseURL}/deposit/getAddress`, {id}, RegistrationParams())
     } else{
         return axios.post(`${baseURL}/deposit/getAddress`, {id}, AccessParams())
@@ -155,7 +155,7 @@ export const fetchWalletAddresFromNetwork = (id) => {
 }
 
 export const setWalletAddress = (address) => {
-    if(window.location.pathname == '/welcome'){
+    if(window.location.pathname === '/welcome'){
         return axios.post(`${baseURL}/profile/setAddress`, {address}, RegistrationParams())
     } else{
         return axios.post(`${baseURL}/profile/setAddress`, {address}, AccessParams())

@@ -33,6 +33,9 @@ function DepositInvoice(props){
                 (parseFloat(response.data.data.sum) - parseFloat(response.data.data.pending_sum)) !== 0 ? setActiveStep(1) : setActiveStep(2)
                 break
             }
+            if(response.data.data.status === 'completed' || response.data.data.status === 'mismatch'){
+
+            }
         })
         .catch((error) => {
             console.log(error)
@@ -86,30 +89,30 @@ function DepositInvoice(props){
         <>
         {
             deposit.status === "new" || deposit.status === "pending" || deposit.status === "prnding internal" ?
-            <Stepper size={'sm'} colorScheme={'red'} index={activeStep} orientation='vertical'  gap='0'>
-            {steps.map((step, index) => (
-                <Step key={index}>
-                    <StepIndicator>
-                        <StepStatus
-                        complete={<StepIcon />}
-                        incomplete={<GoDotFill />}
-                        active={<Spinner size={'xs'}  />}
-                        />
-                    </StepIndicator>
-                    <Box flexShrink='0'>
-                        <StepTitle fontWeight={"bold"} >{step.title}</StepTitle>
-                        { activeStep === index ? <StepDescription p={5}>{step.component}</StepDescription> : <Box p={5}></Box> }
-                    </Box>
-                    <StepSeparator />
-                </Step>
-            ))}
-            </Stepper>
+                <Stepper size={'sm'} colorScheme={'red'} index={activeStep} orientation='vertical'  gap='0'>
+                {steps.map((step, index) => (
+                    <Step key={index}>
+                        <StepIndicator>
+                            <StepStatus
+                            complete={<StepIcon />}
+                            incomplete={<GoDotFill />}
+                            active={<Spinner size={'xs'}  />}
+                            />
+                        </StepIndicator>
+                        <Box flexShrink='0'>
+                            <StepTitle fontWeight={"bold"} >{step.title}</StepTitle>
+                            { activeStep === index ? <StepDescription p={5}>{step.component}</StepDescription> : <Box p={5}></Box> }
+                        </Box>
+                        <StepSeparator />
+                    </Step>
+                ))}
+                </Stepper>
             :
-            <Status {...{deposit}}/>
+            <Status {...{deposit}} canEdit={props.canEdit} payoutAddress={props.payoutAddress}/>
 
 
         }
-        <Box p={3} textAlign={'end'}>{deposit.params && <Text as="i" fontSize={'xs'}>For {deposit.params.order_name} </Text>}</Box>
+        <Box p={3} color={'gray'} textAlign={'end'}>{deposit.params && <Text as="i" fontSize={'xs'}>For {deposit.params.order_name} </Text>}</Box>
         </> :
         <>
             Loading...

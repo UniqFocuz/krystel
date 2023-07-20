@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure, useToast } from "@chakra-ui/react"
+import { Box, Button, Center, Flex, HStack, IconButton, Input, InputGroup, InputLeftAddon, InputRightAddon, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure, useToast } from "@chakra-ui/react"
 import { primaryColour, primaryColourOpaced } from "../../../lib/settings"
 import { BiChevronRight } from "react-icons/bi"
 import { useEffect, useState } from "react"
@@ -15,6 +15,7 @@ function WalletAddress(props){
     const [payoutAddress, setPayoutAddress] = useState(false)
     const [currentDeposit, setCurrentDeposit] = useState({})
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [activeIndex, setActiveIndex] = useState(1)
     const navigate = useNavigate()
     const [allDeposits, setAllDeposit] = useState([])
     const toast = useToast()
@@ -87,6 +88,12 @@ function WalletAddress(props){
         onClose()
         loadPage()
     }
+    const paginationForward = () => {
+        allDeposits.length !== 0 && activeIndex < (allDeposits.length/5) && setActiveIndex(activeIndex+1)
+    }
+    const paginationBackward = () => {
+        allDeposits.length !== 0 && activeIndex > 1 && setActiveIndex(activeIndex-1)
+    }
     return (
         <>
         <Text fontSize='md' fontWeight='bold' color={primaryColour}>
@@ -102,18 +109,18 @@ function WalletAddress(props){
                 <Thead>
                 <Tr>
                     <Th>Deposit ID</Th>
-                    <Th>Created</Th>
-                    <Th>Status</Th>
+                    <Th textAlign={'center'}>Created</Th>
+                    <Th textAlign={'center'}>Status</Th>
                     <Th textAlign={'center'}>View</Th>
                 </Tr>
                 </Thead>
                 <Tbody>
                     {
-                        allDeposits.length !== 0 ? allDeposits.map((deposit, index) => (
+                        allDeposits.length !== 0 ? allDeposits.slice((activeIndex*5)-5, activeIndex*5).map((deposit, index) => (
                             <Tr key={index}>
                                 <Td>{deposit.depositId}</Td>
-                                <Td>{getTimeDifferenceFromNow(deposit.createdAt)}</Td>
-                                <Td>{deposit.status.charAt(0).toUpperCase() + deposit.status.slice(1)}</Td>
+                                <Td textAlign={'center'}>{getTimeDifferenceFromNow(deposit.createdAt)}</Td>
+                                <Td textAlign={'center'}>{deposit.status.charAt(0).toUpperCase() + deposit.status.slice(1)}</Td>
                                 <Td role="button" onClick={() => handleOpenModal(deposit)}><Center><VscEye mx={'auto'}/></Center></Td>
                             </Tr>
                         )) : <Tr><Td colSpan={4} textAlign={'center'} color={'gray'}>No Deposits</Td></Tr>
@@ -121,8 +128,16 @@ function WalletAddress(props){
                 </Tbody>
             </Table>
         </TableContainer>
-        <Flex my={5} justifyContent={'end'}>
-            <Button size={'xs'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} isLoading={isDepositLoading} onClick={handleCreateDeposit} color={"white"}>New Deposit</Button>
+        <Flex my={5} justifyContent={'end'} gap={3}>
+            <InputGroup size={'xs'} width={'auto'} my={'auto'}>
+                <InputLeftAddon children='Prev' borderLeftRadius={5} role="button" onClick={paginationBackward} />
+                <Input width={16} textAlign={'center'} value={(activeIndex) + " of " + (Math.ceil(allDeposits.length/5))} 
+                    style={{ userSelect: 'none', pointerEvents: 'none', touchAction: 'none' }}
+                    onTouchStart={(e) => e.preventDefault()}
+                    onMouseDown={(e) => e.preventDefault()} readOnly />
+                <InputRightAddon children='Next' borderRightRadius={5} role="button" onClick={paginationForward} />
+            </InputGroup>
+            <Flex><Button size={'xs'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} isLoading={isDepositLoading} onClick={handleCreateDeposit} color={"white"}>New Deposit</Button></Flex>
         </Flex>
         <Box>
             <Text textAlign={'justify'} fontSize={'sm'}>To validate your withdrawal address, please complete the below transaction <b style={{color: primaryColour}}>from the wallet</b> you intend to add to your account.</Text>

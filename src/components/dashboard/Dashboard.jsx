@@ -13,10 +13,10 @@ function Dashboard(){
     
     useEffect(()=>{
         dashboard(localStorage.getItem('accessToken'))
-        .then(response => {
+        .then((response) => {
           setDashboardItems(response.data)
         })
-        .catch(error => {
+        .catch((error) => {
             if(error.response.status === 401){
                 toast({
                   title: error.response.data.message,
@@ -28,11 +28,12 @@ function Dashboard(){
         });
     },[navigate, toast])
     return(
-        !dashboardItems &&
+        dashboardItems &&
         <>
             <Box width={{base: "90%", md: "45%", lg: "30%"}} mx="auto" pt={"80px"}>
                 <PrimaryCard/>
                 <SecondaryCard/>
+                {dashboardItems.message}
                 <MenuBar/>
             </Box>
         </>

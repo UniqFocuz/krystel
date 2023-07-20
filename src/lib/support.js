@@ -31,3 +31,4 @@ export function getTimeDifferenceFromNow(timestamp) {
       return `${timeDifferenceInMinutes} mins ago`;
     }
   }
+

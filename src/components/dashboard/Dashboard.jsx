@@ -16,7 +16,6 @@ function Dashboard(){
         .then((response) => {
           setDashboardItems(response.data)
         })
-<<<<<<< HEAD
         .catch(error => {
             toast({
                 title: error.response.data.message,
@@ -24,17 +23,6 @@ function Dashboard(){
                 status: 'error',
             })
             navigate(error.response.data.route)
-=======
-        .catch((error) => {
-            if(error.response.status === 401){
-                toast({
-                  title: error.response.data.message,
-                  variant: 'subtle',
-                  status: 'error',
-                })
-                navigate(error.response.data.route)
-            }
->>>>>>> b5eebd4d06160a634a38c8f47b14eeb097790255
         });
     },[navigate, toast])
     return(

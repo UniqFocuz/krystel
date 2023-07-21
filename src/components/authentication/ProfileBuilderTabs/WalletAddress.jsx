@@ -30,15 +30,12 @@ function WalletAddress(props){
     }
 
     useEffect(() => {
-<<<<<<< HEAD
         const loadPage = async() => {
             await depositPing('verification')
             .then((response) => {
                 setAllDeposit(response.data.invoices)
             })
         }
-=======
->>>>>>> b5eebd4d06160a634a38c8f47b14eeb097790255
         loadPage()
     }, []) 
     

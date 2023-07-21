@@ -30,6 +30,7 @@ function Login(){
                         setIsUsernameValid(response.data.exists);
                     } else {
                         const response = await validateUsername(cred.username)
+                        console.log(response)
                         setIsUsernameValid(response.data.exists);
                     }
                 }

@@ -1,4 +1,4 @@
-import { Box, Button, Flex, IconButton, Input, InputGroup, InputLeftElement, InputRightElement, Text, useColorModeValue, useToast } from "@chakra-ui/react"
+import { Box, Button, Flex, Icon, IconButton, Input, InputGroup, InputLeftElement, InputRightElement, Radio, RadioGroup, Select, Stack, Text, useColorModeValue, useToast } from "@chakra-ui/react"
 import { primaryColour, primaryColourOpaced } from "../../../lib/settings"
 import { BiCheck, BiChevronRight, BiInfoCircle, BiSolidHeart, BiUserCheck, BiUserPlus } from "react-icons/bi"
 import { useEffect, useState } from "react"
@@ -12,8 +12,10 @@ function BasicDetails(props) {
     const grayColorModeValue = useColorModeValue("gray.600")
     const [isUsernameValid, setIsUsernameValid] = useState(null)
     const [isPatronValid, setisPatronValid] = useState(null)
+    const [patronFeedback, setPatronFeedback] = useState('')
     const [isAgeValid, setIsAgeValid] = useState(null)
     const [hasSplChars, setHasSplChars] = useState(null)
+    const [selectedLab, setSelectedLab] = useState("alpha");
     const navigate = useNavigate()
     const toast = useToast()
     const regex = (username) => {
@@ -51,6 +53,7 @@ function BasicDetails(props) {
                 } else {
                     const response = await validatePatron(props.progress.data.patron)
                     setisPatronValid(response.data.exists)
+                    setPatronFeedback(response.data.message)
                 }
             } catch (error) {
                 setisPatronValid(false);
@@ -122,6 +125,16 @@ function BasicDetails(props) {
             }
         })
     };
+    const handleLabChange = (value) => {
+        setSelectedLab(value);
+        props.setProgress({
+          ...props.progress,
+          data: {
+            ...props.progress.data,
+            lab: value
+          }
+        });
+      };
     const handleSubmitDetails = async() => {
         props.setIsLoading(true)
         if(isAgeValid){
@@ -162,6 +175,7 @@ function BasicDetails(props) {
             props.setIsLoading(false)
         }, 3000)
     }
+    console.log(props.progress.data)
     return (
         !props.progress.isPatronSet ?
         <>
@@ -195,7 +209,16 @@ function BasicDetails(props) {
                     </InputRightElement>
                 </InputGroup>
                 <Flex justifyContent={'end'}>
-                    <Text fontSize={'2xs'} width={"70%"} mt={1} textAlign={'end'} fontWeight={'bold'} color={primaryColour}>{isPatronValid === null ? '' : !isPatronValid && 'Cannot find the Patron!'}</Text>
+                    <Text fontSize={'2xs'} width={"70%"} mt={1} textAlign={'end'} fontWeight={'bold'} color={primaryColour}>{patronFeedback}</Text>
+                </Flex>
+                <Flex px={3} my={2}>
+                <RadioGroup size={'sm'} colorScheme="orange" onChange={handleLabChange} value={selectedLab}>
+                    <Stack direction='row' gap={5} >
+                        <Text fontSize={'sm'} fontWeight={'bold'} color={primaryColour}>Lab of the Patron </Text>
+                        <Radio value='alpha'>Lab Alpha</Radio>
+                        <Radio value='beta'>Lab Beta</Radio>
+                    </Stack>
+                </RadioGroup>
                 </Flex>
                 <Flex gap={5}>
                     <InputGroup my={2}>
@@ -221,9 +244,6 @@ function BasicDetails(props) {
                     <Flex width={"50%"}>
                         <Text my={"auto"} color={primaryColour} fontSize={'xs'}>{isAgeValid !== null && !isAgeValid && 'Must be 18 years or above!'}</Text>
                     </Flex>
-                </Flex>
-                <Flex justifyContent={'end'}>
-                    <Text fontSize={'2xs'} width={"70%"} mt={1} textAlign={'end'} fontWeight={'bold'} color={primaryColour}>{isPatronValid === null ? '' : !isPatronValid && 'Cannot find the Patron!'}</Text>
                 </Flex>
                 <InputGroup my={2}>
                     <InputLeftElement pointerEvents='none'>

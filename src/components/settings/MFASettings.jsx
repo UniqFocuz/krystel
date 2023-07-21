@@ -85,7 +85,7 @@ function MFASetting(){
             <Flex justifyContent={'end'}>
                 <Button marginTop={5} size={'xs'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} onClick={handleAddNewDevice} isLoading={isLoading}>Add New Device</Button>
             </Flex>
-            <Text fontSize={'sm'} my={5} textAlign={'justify'}>Having atleast one active Multi-Factor Authentication device enables MFA during the future logins. If you wish tp remove this additional authentication, you can always do it.</Text>
+            <Text fontSize={'sm'} my={5} textAlign={'justify'}>Having atleast one active Multi-Factor Authentication device enables MFA during the future logins. If you wish to remove this additional authentication, you can always do it.</Text>
             <Flex gap={2}><Text fontSize={'sm'} fontWeight={'bolder'} color={"gray"}>Multi-Factor Authentication: </Text> { devices.some((device) => device.confirmed) ? <Center gap={1}><BiSolidLockAlt color={primaryColour}/><Text fontSize={'sm'} color={"gray"}>Active</Text></Center> : <Center gap={1}><BiSolidLockOpenAlt color={primaryColour}/><Text fontSize={'sm'} color={"gray"}>Not Active</Text></Center> } </Flex>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />

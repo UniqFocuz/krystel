@@ -17,14 +17,12 @@ function Dashboard(){
           setDashboardItems(response.data)
         })
         .catch(error => {
-            if(error.response.status === 401){
-                toast({
-                  title: error.response.data.message,
-                  variant: 'subtle',
-                  status: 'error',
-                })
-                navigate(error.response.data.route)
-            }
+            toast({
+                title: error.response.data.message,
+                variant: 'subtle',
+                status: 'error',
+            })
+            navigate(error.response.data.route)
         });
     },[navigate, toast])
     return(

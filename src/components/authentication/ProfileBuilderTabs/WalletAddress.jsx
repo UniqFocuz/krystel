@@ -17,7 +17,7 @@ function WalletAddress(props){
         const loadPage = async() => {
             await depositPing('verification')
             .then((response) => {
-                setAllDeposit(response.data)
+                setAllDeposit(response.data.invoices)
             })
         }
         loadPage()

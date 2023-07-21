@@ -5,7 +5,7 @@ import { primaryColour, primaryColourOpaced } from "../../lib/settings";
 
 function PrimaryCard(){
     return(
-        <Card bg={primaryColourOpaced} border={"none"} padding={5} display={"block"} borderBottomRadius={'none'}>
+        <Card bg={primaryColourOpaced}  border={"none"} padding={5} display={"block"} borderBottomRadius={'none'}>
             <Flex justifyContent={"end"} gap={2}>
                 <Button bg={"white"} gap={2} size={'xs'} padding={3} >
                     <Text fontSize={"2xs"}>Power Card Activated</Text> <IoBatteryChargingOutline color="green" size={20}/>

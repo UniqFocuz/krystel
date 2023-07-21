@@ -1,4 +1,7 @@
 export const primaryColour = "#f6601d"
 export const primaryColourOpaced = "#f6601dAA"
+export const menuLight = "#ffffff33"
+export const menuDark = "#000000bb"
+export const menuBgColor = "#ffffff33"
 export const maxWidthLayoutSm = "450px"
 export const maxWidthLayoutMd = "650px"

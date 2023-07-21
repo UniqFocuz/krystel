@@ -25,3 +25,9 @@ code {
   height: 100%;
   z-index: -1;
 }
+
+.backdrop{
+  background-color: rgb(224, 136, 21);
+  backdrop-filter: blur(100px);
+  height: 100vh;
+}

@@ -12,7 +12,6 @@ function Dashboard(){
     const navigate = useNavigate()
     const toast = useToast()
     const dispatch = useDispatch()
-    const [pageLoading, setIsPageLoading] = useState(false)
     useEffect(()=>{
         dashboard()
         .then((response) => {
@@ -27,17 +26,12 @@ function Dashboard(){
             navigate(error.response.data.route)
         });
     },[navigate, toast])
-    const user = useSelector((state) => state.userReducer);
     return(
-        user.isAuthenticated ?
         <>
             <Box width={maxWidthLayoutSm} mx="auto" pt={"80px"}>
                 <PrimaryCard/>
                 <SecondaryCard/>
             </Box>
-        </>
-        : <>
-        Loading ...
         </>
     )
 }

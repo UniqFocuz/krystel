@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, ChakraProvider, Drawer, DrawerContent, DrawerOverlay, Flex, HStack, Text, VStack, WrapItem, extendTheme, useColorMode, useColorModeValue, useDisclosure } from "@chakra-ui/react";
-import { BiSolidLockAlt, BiSolidMoon, BiSolidSun, BiX } from "react-icons/bi";
-import { BsFillGrid1X2Fill, BsPlus } from "react-icons/bs";
+import { BiSolidLockAlt, BiSolidLockOpen, BiSolidMoon, BiSolidSun, BiX } from "react-icons/bi";
+import { BsFillGrid1X2Fill, BsFillJournalBookmarkFill, BsPlus } from "react-icons/bs";
 import { maxWidthLayoutSm, primaryColour, buttonTheme } from "../../lib/settings";
 import { useEffect, useRef, useState } from "react";
 import "../../index.css"
@@ -8,10 +8,11 @@ import { TbMailExclamation } from "react-icons/tb";
 import { RiDashboardFill } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
-import { HiMiniCog } from "react-icons/hi2";
+import { HiBeaker, HiMiniCog } from "react-icons/hi2";
 import { GoArrowSwitch } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { krystelValuer } from "../../lib/support";
 
 function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -21,16 +22,11 @@ function Navbar() {
     const navigate = useNavigate()
     
     const user = useSelector((state) => state.userReducer);
-    console.log(user)
     const handleNavigate = (route) => {
         onClose()
-        if(route === '/logout'){
-            localStorage.removeItem('accessToken')
-            navigate('/login')
-        } else{
-            navigate(route)
-        }
+        navigate(route)
     }
+    console.log(user)
     return (
         <ChakraProvider theme={buttonTheme}>
             <Box display={"flex"} padding={5} position={'fixed'} width={"100%"} zIndex={999}>
@@ -42,63 +38,79 @@ function Navbar() {
                     <DrawerOverlay className="backdrop" zIndex={"modal"}/>
                     <DrawerContent height={"100vh"} width={maxWidthLayoutSm} marginX={"auto"} shadow={"none"} bgColor={"inherit"} pt={10}>
                         <VStack gap={5} marginX={"auto"}>
-                            <Flex width={"100%"} justifyContent={"end"} textAlign={"end"} gap={2}>
-                                <BiSolidLockAlt color="white" />
-                                <TbMailExclamation color="white" />
+                            {
+                            user.isAuthenticated ? 
+                            <VStack>
+                            <Flex width={"100%"} justifyContent={"end"} textAlign={"end"} gap={2} color={whiteColorModeValue}>
+                                <Flex gap={1}>{ user.isMFAEnabled ? <BiSolidLockAlt /> : <BiSolidLockOpen /> } <Text fontWeight={'bolder'} fontSize={'xs'}>MFA</Text></Flex>
+                                { !user.isVerified && <TbMailExclamation/> }
                             </Flex>
-                            <Flex gap={5}>
-                                <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha">
+                            <VStack gap={5}>
+                                <Flex gap={5}>
+                                    <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha">
+                                        <VStack gap={5}>
+                                            <WrapItem>
+                                                <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size={"xl"} />
+                                            </WrapItem>
+                                            <Text fontWeight={'bold'} color={whiteColorModeValue} fontSize={'sm'}>{user.username}</Text>
+                                        </VStack>
+                                    </Button>
                                     <VStack gap={5}>
-                                        <WrapItem>
-                                            <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size={"xl"} />
-                                        </WrapItem>
-                                        <Text fontWeight={'bold'} color={whiteColorModeValue} fontSize={'sm'}>KY12345678</Text>
+                                        <Flex width={"180px"} gap={5}>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/dashboard')}}><RiDashboardFill color={whiteColorModeValue} size={30}/></Button>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={onClose}><BiX color={whiteColorModeValue} size={35} /></Button>
+                                        </Flex>
+                                        <Flex width={"180px"} gap={5}>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/register')}}><BsPlus color={whiteColorModeValue} size={40}/></Button>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/logout')}}><IoMdLogOut color={whiteColorModeValue} size={30} /></Button>
+                                        </Flex>
                                     </VStack>
-                                </Button>
-                                <VStack gap={5}>
-                                    <Flex width={"180px"} gap={5}>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/dashboard')}}><RiDashboardFill color={whiteColorModeValue} size={30}/></Button>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={onClose}><BiX color={whiteColorModeValue} size={35} /></Button>
-                                    </Flex>
-                                    <Flex width={"180px"} gap={5}>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/register')}}><BsPlus color={whiteColorModeValue} size={40}/></Button>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/logout')}}><IoMdLogOut color={whiteColorModeValue} size={30} /></Button>
-                                    </Flex>
-                                </VStack>
-                            </Flex>
-                            <Flex gap={5}>
-                                <VStack gap={5}>
-                                    <Flex width={"180px"} gap={5}>
-                                        <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha">
-                                            <VStack color={"white"}>
-                                            <Text fontWeight={'bold'}>0.567 Krystel</Text>
-                                            <Text fontWeight={'thin'} fontSize={'xs'}>fabricated</Text>
-                                            </VStack>
-                                        </Button>
-                                    </Flex>
-                                    <Flex width={"180px"} gap={5}>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha"><GoArrowSwitch color={whiteColorModeValue} size={30}/></Button>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha"><FaUsers color={whiteColorModeValue} size={30}/></Button>
-                                    </Flex>
-                                </VStack>
-                                <VStack gap={5}>
-                                    <Flex width={"180px"} gap={5}>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha"></Button>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha"></Button>
-                                    </Flex>
-                                    <Flex width={"180px"} gap={5}>
-                                        <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha">
-
-                                        </Button>
-                                    </Flex>
-                                </VStack>
-                            </Flex>
-                            <Flex gap={5}>
-                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}>D</Button>
-                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}>W</Button>
-                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha"><HiMiniCog color={whiteColorModeValue} size={30} /></Button>
+                                </Flex>
+                                <Flex gap={5}>
+                                    <VStack gap={5}>
+                                        <Flex width={"180px"} gap={5}>
+                                            <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha">
+                                                <VStack color={"white"}>
+                                                <Text fontWeight={'bold'}>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
+                                                <Text fontWeight={'thin'} fontSize={'xs'}>fabricated</Text>
+                                                </VStack>
+                                            </Button>
+                                        </Flex>
+                                        <Flex width={"180px"} gap={5}>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/transfer')}><GoArrowSwitch color={whiteColorModeValue} size={30}/></Button>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/buddies')}><FaUsers color={whiteColorModeValue} size={30}/></Button>
+                                        </Flex>
+                                    </VStack>
+                                    <VStack gap={5}>
+                                        <Flex width={"180px"} gap={5}>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/logs')}><BsFillJournalBookmarkFill color={whiteColorModeValue} size={25}/></Button>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/facility')}><HiBeaker color={whiteColorModeValue} size={30} /></Button>
+                                        </Flex>
+                                        <Flex width={"180px"} gap={5}>
+                                            <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha">
+                                                <VStack color={"white"}>
+                                                    <Text fontWeight={'bold'}>2107 Mems</Text>
+                                                    <Text fontSize={'xs'}>1654 alpha | 453 beta</Text>
+                                                </VStack>
+                                            </Button>
+                                        </Flex>
+                                    </VStack>
+                                </Flex>
+                                <Flex gap={5}>
+                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}>D</Button>
+                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}>W</Button>
+                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha"><HiMiniCog color={whiteColorModeValue} size={30} /></Button>
+                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={toggleColorMode}>{colorMode === "light" ? <BiSolidMoon color={whiteColorModeValue} size={30} /> : <BiSolidSun color={whiteColorModeValue} size={30} />}</Button>
+                                </Flex>
+                            </VStack>
+                            </VStack>
+                            :
+                            <Flex gap={5} mt={5}>
                                 <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={toggleColorMode}>{colorMode === "light" ? <BiSolidMoon color={whiteColorModeValue} size={30} /> : <BiSolidSun color={whiteColorModeValue} size={30} />}</Button>
+                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/register')}}><BsPlus color={whiteColorModeValue} size={40}/></Button>
+                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={onClose}><BiX color={whiteColorModeValue} size={35} /></Button>
                             </Flex>
+                            }
                         </VStack>
                     </DrawerContent>
                 </Drawer>

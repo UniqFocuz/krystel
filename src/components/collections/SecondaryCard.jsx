@@ -1,16 +1,21 @@
-import { AbsoluteCenter, Box, Card, Divider, Flex, Text } from "@chakra-ui/react";
+import { AbsoluteCenter, Box, Card, Divider, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import { primaryColour } from "../../lib/settings";
 import { SiCrystal } from "react-icons/si"
 import { MdOutlineElectricBolt } from "react-icons/md"
 import { BsFillDropletFill } from "react-icons/bs";
 import { IoBatteryChargingOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { energyValuer, krystelValuer } from "../../lib/support";
 
 function SecondaryCard(){
+    const user = useSelector((state) => state.userReducer);
+    const grayColorModeValue = useColorModeValue("white", "#2D3748")
     return(
+        user.isAuthenticated &&
         <Card borderTopRadius={0} paddingX={5} paddingY={10} marginBottom={20}>
             <Box position='relative'>
                 <Divider />
-                <AbsoluteCenter bg='white' px='2'>
+                <AbsoluteCenter bg={grayColorModeValue} px='2'>
                     <Text color={primaryColour} fontWeight={'light'}>my kollection</Text>
                 </AbsoluteCenter>
             </Box>
@@ -24,8 +29,8 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}> Krystels are crafted by the process of krystelization by a Krystelizer, making it rare and expensive </Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>0.753975 KTL</Text>
-                        <Text fontSize={'xs'} color={"blackAlpha.500"}>753,975 <b>gem<sup>6</sup></b></Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{krystelValuer(user.kollectibles.krystel)}</Text>
+                        <Text fontSize={'xs'} color={"blackAlpha.500"}>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -39,8 +44,8 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}> Energy will be used to increase the efficiency of the Krystelizer</Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>198 kWh</Text>
-                        <Text fontSize={'xs'} color={"blackAlpha.500"}>1,386 kWh</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{energyValuer(user.kollectibles.energy)}</Text>
+                        <Text fontSize={'xs'} color={"blackAlpha.500"}>{energyValuer(user.kollectibles.energyCap)}</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -54,8 +59,8 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}>A Krystelizer needs fuel to consistently run. Fuel can be collected every <b>3 hours</b></Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>190 gal</Text>
-                        <Text fontSize={'xs'} color={"brown"}>10 gal</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{user.kollectibles.fuel} gal</Text>
+                        <Text fontSize={'xs'}>{user.kollectibles.fuelCap} gal</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -69,7 +74,8 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}> Power cards are required to start a Krystelizer</Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>x3 Cards</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>x{user.kollectibles.powerCards}</Text>
+                        <Text fontSize={'xs'}>Max. x{user.kollectibles.powerCardsCap}</Text>
                     </Box>
                 </Flex>
             </Card>

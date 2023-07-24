@@ -47,23 +47,25 @@ function Login(){
 
     useEffect(() => {
         const loadPage = async() => {
-            await pingLogin().then((response) => {
-                setIsPageLoading(false)
-            }).catch((error) => {
-                if(error.response.status === 308){
-                    navigate('/dashboard')
-                    toast({
-                    title: `You are already logged in!`,
-                    variant: 'subtle',
-                    status: 'success',
-                    })
-                }
-                else{
-                    localStorage.removeItem('accessToken')
-                }
-            }).finally(() => {
-                setIsPageLoading(false)
-            })
+            localStorage.getItem('accessToken') !== null ?
+                await pingLogin().then((response) => {
+                    setIsPageLoading(false)
+                }).catch((error) => {
+                    if(error.response.status === 308){
+                        navigate('/dashboard')
+                        toast({
+                            title: `You are already logged in!`,
+                            variant: 'subtle',
+                            status: 'success',
+                        })
+                    }
+                    else{
+                        localStorage.removeItem('accessToken')
+                    }
+                }).finally(() => {
+                    setIsPageLoading(false)
+                })
+                : setIsPageLoading(false)
         }
         loadPage()
     }, [navigate, toast])

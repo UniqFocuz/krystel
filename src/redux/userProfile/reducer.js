@@ -1,6 +1,9 @@
 import { USER_PROFILE } from "./actionTypes";
 
-const initialState = {};
+const initialState = {
+  "isAuthenticated" : false,
+  "isMFAEnabled" : false
+};
   
   const userReducer = (state = initialState, action) => {
     switch (action.type) {

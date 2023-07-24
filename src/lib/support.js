@@ -32,3 +32,21 @@ export function getTimeDifferenceFromNow(timestamp) {
     }
   }
 
+export function krystelValuer(value){
+  if(value < 100000){
+    return value.toLocaleString() + " gem6"
+  }
+  else{
+    return (value/1000000).toFixed(6).toLocaleString() + " KTL"
+  }
+}
+
+
+export function energyValuer(value){
+  if(value < 1000){
+    return value.toLocaleString() + " kWh"
+  }
+  else{
+    return (value/1000).toFixed(0).toLocaleString() + " mWh"
+  }
+}

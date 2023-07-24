@@ -53,7 +53,6 @@ const RegistrationParams = () => {
 
 export const pingLogin = () => {
     return axios.get(`${baseURL}/auth/login`, AccessParams())
-
 }
 
 export const login = (username, password) => {
@@ -165,4 +164,12 @@ export const setWalletAddress = (address) => {
 // Application API
 export const dashboard = () => {
     return axios.get(`${baseURL}/dashboard`, AccessParams())
+}
+
+export const harvestKrystel = () => {
+    return axios.post(`${baseURL}/app/harvest`, {}, AccessParams())
+}
+
+export const purchaseKrystelizer = (username) => {
+    return axios.post(`${baseURL}/facility/krystelizer`, {username}, AccessParams())
 }

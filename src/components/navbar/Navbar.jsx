@@ -12,7 +12,7 @@ import { HiBeaker, HiMiniCog } from "react-icons/hi2";
 import { GoArrowSwitch } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { krystelValuer } from "../../lib/support";
+import { krystelValuer, countValuer } from "../../lib/support";
 
 function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -89,8 +89,8 @@ function Navbar() {
                                         <Flex width={"180px"} gap={5}>
                                             <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha">
                                                 <VStack color={"white"}>
-                                                    <Text fontWeight={'bold'}>2107 Mems</Text>
-                                                    <Text fontSize={'xs'}>1654 alpha | 453 beta</Text>
+                                                    <Text fontWeight={'bold'}>{countValuer(user.alphaPopulation + user.betaPopulation)} subjects</Text>
+                                                    <Text fontSize={'xs'}>{countValuer(user.alphaVolume)} alpha | {countValuer(user.betaVolume)} beta</Text>
                                                 </VStack>
                                             </Button>
                                         </Flex>

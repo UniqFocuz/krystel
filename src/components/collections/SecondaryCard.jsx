@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Box, Card, Divider, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { AbsoluteCenter, Box, Card, Divider, Flex, Text, Tooltip, useColorModeValue } from "@chakra-ui/react";
 import { primaryColour } from "../../lib/settings";
 import { SiCrystal } from "react-icons/si"
 import { MdOutlineElectricBolt } from "react-icons/md"
@@ -12,7 +12,7 @@ function SecondaryCard(){
     const grayColorModeValue = useColorModeValue("white", "#2D3748")
     return(
         user.isAuthenticated &&
-        <Card borderTopRadius={0} paddingX={5} paddingY={10} marginBottom={20}>
+        <Card borderTopRadius={0} paddingX={5} paddingY={10} marginBottom={20}  height={"500px"} overflowY={"auto"}>
             <Box position='relative'>
                 <Divider />
                 <AbsoluteCenter bg={grayColorModeValue} px='2'>
@@ -30,7 +30,20 @@ function SecondaryCard(){
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
                         <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{krystelValuer(user.kollectibles.krystel)}</Text>
-                        <Text fontSize={'xs'} color={"blackAlpha.500"}>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
+                    </Box>
+                </Flex>
+            </Card>
+            <Card padding={5} mt={5}>
+                <Flex gap={3}>
+                    <Box my={'auto'} width={"12%"} display="flex" justifyContent="center" alignItems="center">
+                        <SiCrystal color={"gray"} size={30}/>
+                    </Box>
+                    <Box my={'auto'} mr={'auto'} width={"55%"}>
+                        <Text color={primaryColour} fontSize={'sm'}> SuperOre</Text>
+                        <Text color={'blackAlpha.500'} fontSize={'2xs'}> Superores are crafted </Text>
+                    </Box>
+                    <Box my={'auto'} textAlign={"end"}>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{user.kollectibles.superOre} Units</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -44,8 +57,7 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}> Energy will be used to increase the efficiency of the Krystelizer</Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{energyValuer(user.kollectibles.energy)}</Text>
-                        <Text fontSize={'xs'} color={"blackAlpha.500"}>{energyValuer(user.kollectibles.energyCap)}</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}><Tooltip label={user.kollectibles.energy + " wH"}>{energyValuer(user.kollectibles.energy)}</Tooltip></Text>
                     </Box>
                 </Flex>
             </Card>
@@ -60,7 +72,6 @@ function SecondaryCard(){
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
                         <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{user.kollectibles.fuel} gal</Text>
-                        <Text fontSize={'xs'}>{user.kollectibles.fuelCap} gal</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -75,7 +86,6 @@ function SecondaryCard(){
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
                         <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>x{user.kollectibles.powerCards}</Text>
-                        <Text fontSize={'xs'}>Max. x{user.kollectibles.powerCardsCap}</Text>
                     </Box>
                 </Flex>
             </Card>

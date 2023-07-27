@@ -173,3 +173,7 @@ export const harvestKrystel = () => {
 export const purchaseKrystelizer = (username) => {
     return axios.post(`${baseURL}/facility/krystelizer`, {username}, AccessParams())
 }
+
+export const fetchTransactions = (query) => {
+    return axios.get(`${baseURL}/logs?query=${query}`, AccessParams())
+}

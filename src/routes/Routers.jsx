@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
 import HomePage from "../components/HomePage";
 import Login from "../components/authentication/Login";
@@ -7,8 +7,31 @@ import MFA from "../components/authentication/MFA";
 import ProfileBuilder from "../components/authentication/ProfileBuilder";
 import Logout from "../components/authentication/Logout";
 import Facility from "../components/facility/Facility";
+import Logs from "../components/logs/Logs";
+import { dashboard } from "../lib/api";
+import { useEffect } from "react";
+import { setUserProfile } from "../redux/userProfile/actions";
+import { useToast } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
 
 function Routers(){
+    const toast = useToast()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    useEffect(()=>{
+        dashboard()
+        .then((response) => {
+            dispatch(setUserProfile(response.data.default))
+        })
+        .catch(error => {
+            toast({
+                title: error.response.data,
+                variant: 'subtle',
+                status: 'error',
+            })
+            navigate(error.response.data.route)
+        });
+    },[navigate, toast])
     return (
         <Routes>
             <Route path="/" element={<HomePage/>}/>
@@ -21,6 +44,7 @@ function Routers(){
             {/* App Routes */}
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/facility" element={<Facility/>}/>
+            <Route path="/logs" element={<Logs/>}/>
         </Routes>
     )
 }

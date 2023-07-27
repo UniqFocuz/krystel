@@ -54,7 +54,7 @@ function Facility() {
                                 <KrystelizerTab/>
                             </TabPanel>
                             <TabPanel>
-                                <p>two!</p>
+                                
                             </TabPanel>
                         </TabPanels>
                     </Tabs>

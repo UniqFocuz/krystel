@@ -44,9 +44,31 @@ export function krystelValuer(value){
 
 export function energyValuer(value){
   if(value < 1000){
-    return value.toLocaleString() + " kWh"
+    return value.toLocaleString() + " Wh"
+  }
+  else if(value < 1000000){
+    return (value/1000000).toFixed(2).toLocaleString() + " kWh"
   }
   else{
-    return (value/1000).toFixed(0).toLocaleString() + " mWh"
+    return (value/1000000).toFixed(2).toLocaleString() + " mWh"
   }
+}
+
+export function countValuer(value){
+  if(value < 1000){
+    return value.toLocaleString()
+  }
+  else if (value < 1000000){
+    return (value/1000).toFixed(1).toLocaleString() + "k"
+  }
+  else{
+    return (value/1000000).toFixed(1).toLocaleString() + "m"
+  }
+}
+
+const moment = require('moment-timezone');
+
+export function convertToCountryTime(inputTime, countryCode) {
+  const countryTime = moment.utc(inputTime).tz('Asia/Kolkata').format('YYYY-MM-DDTHH:mm:ss.SSSSSSZZ');
+  return countryTime.toLocaleString();
 }

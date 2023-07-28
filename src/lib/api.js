@@ -177,3 +177,7 @@ export const purchaseKrystelizer = (username) => {
 export const fetchTransactions = (query) => {
     return axios.get(`${baseURL}/logs?query=${query}`, AccessParams())
 }
+
+export const refillFuel = () => {
+    return axios.post(`${baseURL}/app/refill`, {}, AccessParams())
+}

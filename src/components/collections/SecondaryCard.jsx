@@ -4,14 +4,29 @@ import { SiCrystal } from "react-icons/si"
 import { MdOutlineElectricBolt } from "react-icons/md"
 import { BsFillDropletFill } from "react-icons/bs";
 import { IoBatteryChargingOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { energyValuer, krystelValuer } from "../../lib/support";
+import { refillFuel } from "../../lib/api";
+import { setUserProfile } from "../../redux/userProfile/actions";
 
 function SecondaryCard(){
     const user = useSelector((state) => state.userReducer);
     const grayColorModeValue = useColorModeValue("white", "#2D3748")
+    const dispatch = useDispatch()
+    const handleFuelRefill = async() => {
+        await refillFuel()
+        .then((response) => {
+            dispatch(setUserProfile({...user, fuel : (response.data.fuel/user.kollectibles.fuelCap)*100, kollectibles : {
+                ...user.kollectibles, fuel : response.data.fuel
+            }}))
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+    console.log(user)
     return(
-        user.isAuthenticated &&
+        user.kollectibles &&
         <Card borderTopRadius={0} paddingX={5} paddingY={10} marginBottom={20}  height={"500px"} overflowY={"auto"}>
             <Box position='relative'>
                 <Divider />
@@ -61,7 +76,7 @@ function SecondaryCard(){
                     </Box>
                 </Flex>
             </Card>
-            <Card padding={5} mt={5}>
+            <Card padding={5} mt={5} role="button" onClick={handleFuelRefill}>
                 <Flex gap={3}>
                     <Box my={'auto'} width={"12%"} display="flex" justifyContent="center" alignItems="center">
                     <BsFillDropletFill color={"brown"} size={30}/>

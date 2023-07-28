@@ -12,7 +12,7 @@ import { dashboard } from "../lib/api";
 import { useEffect } from "react";
 import { setUserProfile } from "../redux/userProfile/actions";
 import { useToast } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Routers(){
     const toast = useToast()
@@ -23,15 +23,18 @@ function Routers(){
         .then((response) => {
             dispatch(setUserProfile(response.data.default))
         })
-        .catch(error => {
-            toast({
-                title: error.response.data,
-                variant: 'subtle',
-                status: 'error',
-            })
-            navigate(error.response.data.route)
+        .catch((error) => {
+            if(error.response.status === 401){
+                toast({
+                    title: 'Session Expired',
+                    variant: 'subtle',
+                    status: 'error',
+                })
+                localStorage.removeItem('accessToken')
+                navigate("/login")
+            }
         });
-    },[navigate, toast])
+    },[])
     return (
         <Routes>
             <Route path="/" element={<HomePage/>}/>

@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { setUserProfile } from "../redux/userProfile/actions";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
+import Transfer from "../components/trasnfer/Transfer";
 
 function Routers(){
     const toast = useToast()
@@ -48,6 +49,7 @@ function Routers(){
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/facility" element={<Facility/>}/>
             <Route path="/logs" element={<Logs/>}/>
+            <Route path="/transfer" element={<Transfer/>}/>
         </Routes>
     )
 }

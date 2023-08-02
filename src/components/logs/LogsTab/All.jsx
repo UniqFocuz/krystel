@@ -16,7 +16,7 @@ function All({logs}){
     return(
         currentLogs &&
         <>
-            <VStack gap={4} height={"500px"} overflowY={"auto"}>
+            <VStack gap={4} height={"400px"} overflowY={"auto"}>
             {   
                 currentLogs.length !== 0 ?
                 currentLogs.map((log, index)=> (

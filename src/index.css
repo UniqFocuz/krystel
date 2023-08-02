@@ -31,3 +31,7 @@ code {
   backdrop-filter: blur(100px);
   height: 100vh;
 }
+
+.flip{
+  transform: scaleX(-1);
+}

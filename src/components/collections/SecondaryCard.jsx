@@ -27,7 +27,7 @@ function SecondaryCard(){
     console.log(user)
     return(
         user.kollectibles &&
-        <Card borderTopRadius={0} paddingX={5} paddingY={10} marginBottom={20}  height={"500px"} overflowY={"auto"}>
+        <Card borderTopRadius={0} paddingX={5} paddingY={10} marginBottom={20} >
             <Box position='relative'>
                 <Divider />
                 <AbsoluteCenter bg={grayColorModeValue} px='2'>
@@ -72,7 +72,8 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}> Energy will be used to increase the efficiency of the Krystelizer</Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}><Tooltip label={user.kollectibles.energy + " wH"}>{energyValuer(user.kollectibles.energy)}</Tooltip></Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{energyValuer(user.kollectibles.energy)} Bolts</Text>
+                        <Text fontWeight={'light'} fontSize={'xs'} color={"gray"}>{user.kollectibles.energy}</Text>
                     </Box>
                 </Flex>
             </Card>

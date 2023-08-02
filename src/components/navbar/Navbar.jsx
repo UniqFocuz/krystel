@@ -8,6 +8,7 @@ import { TbMailExclamation } from "react-icons/tb";
 import { RiDashboardFill } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
+import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
 import { HiBeaker, HiMiniCog } from "react-icons/hi2";
 import { GoArrowSwitch } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
@@ -97,8 +98,8 @@ function Navbar() {
                                     </VStack>
                                 </Flex>
                                 <Flex gap={5}>
-                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}>D</Button>
-                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}>W</Button>
+                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}><GiPayMoney className="flip" size={30}  /></Button>
+                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}><GiReceiveMoney size={30}/></Button>
                                     <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha"><HiMiniCog color={whiteColorModeValue} size={30} /></Button>
                                     <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={toggleColorMode}>{colorMode === "light" ? <BiSolidMoon color={whiteColorModeValue} size={30} /> : <BiSolidSun color={whiteColorModeValue} size={30} />}</Button>
                                 </Flex>

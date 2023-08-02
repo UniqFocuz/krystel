@@ -46,11 +46,8 @@ export function energyValuer(value){
   if(value < 1000){
     return value.toLocaleString() + " Wh"
   }
-  else if(value < 1000000){
-    return (value/1000000).toFixed(2).toLocaleString() + " kWh"
-  }
   else{
-    return (value/1000000).toFixed(2).toLocaleString() + " mWh"
+    return (Math.floor(value/10000)).toFixed(0).toLocaleString()
   }
 }
 

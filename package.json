@@ -18,6 +18,7 @@
     "moment-timezone": "^0.5.43",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
+    "react-d3-tree": "^3.6.1",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.5",
     "react-icons": "^4.10.1",

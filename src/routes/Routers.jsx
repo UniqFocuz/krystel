@@ -14,6 +14,7 @@ import { setUserProfile } from "../redux/userProfile/actions";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import Transfer from "../components/transfer/Transfer";
+import Tree from "../components/tree/Tree";
 
 function Routers(){
     const toast = useToast()
@@ -50,6 +51,7 @@ function Routers(){
             <Route path="/facility" element={<Facility/>}/>
             <Route path="/logs" element={<Logs/>}/>
             <Route path="/transfer" element={<Transfer/>}/>
+            <Route path="/laboratory" element={<Tree/>}/>
         </Routes>
     )
 }

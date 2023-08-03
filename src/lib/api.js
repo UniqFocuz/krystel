@@ -185,3 +185,7 @@ export const fetchTransactions = (query) => {
 export const refillFuel = () => {
     return axios.post(`${baseURL}/app/refill`, {}, AccessParams())
 }
+
+export const fetchTree = (username) => {
+    return axios.get(`${baseURL}/tree?username=${username}`, AccessParams())
+}

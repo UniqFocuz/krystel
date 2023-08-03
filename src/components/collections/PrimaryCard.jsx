@@ -43,18 +43,18 @@ function PrimaryCard() {
         <Tabs size='sm' variant='enclosed' index={activeIndex}>
             <TabPanels>
                 <TabPanel p={0}>
-                    <Card bg={primaryColourOpaced} border={"none"} padding={5} display={"block"} borderBottomRadius={'none'}>
+                    <Card bg={primaryColourOpaced} border={"none"} display={"block"} borderBottomRadius={'none'}>
                         {
                             user.currentFabrication ?
-                                <Box>
+                                <Box padding={5}>
                                     <Flex justifyContent={"end"} gap={2}>
-                                        <Button bg={"white"} gap={2} size={'xs'} padding={3} >
+                                        <Button gap={2} size={'xs'} padding={3}  color={whiteColorModeValue}>
                                             <Text fontSize={"2xs"}>Power Card Activated</Text> <IoBatteryChargingOutline color="green" size={20} />
                                         </Button>
-                                        <Button bg={"white"} gap={1} size={'xs'} padding={3} >
+                                        <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
                                             <BsFillDropletFill color="brown" size={12} /> <Text fontSize={"2xs"}>{user.fuel}%</Text>
                                         </Button>
-                                        <Button bg={"white"} gap={1} size={'xs'} padding={3} >
+                                        <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
                                             <Text fontWeight={"bold"} fontSize={"2xs"}>{user.multiplier.toFixed(1)}x</Text>
                                         </Button>
                                     </Flex>
@@ -66,12 +66,11 @@ function PrimaryCard() {
                                                 <Text fontSize={"md"} >
                                                     supplied in <b>{user.currentFabrication.daysFromCreation.slice(1)}</b>
                                                 </Text>
-                                                <Button size={'sm'} mt={10} onClick={() => handleHarvestKrystel()} color={primaryColour}>Harvest {user.harvestVolume} gem<sup>6</sup></Button>
+                                                <Button size={'sm'} mt={10} onClick={() => handleHarvestKrystel()} color={whiteColorModeValue}>Harvest {user.harvestVolume} gem<sup>6</sup></Button>
                                                 <Text fontSize={"xs"} mt={2}>last harvest: <b>{user.harvestTime.slice(1)}</b> ago</Text>
                                             </Box>
                                         </Box>
                                     </Flex>
-                                    <Button size={'sm'} mt={10} onClick={() => handleToggle(1)} color={primaryColour}>Super Fabrication</Button>
 
                                 </Box>
                                 : <Flex p={5}>
@@ -82,13 +81,14 @@ function PrimaryCard() {
 
                                 </Flex>
                         }
+                        <Button size={'sm'} mt={10} borderRadius={0} width={"100%"} onClick={() => handleToggle(1)} colorScheme="blackAlpha">Super Fabrication</Button>
                     </Card>
                 </TabPanel>
                 <TabPanel p={0}>
-                    <Card bg={secondaryColourOpaced} border={"none"} padding={5} display={"block"} borderBottomRadius={'none'}>
+                    <Card bg={secondaryColourOpaced} border={"none"} display={"block"} borderBottomRadius={'none'}>
                         {
                             user.currentFabrication ?
-                                <Box>
+                                <Box padding={5}>
                                     <Flex justifyContent={"end"} gap={2}>
                                         <Button bg={"white"} gap={2} size={'xs'} padding={3} >
                                             <Text fontSize={"2xs"}>Power Card Activated</Text> <IoBatteryChargingOutline color="green" size={20} />
@@ -107,7 +107,6 @@ function PrimaryCard() {
                                             </Box>
                                         </Box>
                                     </Flex>
-                                    <Button size={'sm'} mt={10} onClick={() => handleToggle(0)} color={primaryColour}>Krystelizer</Button>
                                 </Box>
                                 : <Flex p={5}>
                                     <Box m={"auto"} textAlign={"center"}>
@@ -117,6 +116,7 @@ function PrimaryCard() {
 
                                 </Flex>
                         }
+                        <Button size={'sm'} mt={10} borderRadius={0} width={"100%"} onClick={() => handleToggle(0)} colorScheme="blackAlpha">Krystelization</Button>
                     </Card>
                 </TabPanel>
             </TabPanels>

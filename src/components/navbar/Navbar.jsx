@@ -88,7 +88,7 @@ function Navbar() {
                                             <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/facility')}><HiBeaker color={whiteColorModeValue} size={30} /></Button>
                                         </Flex>
                                         <Flex width={"180px"} gap={5}>
-                                            <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha">
+                                            <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/laboratory')}>
                                                 <VStack color={"white"}>
                                                     <Text fontWeight={'bold'}>{countValuer(user.alphaPopulation + user.betaPopulation)} subjects</Text>
                                                     <Text fontSize={'xs'}>{countValuer(user.alphaVolume)} alpha | {countValuer(user.betaVolume)} beta</Text>

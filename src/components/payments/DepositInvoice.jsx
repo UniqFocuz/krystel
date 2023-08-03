@@ -38,7 +38,6 @@ function DepositInvoice(props){
             }
         })
         .catch((error) => {
-            console.log(error)
         })
         .finally(() => {
             setIsRefreshLoading(false)

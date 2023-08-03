@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { setUserProfile } from "../redux/userProfile/actions";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import Transfer from "../components/trasnfer/Transfer";
+import Transfer from "../components/transfer/Transfer";
 
 function Routers(){
     const toast = useToast()
@@ -32,8 +32,8 @@ function Routers(){
                     status: 'error',
                 })
                 localStorage.removeItem('accessToken')
-                navigate("/login")
             }
+            error.response.data.route && navigate(error.response.data.route)
         });
     },[])
     return (

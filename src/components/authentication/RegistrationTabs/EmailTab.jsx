@@ -12,7 +12,6 @@ function EmailTab (props){
         const regex = /^[A-Za-z0-9._%+-]+@(?:gmail\.com|outlook\.com|hotmail\.com|yahoo\.com|yahoo\.[a-z]+|icloud\.com|aol\.com|zoho\.com|protonmail\.com|mail\.com|gmx\.com|yandex\.com)$/i;
         if(regex.test(email)){
             validatePreRegisterEmail(email).then((response) => {
-                console.log(response.data)
                 if(response.data.exists === true){
                     if(response.data.active === true){
                         props.setIsValid(false)

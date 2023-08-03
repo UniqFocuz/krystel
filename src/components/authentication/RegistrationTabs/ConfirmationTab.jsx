@@ -28,7 +28,6 @@ function ConfirmationTab(props){
                 navigate('/welcome')
             }, 3000)
         }).catch((error) => {
-            console.log(error)
             toast({
                 title: error.response.data.message,
                 variant: 'subtle',

@@ -19,3 +19,29 @@ export const buttonTheme = extendTheme({
       },
     },
   });
+
+
+export const numPadButtons = extendTheme({
+  components: {
+    Button: {
+      baseStyle: {
+        borderRadius: 10,
+        width: "100%",
+      },
+      variants: {
+        solid: {
+          bg: "white",
+          color: primaryColour,
+          _hover: {
+            bg: primaryColourOpaced,
+            color: "white",
+          },
+          _active: {
+            bg: primaryColourOpaced,
+            color: "white",
+          },
+        },
+      },
+    },
+  },
+});

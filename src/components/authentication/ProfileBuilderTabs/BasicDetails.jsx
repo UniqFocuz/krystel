@@ -175,7 +175,6 @@ function BasicDetails(props) {
             props.setIsLoading(false)
         }, 3000)
     }
-    console.log(props.progress.data)
     return (
         !props.progress.isPatronSet ?
         <>

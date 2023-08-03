@@ -41,13 +41,13 @@ function Facility() {
                         <Text my={"auto"} fontWeight={'bold'}>Facility</Text>
                     </Flex>
                 </Card>
-                <Card borderTopRadius={0} padding={5} marginBottom={20}>
+                <Card borderTopRadius={0} padding={5} marginBottom={20} height={"550px"} overflowX={"auto"}>
                     <Tabs size='md' variant='soft-rounded' colorScheme="orange">
                         <TabList gap={2}>
                             <Tab><BiStar/></Tab>
-                            <Tab><MdOutlineElectricBolt/></Tab>
+                            {/* <Tab><MdOutlineElectricBolt/></Tab>
                             <Tab><BsFillDropletFill/></Tab>
-                            <Tab><BiSolidBattery/></Tab>
+                            <Tab><BiSolidBattery/></Tab> */}
                         </TabList>
                         <TabPanels my={5}>
                             <TabPanel p={0}>

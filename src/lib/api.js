@@ -174,6 +174,10 @@ export const purchaseKrystelizer = (username) => {
     return axios.post(`${baseURL}/facility/krystelizer`, {username}, AccessParams())
 }
 
+export const transferOre = (coordinate, amount) => {
+    return axios.post(`${baseURL}/transfer`, { coordinate, amount }, AccessParams())
+}
+
 export const fetchTransactions = (query) => {
     return axios.get(`${baseURL}/logs?query=${query}`, AccessParams())
 }

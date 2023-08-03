@@ -17,7 +17,6 @@ function EmailVerify(props) {
             })
         })
         .catch((error) => {
-            console.log(error.response)
         })
     }
     return (

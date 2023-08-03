@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { fetchTransactions } from "../../lib/api"
 import { useEffect, useState } from "react"
 import { GoArrowSwitch } from "react-icons/go"
-import All from "./LogsTab/All"
+import LogPanel from "./LogsTab/LogPanel"
 
 function Logs(){
     const navigate = useNavigate()
@@ -31,14 +31,14 @@ function Logs(){
                         <Text my={"auto"} fontWeight={'bold'}>Logs</Text>
                     </Flex>
                 </Card>
-                <Card borderTopRadius={0} padding={5} marginBottom={20}>
+                <Card borderTopRadius={0} padding={5} marginBottom={20} height={"550px"} overflowX={"auto"}>
                     <Tabs size='md' variant='soft-rounded' colorScheme="orange">
                         <TabList gap={2}>
                             <Tab><GoArrowSwitch/></Tab>
                         </TabList>
                         <TabPanels my={5}>
                             <TabPanel p={0}>
-                                <All {...{logs}} />
+                                <LogPanel {...{logs}} />
                             </TabPanel>
                         </TabPanels>
                     </Tabs>

@@ -1,5 +1,5 @@
 import { AbsoluteCenter, Box, Card, Divider, Flex, Text, Tooltip, useColorModeValue } from "@chakra-ui/react";
-import { primaryColour } from "../../lib/settings";
+import { primaryColour, primaryColourOpaced } from "../../lib/settings";
 import { SiCrystal } from "react-icons/si"
 import { MdOutlineElectricBolt } from "react-icons/md"
 import { BsFillDropletFill } from "react-icons/bs";
@@ -21,10 +21,8 @@ function SecondaryCard(){
             }}))
         })
         .catch((error) => {
-            console.log(error)
         })
     }
-    console.log(user)
     return(
         user.kollectibles &&
         <Card borderTopRadius={0} paddingX={5} paddingY={10} marginBottom={20} >
@@ -45,6 +43,20 @@ function SecondaryCard(){
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
                         <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{krystelValuer(user.kollectibles.krystel)}</Text>
+                    </Box>
+                </Flex>
+            </Card>
+            <Card padding={5} mt={5}>
+                <Flex gap={3}>
+                    <Box my={'auto'} width={"12%"} display="flex" justifyContent="center" alignItems="center">
+                        <SiCrystal color={primaryColourOpaced} size={30}/>
+                    </Box>
+                    <Box my={'auto'} mr={'auto'} width={"55%"}>
+                        <Text color={primaryColour} fontSize={'sm'}> Ore</Text>
+                        <Text color={'blackAlpha.500'} fontSize={'2xs'}> Ores are crafted </Text>
+                    </Box>
+                    <Box my={'auto'} textAlign={"end"}>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{user.kollectibles.ore} Units</Text>
                     </Box>
                 </Flex>
             </Card>

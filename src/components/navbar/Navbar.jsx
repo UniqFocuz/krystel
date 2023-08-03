@@ -1,11 +1,11 @@
 import { Avatar, Box, Button, ChakraProvider, Drawer, DrawerContent, DrawerOverlay, Flex, HStack, Text, VStack, WrapItem, extendTheme, useColorMode, useColorModeValue, useDisclosure } from "@chakra-ui/react";
-import { BiSolidLockAlt, BiSolidLockOpen, BiSolidMoon, BiSolidSun, BiX } from "react-icons/bi";
+import { BiSolidLockAlt, BiSolidLockOpen, BiSolidMoon, BiSolidSun, BiSolidUserX, BiX } from "react-icons/bi";
 import { BsFillGrid1X2Fill, BsFillJournalBookmarkFill, BsPlus } from "react-icons/bs";
 import { maxWidthLayoutSm, primaryColour, buttonTheme } from "../../lib/settings";
 import { useEffect, useRef, useState } from "react";
 import "../../index.css"
 import { TbMailExclamation } from "react-icons/tb";
-import { RiDashboardFill } from "react-icons/ri";
+import { RiDashboardFill, RiUserUnfollowLine } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
@@ -27,7 +27,6 @@ function Navbar() {
         onClose()
         navigate(route)
     }
-    console.log(user)
     return (
         <ChakraProvider theme={buttonTheme}>
             <Box display={"flex"} padding={5} position={'fixed'} width={"100%"} zIndex={999}>
@@ -45,6 +44,7 @@ function Navbar() {
                             <Flex width={"100%"} justifyContent={"end"} textAlign={"end"} gap={2} color={whiteColorModeValue}>
                                 <Flex gap={1}>{ user.isMFAEnabled ? <BiSolidLockAlt /> : <BiSolidLockOpen /> } <Text fontWeight={'bolder'} fontSize={'xs'}>MFA</Text></Flex>
                                 { !user.isVerified && <TbMailExclamation/> }
+                                { user.isProfileComplete && <BiSolidUserX size={18}/> }
                             </Flex>
                             <VStack gap={5}>
                                 <Flex gap={5}>

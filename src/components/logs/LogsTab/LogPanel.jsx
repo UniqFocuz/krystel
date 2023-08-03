@@ -16,24 +16,24 @@ function All({logs}){
     return(
         currentLogs &&
         <>
-            <VStack gap={4} height={"400px"} overflowY={"auto"}>
+            <VStack gap={4}>
             {   
                 currentLogs.length !== 0 ?
                 currentLogs.map((log, index)=> (
-                    <Card key={index} px={5} py={5} width={"100%"} role="button" variant={"filled"} fontWeight={'bold'} fontSize={'sm'}>
+                    <Card key={index} p={3} py={4} width={"100%"} role="button" variant={"filled"} fontWeight={'bold'} fontSize={'sm'}>
                         <Flex width={"100%"}>
                             <Flex width={"20%"}>
                                 { log.coordinate ?
-                                    <WrapItem>
-                                        <Avatar name={log.fullName} src='' bg={"gray.400"} />
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name={log.fullName} size={'md'} m={"auto"} src='' bg={"gray.400"} />
                                     </WrapItem>
                                     :log.type === 'Super Ore' ?
-                                    <WrapItem>
-                                        <Avatar name='Super Ore' src='' bg={"gray.400"} />
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name='Super Ore' size={'md'} m={"auto"} src='' bg={"gray.400"} />
                                     </WrapItem>
                                     : log.type === 'Power Card' ?
-                                    <WrapItem>
-                                        <Avatar name='Power Card' src='' bg={"red.400"} />
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name='Power Card' size={'md'} m={"auto"} src='' bg={"red.400"} />
                                     </WrapItem>
                                     : <Text>{countValuer(log.amount)}</Text>
                                 }

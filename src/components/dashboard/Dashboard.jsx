@@ -1,12 +1,7 @@
-import { Box, useToast } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
 import PrimaryCard from "../collections/PrimaryCard"
 import SecondaryCard from "../collections/SecondaryCard"
-import { useEffect, useState } from "react"
-import { dashboard } from "../../lib/api"
-import { useNavigate } from "react-router-dom"
 import { maxWidthLayoutSm } from "../../lib/settings"
-import { useDispatch, useSelector } from "react-redux"
-import { setUserProfile } from "../../redux/userProfile/actions"
 
 function Dashboard(){
     return(

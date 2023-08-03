@@ -8,7 +8,6 @@ import { harvestKrystel } from "../../lib/api";
 import { setUserProfile } from "../../redux/userProfile/actions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import CrystalPyramid from "../CrystalPyramid";
 
 function PrimaryCard() {
     const dispatch = useDispatch()
@@ -56,11 +55,11 @@ function PrimaryCard() {
                                             <BsFillDropletFill color="brown" size={12} /> <Text fontSize={"2xs"}>{user.fuel}%</Text>
                                         </Button>
                                         <Button bg={"white"} gap={1} size={'xs'} padding={3} >
-                                            <Text fontWeight={"bold"} fontSize={"2xs"}>{user.multiplier}x</Text>
+                                            <Text fontWeight={"bold"} fontSize={"2xs"}>{user.multiplier.toFixed(1)}x</Text>
                                         </Button>
                                     </Flex>
                                     <Flex color={"white"} mt={5}>
-                                        <CrystalPyramid/>
+                                        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_5kg5gsqjaK.json" mode="bounce" background="transparent" speed="0.5" style={{ width: "50%", height: "50%" }} loop autoplay></lottie-player>
                                         <Box display={"flex"} width={"50%"}>
                                             <Box margin={"auto"} textAlign={"end"}>
                                                 <Text fontSize={'3xl'} >{krystelValuer(user.currentFabrication.fabricatedVolume)}</Text>

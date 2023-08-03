@@ -18,19 +18,18 @@ function Login(){
     const handleShowPassword = () => setShowPassword(!showPassword)
     const [loader, setloader] = useState(false)
     const [isPageLoading, setIsPageLoading] = useState(true)
-    const [isUsernameValid, setIsUsernameValid] = useState(null); // Initial validation status
+    const [isUsernameValid, setIsUsernameValid] = useState(null); 
     useEffect(() => {
         const validate = async () => {
             try {
                 if (cred.username === '') {
-                  setIsUsernameValid(null); // Reset to null when the username field is empty
+                  setIsUsernameValid(null); 
                 } else {
                     if(cred.username.includes('@') === true){
                         const response = await validatePreRegisterEmail(cred.username)
                         setIsUsernameValid(response.data.exists);
                     } else {
                         const response = await validateUsername(cred.username)
-                        console.log(response)
                         setIsUsernameValid(response.data.exists);
                     }
                 }
@@ -40,9 +39,9 @@ function Login(){
         };
     
 
-    const typingTimeout = setTimeout(validate, 500); // Wait for 500ms after typing stops before validating
+    const typingTimeout = setTimeout(validate, 500); 
 
-    return () => clearTimeout(typingTimeout); // Cleanup the timeout on unmount or when the username changes
+    return () => clearTimeout(typingTimeout); 
     }, [cred.username]);
 
     useEffect(() => {
@@ -71,7 +70,7 @@ function Login(){
     }, [navigate, toast])
 
     const handleUsernameChange = (e) => {
-        setCred({ ...cred, username: e.target.value.toUpperCase().replace('KY-', '') });
+        setCred({ ...cred, username: e.target.value.toUpperCase() });
     };
     const handlePasswordChange = (e) => {
         setCred({ ...cred, password: e.target.value });

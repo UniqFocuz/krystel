@@ -23,10 +23,8 @@ function KrystelizerTab(){
                 variant: 'subtle',
                 status: 'success',
             })
-            console.log(response.data)
         })
         .catch((error) => {
-            console.log(error.response.data)
             setBuyLoader(false)
             toast({
                 title: error.response.data.message,

@@ -33,6 +33,7 @@ function Routers(){
                     status: 'error',
                 })
                 localStorage.removeItem('accessToken')
+                navigate(error.response.data.route)
             }
             if(error.response.status === 500){
                 toast({

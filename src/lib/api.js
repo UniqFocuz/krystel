@@ -164,7 +164,9 @@ export const setWalletAddress = (address) => {
 // Application API
 export const dashboard = () => {
     console.log(AccessParams())
-    return axios.get(`${baseURL}/dashboard`, AccessParams())
+    return axios.get(`${baseURL}/dashboard`, { headers: {
+        Authorization : `Bearer ${localStorage.getItem('accessToken')}`
+    }})
 }
 
 export const harvestKrystel = () => {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const DEBUG = true
+export const DEBUG = false
 
 let baseURL = ""
 
@@ -9,7 +9,7 @@ if(DEBUG){
     baseURL = "http://localhost:8000/api"
 }
 else{
-    baseURL = "http://localhost:8000/api"
+    baseURL = "http://3.8.193.154/api"
 }
 
 // Support API

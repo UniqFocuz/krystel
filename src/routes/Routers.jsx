@@ -34,7 +34,15 @@ function Routers(){
                 })
                 localStorage.removeItem('accessToken')
             }
-            error.response.data.route && navigate(error.response.data.route)
+            if(error.response.status === 500){
+                toast({
+                    title: 'Session Expired',
+                    variant: 'subtle',
+                    status: 'error',
+                })
+                localStorage.removeItem('accessToken')
+                navigate(error.response.data.route)
+            }
         });
     },[])
     return (

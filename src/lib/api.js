@@ -163,7 +163,8 @@ export const setWalletAddress = (address) => {
 
 // Application API
 export const dashboard = () => {
-    return axios.get(`${baseURL}/dashboard`,  AccessParams())
+    const accessParams = AccessParams()
+    return axios.get(`${baseURL}/dashboard`, accessParams)
 }
 
 export const harvestKrystel = () => {

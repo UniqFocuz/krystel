@@ -3,10 +3,14 @@ import { maxWidthLayoutSm, primaryColourOpaced } from "../../lib/settings"
 import { IoChevronBackOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
 import TransferTab from "./TransferTabs/TransferTab"
+import PageLoader from "../collections/misc/PageLoader"
+import { useSelector } from "react-redux"
 
 function Transfer(){
     const navigate = useNavigate()
+    const user = useSelector((state) => state.userReducer);
     return(
+        user.isAuthenticated ?
         <>
             <Box width={maxWidthLayoutSm} mx="auto" pt={"80px"}>
                 <Card bg={primaryColourOpaced} color={"white"} padding={5} borderBottomRadius={'none'}>
@@ -32,6 +36,7 @@ function Transfer(){
                 </Card>
             </Box>
         </>
+        : <PageLoader/>
     )
 }
 

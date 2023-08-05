@@ -3,6 +3,7 @@ import PrimaryCard from "../collections/PrimaryCard"
 import SecondaryCard from "../collections/SecondaryCard"
 import { maxWidthLayoutSm } from "../../lib/settings"
 import { useSelector } from "react-redux";
+import PageLoader from "../collections/misc/PageLoader";
 
 function Dashboard(){
 
@@ -15,8 +16,7 @@ function Dashboard(){
                 <SecondaryCard/>
             </Box>
         </>
-        :
-        <>Loading ...</>
+        :<PageLoader/>
     )
 }
 

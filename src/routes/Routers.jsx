@@ -34,16 +34,15 @@ function Routers(){
                     status: 'error',
                 })
                 localStorage.removeItem('accessToken')
-                navigate(error.response.data.route)
+                navigate('/login')
             }
             if(error.response.status === 500){
+                console.log(error)
                 toast({
-                    title: 'Session Expired',
+                    title: 'An unexpected error occured!',
                     variant: 'subtle',
-                    status: 'error',
+                    status: 'warning',
                 })
-                localStorage.removeItem('accessToken')
-                navigate(error.response.data.route)
             }
         });
     },[location.pathname, dispatch, navigate, toast])

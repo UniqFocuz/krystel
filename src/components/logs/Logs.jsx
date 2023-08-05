@@ -6,6 +6,8 @@ import { fetchTransactions } from "../../lib/api"
 import { useEffect, useState } from "react"
 import { GoArrowSwitch } from "react-icons/go"
 import LogPanel from "./LogsTab/LogPanel"
+import { useSelector } from "react-redux"
+import PageLoader from "../collections/misc/PageLoader"
 
 function Logs(){
     const navigate = useNavigate()
@@ -19,8 +21,10 @@ function Logs(){
         }
         fetchLogs()
     }, [])
+    const user = useSelector((state) => state.userReducer);
     
     return(
+        user.isAuthenticated ?
         <>
             <Box width={maxWidthLayoutSm} mx="auto" pt={"80px"}>
                 <Card bg={primaryColourOpaced} color={"white"} padding={5} borderBottomRadius={'none'}>
@@ -46,6 +50,7 @@ function Logs(){
                 </Card>
             </Box>
         </>
+        : <PageLoader/>
     )
 }
 

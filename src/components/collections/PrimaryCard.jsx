@@ -8,6 +8,7 @@ import { harvestKrystel } from "../../lib/api";
 import { setUserProfile } from "../../redux/userProfile/actions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import PageLoader from "./misc/PageLoader";
 
 function PrimaryCard() {
     const dispatch = useDispatch()
@@ -39,7 +40,7 @@ function PrimaryCard() {
         setActiveIndex(index)
     }
     return (
-        user.isAuthenticated &&
+        user.isAuthenticated ?
         <Tabs size='sm' variant='enclosed' index={activeIndex}>
             <TabPanels>
                 <TabPanel p={0}>
@@ -121,6 +122,7 @@ function PrimaryCard() {
                 </TabPanel>
             </TabPanels>
         </Tabs>
+        :<PageLoader/>
     )
 }
 

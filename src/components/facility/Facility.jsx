@@ -10,6 +10,7 @@ import { BiSolidBattery, BiStar } from "react-icons/bi"
 import { MdOutlineElectricBolt } from "react-icons/md"
 import { BsFillDropletFill } from "react-icons/bs"
 import KrystelizerTab from "./FacilityTabs/KrystelizerTab"
+import PageLoader from "../collections/misc/PageLoader"
 
 function Facility() {
     const navigate = useNavigate()
@@ -30,7 +31,9 @@ function Facility() {
                 navigate(error.response.data.route)
             });
     }, [navigate, toast])
+    const user = useSelector((state) => state.userReducer);
     return (
+        user.isAuthenticated?
         <>
             <Box width={maxWidthLayoutSm} mx="auto" pt={"80px"}>
                 <Card bg={primaryColourOpaced} color={"white"} padding={5} borderBottomRadius={'none'}>
@@ -61,6 +64,7 @@ function Facility() {
                 </Card>
             </Box>
         </>
+        : <PageLoader/>
     )
 }
 

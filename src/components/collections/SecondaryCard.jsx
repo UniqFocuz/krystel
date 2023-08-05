@@ -42,7 +42,7 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}> Krystels are crafted by the process of krystelization by a Krystelizer, making it rare and expensive </Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{krystelValuer(user.kollectibles.krystel)}</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{/*{krystelValuer(user.kollectibles.krystel)}*/} 0</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -70,7 +70,7 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}> Superores are crafted </Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{user.kollectibles.superOre} Units</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{/*{user.kollectibles.superOre}*/} 0 Units</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -84,12 +84,12 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}> Energy will be used to increase the efficiency of the Krystelizer</Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{energyValuer(user.kollectibles.energy)} Bolts</Text>
-                        <Text fontWeight={'light'} fontSize={'xs'} color={"gray"}>{user.kollectibles.energy}</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{/*{energyValuer(user.kollectibles.energy)}*/} 0 Bolts</Text>
+                        <Text fontWeight={'light'} fontSize={'xs'} color={"gray"}>{/*{user.kollectibles.energy}*/} 0</Text>
                     </Box>
                 </Flex>
             </Card>
-            <Card padding={5} mt={5} role="button" onClick={handleFuelRefill}>
+            <Card padding={5} mt={5} role="button" /* onClick={handleFuelRefill}*/>
                 <Flex gap={3}>
                     <Box my={'auto'} width={"12%"} display="flex" justifyContent="center" alignItems="center">
                     <BsFillDropletFill color={"brown"} size={30}/>
@@ -99,7 +99,7 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}>A Krystelizer needs fuel to consistently run. Fuel can be collected every <b>3 hours</b></Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{user.kollectibles.fuel} gal</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{/*{user.kollectibles.fuel}*/} 0 gal</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -113,7 +113,7 @@ function SecondaryCard(){
                         <Text color={'blackAlpha.500'} fontSize={'2xs'}> Power cards are required to start a Krystelizer</Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>x{user.kollectibles.powerCards}</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>x{/*user.kollectibles.powerCards*/}0</Text>
                     </Box>
                 </Flex>
             </Card>

@@ -37,12 +37,13 @@ function Routers(){
                 navigate('/login')
             }
             if(error.response.status === 500){
-                console.log(error)
                 toast({
                     title: 'An unexpected error occured!',
                     variant: 'subtle',
                     status: 'warning',
                 })
+                localStorage.removeItem('accessToken')
+                navigate('/login')
             }
         });
     },[location.pathname, dispatch, navigate, toast])
@@ -58,7 +59,7 @@ function Routers(){
             {/* App Routes */}
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/facility" element={<Facility/>}/>
-            <Route path="/logs" element={<Logs/>}/>
+            {/* <Route path="/logs" element={<Logs/>}/> */}
             <Route path="/transfer" element={<Transfer/>}/>
             <Route path="/laboratory" element={<Tree/>}/>
         </Routes>

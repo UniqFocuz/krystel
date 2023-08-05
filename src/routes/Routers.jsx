@@ -12,7 +12,7 @@ import { dashboard } from "../lib/api";
 import { useEffect } from "react";
 import { setUserProfile } from "../redux/userProfile/actions";
 import { useToast } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Transfer from "../components/transfer/Transfer";
 import Tree from "../components/tree/Tree";
 
@@ -27,27 +27,26 @@ function Routers(){
             dispatch(setUserProfile(response.data.default))
         })
         .catch((error) => {
-            console.log(error)
-            // if(error.response.status === 401){
-            //     toast({
-            //         title: 'Session Expired',
-            //         variant: 'subtle',
-            //         status: 'error',
-            //     })
-            //     localStorage.removeItem('accessToken')
-            //     navigate(error.response.data.route)
-            // }
-            // if(error.response.status === 500){
-            //     toast({
-            //         title: 'Session Expired',
-            //         variant: 'subtle',
-            //         status: 'error',
-            //     })
-            //     localStorage.removeItem('accessToken')
-            //     navigate(error.response.data.route)
-            // }
+            if(error.response.status === 401){
+                toast({
+                    title: 'Session Expired',
+                    variant: 'subtle',
+                    status: 'error',
+                })
+                localStorage.removeItem('accessToken')
+                navigate(error.response.data.route)
+            }
+            if(error.response.status === 500){
+                toast({
+                    title: 'Session Expired',
+                    variant: 'subtle',
+                    status: 'error',
+                })
+                localStorage.removeItem('accessToken')
+                navigate(error.response.data.route)
+            }
         });
-    },[location.pathname])
+    },[location.pathname, dispatch, navigate, toast])
     return (
         <Routes>
             <Route path="/" element={<HomePage/>}/>

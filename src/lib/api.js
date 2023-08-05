@@ -9,7 +9,7 @@ if(DEBUG){
     baseURL = "http://localhost:8000/api"
 }
 else{
-    baseURL = "http://api.krystel.io/api"
+    baseURL = "https://api.krystel.io/api"
 }
 
 // Support API

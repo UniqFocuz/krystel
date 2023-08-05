@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
 import HomePage from "../components/HomePage";
 import Login from "../components/authentication/Login";
@@ -20,32 +20,35 @@ function Routers(){
     const toast = useToast()
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation();
     useEffect(()=>{
         dashboard()
         .then((response) => {
             dispatch(setUserProfile(response.data.default))
+            console.log(response.data)
         })
         .catch((error) => {
-            if(error.response.status === 401){
-                toast({
-                    title: 'Session Expired',
-                    variant: 'subtle',
-                    status: 'error',
-                })
-                localStorage.removeItem('accessToken')
-                navigate(error.response.data.route)
-            }
-            if(error.response.status === 500){
-                toast({
-                    title: 'Session Expired',
-                    variant: 'subtle',
-                    status: 'error',
-                })
-                localStorage.removeItem('accessToken')
-                navigate(error.response.data.route)
-            }
+            console.log(error)
+            // if(error.response.status === 401){
+            //     toast({
+            //         title: 'Session Expired',
+            //         variant: 'subtle',
+            //         status: 'error',
+            //     })
+            //     localStorage.removeItem('accessToken')
+            //     navigate(error.response.data.route)
+            // }
+            // if(error.response.status === 500){
+            //     toast({
+            //         title: 'Session Expired',
+            //         variant: 'subtle',
+            //         status: 'error',
+            //     })
+            //     localStorage.removeItem('accessToken')
+            //     navigate(error.response.data.route)
+            // }
         });
-    },[])
+    },[location.pathname])
     return (
         <Routes>
             <Route path="/" element={<HomePage/>}/>

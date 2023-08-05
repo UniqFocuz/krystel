@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const DEBUG = false
+export const DEBUG = true
 
 let baseURL = ""
 
@@ -9,7 +9,7 @@ if(DEBUG){
     baseURL = "http://localhost:8000/api"
 }
 else{
-    baseURL = "https://api.krystel.io/api"
+    baseURL = "http://api.krystel.io/api"
 }
 
 // Support API
@@ -163,10 +163,7 @@ export const setWalletAddress = (address) => {
 
 // Application API
 export const dashboard = () => {
-    console.log(AccessParams())
-    return axios.get(`${baseURL}/dashboard`, { headers: {
-        Authorization : `Bearer ${localStorage.getItem('accessToken')}`
-    }})
+    return axios.get(`${baseURL}/dashboard`,  AccessParams())
 }
 
 export const harvestKrystel = () => {

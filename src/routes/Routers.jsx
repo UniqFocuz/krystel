@@ -25,7 +25,6 @@ function Routers(){
         dashboard()
         .then((response) => {
             dispatch(setUserProfile(response.data.default))
-            console.log(response.data)
         })
         .catch((error) => {
             console.log(error)

@@ -9,7 +9,7 @@ if(DEBUG){
     baseURL = "http://localhost:8000/api"
 }
 else{
-    baseURL = "https://4680-103-160-216-221.ngrok-free.app"
+    baseURL = "https://api.krystel.io/api"
 }
 
 // Support API

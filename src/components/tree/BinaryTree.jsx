@@ -6,7 +6,6 @@ import { AiOutlineUser } from 'react-icons/ai';
 
 
 const BinaryTree = ({ data, navigateNode }) => {
-    console.log(data)
     return (
         data &&
         <Box py={5}>

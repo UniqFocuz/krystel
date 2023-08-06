@@ -15,8 +15,8 @@ function Tree() {
     const [currentUser, setCurrentUser] = useState(null);
     const [data, setData] = useState({})
     const [isLoading, setIsLoading] = useState(false)
-    // const [history, setHistory] = useState([])
-
+    const [history, setHistory] = useState([])
+    console.log(history)
     useEffect(() => {
         if (user.isAuthenticated) {
             setCurrentUser(user.username);
@@ -33,8 +33,29 @@ function Tree() {
         }
     };
 
+    const handleTop = () => {
+        nativeNavigateNode(user.username)
+    }
+
+    const handleBack = () => {
+        nativeNavigateNode(history.slice(-1))
+        setHistory(history.slice(0,-1))
+
+    }
+
+    const nativeNavigateNode = (username) => {
+        setIsLoading(true)
+        setCurrentUser(username);
+        pingTree(username)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 1000)
+
+    }
+
     const navigateNode = (username) => {
         setIsLoading(true)
+        history.push(history.length === 0 ? user.username : data.username)
         setCurrentUser(username);
         pingTree(username)
         setTimeout(() => {
@@ -71,15 +92,24 @@ function Tree() {
                                                 <Badge m={1} fontSize={'2xs'} py={1} px={3} borderRadius={15}>Alpha Vol: {data.alphaVolume}</Badge>
                                                 <Badge m={1} fontSize={'2xs'} py={1} px={3} borderRadius={15}>Beta Vol: {data.betaVolume}</Badge>
                                             </Box>
-                                            <Flex gap={2} justifyContent={'end'}>
-                                                <AvatarGroup size='xs' max={3}>
-                                                    {
-                                                        data.researchers.map((item, index) => (
-                                                            <Avatar key={index} name={item.name} />
-                                                        ))
-                                                    }
-                                                </AvatarGroup>
-                                                <Text my={"auto"} fontSize={'sm'}>{data.researchers.length} Researchers</Text>
+                                            <Flex gap={2} justifyContent={'space-between'}>
+                                                {
+                                                    history.length !== 0 && 
+                                                    <Flex gap={2} px={1}>
+                                                        <Badge m={"auto"} fontSize={'2xs'} py={1} role="button" px={3} onClick={handleTop} borderRadius={15}>Top</Badge>
+                                                        <Badge m={"auto"} fontSize={'2xs'} py={1} role="button" px={3} onClick={handleBack} borderRadius={15}>Back</Badge>
+                                                    </Flex>
+                                                }
+                                                <Flex gap={2} ml={"auto"}>
+                                                    <AvatarGroup size='xs' max={3}>
+                                                        {
+                                                            data.researchers.map((item, index) => (
+                                                                <Avatar key={index} name={item.name} />
+                                                            ))
+                                                        }
+                                                    </AvatarGroup>
+                                                    <Text my={"auto"} fontSize={'sm'}>{data.researchers.length} Researchers</Text>
+                                                </Flex>
                                             </Flex>
                                         </>
                                     : <ComponentLoader />

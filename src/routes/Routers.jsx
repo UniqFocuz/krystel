@@ -22,6 +22,8 @@ function Routers(){
     const navigate = useNavigate()
     const location = useLocation();
     useEffect(()=>{
+        let whitelist = ["/login", "/register"]
+        !whitelist.includes(location.pathname) &&
         dashboard()
         .then((response) => {
             dispatch(setUserProfile(response.data.default))

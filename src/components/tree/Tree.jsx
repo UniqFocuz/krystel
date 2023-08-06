@@ -63,7 +63,7 @@ function Tree() {
                                         <>
                                             <Text fontSize={'2xl'} mb={3} color={primaryColour} fontWeight={"bold"}>{data.username}</Text>
                                             <Box mb={5}>
-                                                <Badge m={1} fontSize={'2xs'} py={1} px={3} borderRadius={15} colorScheme="orange">Patron: {user.patron}</Badge>
+                                                <Badge m={1} fontSize={'2xs'} py={1} px={3} borderRadius={15} colorScheme="orange">Patron: {data.patron}</Badge>
                                                 <Badge m={1} fontSize={'2xs'} py={1} px={3} borderRadius={15}>Alpha: {data.alphaPopulation}</Badge>
                                                 <Badge m={1} fontSize={'2xs'} py={1} px={3} borderRadius={15}>Beta: {data.betaPopulation}</Badge>
                                                 <Badge m={1} fontSize={'2xs'} py={1} px={3} borderRadius={15}>Active Alpha: {data.alphaActivePopulation}</Badge>

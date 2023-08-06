@@ -9,7 +9,7 @@ import { setUserProfile } from "../../../redux/userProfile/actions";
 
 function KrystelizerTab(){
     const user = useSelector((state) => state.userReducer);
-    const [username, setUsername] = useState(user.username)
+    const [username, setUsername] = useState('')
     const [isUsernameValid, setIsUsernameValid] = useState(null); 
     const [usernameFeedback, setUsernameFeedback] = useState('')
     const usernameInputRef = useRef(null);

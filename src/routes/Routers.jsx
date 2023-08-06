@@ -36,7 +36,6 @@ function Routers(){
                     status: 'error',
                 })
                 localStorage.removeItem('accessToken')
-                navigate('/login')
             }
             if(error.response.status === 500){
                 toast({
@@ -45,7 +44,6 @@ function Routers(){
                     status: 'warning',
                 })
                 localStorage.removeItem('accessToken')
-                navigate('/login')
             }
         });
     },[location.pathname, dispatch, navigate, toast])

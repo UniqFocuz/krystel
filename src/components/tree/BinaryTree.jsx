@@ -10,9 +10,9 @@ const BinaryTree = ({ data, navigateNode }) => {
         data &&
         <Box py={5}>
             <div className="hv-wrapper" >
-                <div className="hv-item" role='button' onDoubleClick={() => navigateNode(data.username)}>
+                <div className="hv-item" role='button'>
                     <div className="hv-item-parent">
-                        <Box p={2} mx={8} textAlign={'center'} fontWeight={'bold'} color={primaryColour}>
+                        <Box p={2} mx={8} textAlign={'center'} fontWeight={'bold'} color={primaryColour} onDoubleClick={() => navigateNode(data.username)}>
                             <Avatar name={data.name} size={'md'} mb={1} >
                                 <AvatarBadge bg={ data.status === 'invalid' ? 'gray.400' : data.status === 'inactive' ? 'red.300' : data.status === 'active' && 'green.300' } boxSize='1em' />
                             </Avatar>
@@ -55,7 +55,7 @@ const BinaryTree = ({ data, navigateNode }) => {
                                         </Stack>
                                     </Box>
                                     :
-                                    <Box p={2} mx={8} textAlign={'center'} fontWeight={'bold'} color={primaryColour}>
+                                    <Box p={2} mx={8} textAlign={'center'} fontWeight={'bold'} color={primaryColour} pointerEvents={"none"}>
                                         <Avatar icon={<AiOutlineUser fontSize='1.5rem' />} size={'md'} mb={1} />
                                     </Box>
                             }

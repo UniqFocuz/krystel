@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./styles/tree.css"
-import { Avatar, AvatarBadge, Box, Text } from '@chakra-ui/react';
+import { Avatar, AvatarBadge, Box, Stack, Text } from '@chakra-ui/react';
 import { primaryColour } from '../../lib/settings';
 import { AiOutlineUser } from 'react-icons/ai';
 
@@ -16,7 +16,10 @@ const BinaryTree = ({ data, navigateNode }) => {
                             <Avatar name={data.name} size={'md'} mb={1} >
                                 <AvatarBadge bg={ data.status === 'invalid' ? 'gray.400' : data.status === 'inactive' ? 'red.300' : data.status === 'active' && 'green.300' } boxSize='1em' />
                             </Avatar>
-                            <Text fontSize={'xs'} fontWeight={'bold'}>{data.username}</Text>
+                            <Stack gap={0}>
+                                <Text fontSize={'xs'} fontWeight={'bold'}>{data.username}</Text>
+                                <Text fontSize={'2xs'} fontWeight={'bold'}>{data.nickname}</Text>
+                            </Stack>
                         </Box>
                     </div>
                     <div className="hv-item-children">
@@ -27,7 +30,10 @@ const BinaryTree = ({ data, navigateNode }) => {
                                         <Avatar name={data.children.alpha.name} size={'md'} mb={1} >
                                             <AvatarBadge bg={ data.children.alpha.status === 'invalid' ? 'gray.400' : data.children.alpha.status === 'inactive' ? 'red.300' : data.children.alpha.status === 'active' && 'green.300'} boxSize='1em' />
                                         </Avatar>
-                                        <Text fontSize={'xs'} fontWeight={'bold'}>{data.children.alpha.username}</Text>
+                                        <Stack gap={0}>
+                                            <Text fontSize={'xs'} fontWeight={'bold'}>{data.children.alpha.username}</Text>
+                                            <Text fontSize={'2xs'} fontWeight={'bold'}>{data.children.alpha.nickname}</Text>
+                                        </Stack>
                                     </Box>
                                     :
                                     <Box p={2} mx={8} textAlign={'center'} fontWeight={'bold'} color={primaryColour}>
@@ -43,7 +49,10 @@ const BinaryTree = ({ data, navigateNode }) => {
                                         <Avatar name={data.children.beta.name} size={'md'} mb={1} >
                                             <AvatarBadge bg={ data.children.beta.status === 'invalid' ? 'gray.400' : data.children.beta.status === 'inactive' ? 'red.300' : data.children.beta.status === 'active' && 'green.300' } boxSize='1em' />
                                         </Avatar>
-                                        <Text fontSize={'xs'} fontWeight={'bold'}>{data.children.beta.username}</Text>
+                                        <Stack gap={0}>
+                                            <Text fontSize={'xs'} fontWeight={'bold'}>{data.children.beta.username}</Text>
+                                            <Text fontSize={'2xs'} fontWeight={'bold'}>{data.children.beta.nickname}</Text>
+                                        </Stack>
                                     </Box>
                                     :
                                     <Box p={2} mx={8} textAlign={'center'} fontWeight={'bold'} color={primaryColour}>

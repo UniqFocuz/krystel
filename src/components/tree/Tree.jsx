@@ -1,4 +1,4 @@
-import { Avatar, AvatarBadge, AvatarGroup, Badge, Box, Card, Center, Flex, Stack, Text } from "@chakra-ui/react"
+import { Avatar, AvatarBadge, AvatarGroup, Badge, Box, Button, Card, Center, Divider, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Stack, Text, useToast } from "@chakra-ui/react"
 import { maxWidthLayoutSm, primaryColour, primaryColourOpaced } from "../../lib/settings"
 import { IoChevronBackOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
@@ -8,6 +8,7 @@ import { useSelector } from "react-redux"
 import { fetchTree } from "../../lib/api"
 import PageLoader from "../collections/misc/PageLoader"
 import ComponentLoader from "../collections/misc/ComponentLoader"
+import { AiOutlineSearch } from "react-icons/ai"
 
 function Tree() {
     const navigate = useNavigate()
@@ -16,7 +17,9 @@ function Tree() {
     const [data, setData] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     const [history, setHistory] = useState([])
-    console.log(history)
+    const [search, setSearch] = useState()
+    const [searchLoading, setSearchLoading] = useState(false)
+    const toast = useToast()
     useEffect(() => {
         if (user.isAuthenticated) {
             setCurrentUser(user.username);
@@ -25,16 +28,30 @@ function Tree() {
     }, [user.isAuthenticated, user.username]);
 
     const pingTree = async (username) => {
-        try {
-            const response = await fetchTree(username);
+        await fetchTree(username)
+        .then((response) => {
             setData(response.data);
-            setIsLoading(false)
-        } catch (error) {
-        }
+            return true
+        })
+        .catch((error) => {
+            setData(user.username)
+            nativeNavigateNode(user.username)
+            toast({
+                title: `Please enter a valid User ID!`,
+                variant: 'subtle',
+                status: 'warning',
+            })
+            setTimeout(() => {
+                setIsLoading(false)
+            }, 1000)
+            return false
+        })
     };
 
     const handleTop = () => {
+        setCurrentUser(user.username);
         nativeNavigateNode(user.username)
+        setHistory([])
     }
 
     const handleBack = () => {
@@ -43,21 +60,42 @@ function Tree() {
 
     }
 
+    const handleSearchChange = (e) => {
+        const search = e.target.value
+        setSearch(search)
+    }
+
+    const handleSearchSubmit = async() => {
+        if((search !== '') && (search !== null) && (search !== undefined)){
+            setIsLoading(true)
+            setSearchLoading(true)
+            pingTree(search)
+            setSearchLoading(false)
+            setIsLoading(false)
+        } else{
+            toast({
+                title: `Please enter a valid User ID!`,
+                variant: 'subtle',
+                status: 'warning',
+            })
+
+        }
+    }
+
     const nativeNavigateNode = (username) => {
         setIsLoading(true)
-        setCurrentUser(username);
         pingTree(username)
+        setCurrentUser(username);
         setTimeout(() => {
             setIsLoading(false)
         }, 1000)
-
     }
 
     const navigateNode = (username) => {
         setIsLoading(true)
         history.push(history.length === 0 ? user.username : data.username)
-        setCurrentUser(username);
         pingTree(username)
+        setCurrentUser(username);
         setTimeout(() => {
             setIsLoading(false)
         }, 1000)
@@ -82,7 +120,16 @@ function Tree() {
                                 {
                                     !isLoading ?
                                         <>
-                                            <Text fontSize={'2xl'} mb={3} color={primaryColour} fontWeight={"bold"}>{data.username}</Text>
+                                            <Text fontSize={'2xl'} color={primaryColour} mb={1} fontWeight={"bold"}>{data.username} ({data.nickname})</Text>
+                                            <InputGroup mb={3}>
+                                                <InputLeftElement pointerEvents='none'>
+                                                <AiOutlineSearch color={primaryColour} />
+                                                </InputLeftElement>
+                                                <Input type='text' color={primaryColour} onChange={handleSearchChange} placeholder='User ID' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
+                                            </InputGroup>
+                                            <Flex mb={3} justifyContent={'end'}>
+                                                <Button my={"auto"} fontSize={'2xs'} py={1} size={"ms"} role="button" px={3} isLoading={searchLoading} onClick={() => handleSearchSubmit()} color={"white"} bg={primaryColourOpaced} _hover={{bg: primaryColour}} borderRadius={15}>Search</Button>
+                                            </Flex>
                                             <Box mb={5}>
                                                 <Badge m={1} fontSize={'2xs'} py={1} px={3} borderRadius={15} colorScheme="orange">Patron: {data.patron}</Badge>
                                                 <Badge m={1} fontSize={'2xs'} py={1} px={3} borderRadius={15}>Alpha: {data.alphaPopulation}</Badge>

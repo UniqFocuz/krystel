@@ -35,7 +35,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "local": "HOST=127.0.0.1 react-scripts start"
   },
   "eslintConfig": {
     "extends": [

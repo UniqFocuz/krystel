@@ -59,7 +59,7 @@ function KrystelizerTab(){
                             setIsUsernameValid(response.data.exists);
                         }
                         if(!response.data.exists){
-                            setUsernameFeedback('Invalid Username or Email!')
+                            setUsernameFeedback('Invalid User ID or Email!')
                         } else{
                             setUsernameFeedback('')
                         }
@@ -88,7 +88,7 @@ function KrystelizerTab(){
                 <InputLeftElement pointerEvents='none'>
                 <AiOutlineUser color={primaryColour} />
                 </InputLeftElement>
-                <Input type='text' ref={usernameInputRef} color={primaryColour} value={username} onChange={handleUsernameChange}  placeholder='Receiver Username or Email' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
+                <Input type='text' ref={usernameInputRef} color={primaryColour} value={username} onChange={handleUsernameChange}  placeholder='Receiver User ID or Email' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
                 <InputRightElement color={primaryColour}>
                 {isUsernameValid === null ? '' : isUsernameValid ? <BiCheck role="button" color="green"/> : <BiInfoCircle role="button" color="red"/> }
                 </InputRightElement>

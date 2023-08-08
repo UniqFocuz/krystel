@@ -22,13 +22,14 @@ function Routers(){
     const navigate = useNavigate()
     const location = useLocation();
     useEffect(()=>{
-        let whitelist = ["/login", "/register"]
+        let whitelist = ["/login", "/register", "/logout", "/welcome", "/login/mfa"]
         !whitelist.includes(location.pathname) &&
         dashboard()
         .then((response) => {
             dispatch(setUserProfile(response.data.default))
         })
         .catch((error) => {
+            navigate('/login')
             if(error.response.status === 401){
                 toast({
                     title: 'Session Expired',
@@ -44,6 +45,7 @@ function Routers(){
                     status: 'warning',
                 })
                 localStorage.removeItem('accessToken')
+                navigate('/login')
             }
         });
     },[location.pathname, dispatch, navigate, toast])

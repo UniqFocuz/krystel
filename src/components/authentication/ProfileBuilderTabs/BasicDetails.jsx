@@ -25,7 +25,7 @@ function BasicDetails(props) {
         const validate = async () => {
             try {
                 if (props.progress.data.username === '') {
-                    setIsUsernameValid(null); // Reset to null when the username field is empty
+                    setIsUsernameValid(null);
                     setHasSplChars(null)
                 } else {
                     if (regex(props.progress.data.username) === true) {
@@ -38,7 +38,7 @@ function BasicDetails(props) {
                     }
                 }
             } catch (error) {
-                setIsUsernameValid(true);
+                setIsUsernameValid(false);
             }
         };
         const typingTimeout = setTimeout(validate, 1000);
@@ -49,7 +49,8 @@ function BasicDetails(props) {
         const validate = async () => {
             try {
                 if (props.progress.data.patron === '') {
-                    setisPatronValid(null); // Reset to null when the username field is empty
+                    setisPatronValid(null);
+                    setPatronFeedback('')
                 } else {
                     const response = await validatePatron(props.progress.data.patron)
                     setisPatronValid(response.data.exists)
@@ -57,6 +58,7 @@ function BasicDetails(props) {
                 }
             } catch (error) {
                 setisPatronValid(false);
+                setPatronFeedback('')
             }
         };
         const typingTimeout = setTimeout(validate, 1000);
@@ -182,7 +184,7 @@ function BasicDetails(props) {
                 Heads up for a Quick Start!
             </Text>
             <Text marginY={5} fontSize={"sm"} textAlign={"justify"} color={grayColorModeValue}>
-                Let's fill in few important details! While Username, Patron and Date of Birth are mandatory, you can always change your Name and Nick Name whenever you want!
+                Let's fill in few important details! While User ID, Patron and Date of Birth are mandatory, you can always change your Name and Nick Name whenever you want!
             </Text>
             <Box>
                 <InputGroup mb={2}>
@@ -191,13 +193,6 @@ function BasicDetails(props) {
                     </InputLeftElement>
                     <Input type='text' color={primaryColour} value={props.progress.data.username} fontSize={"sm"} fontWeight={'medium'} variant={'flushed'} focusBorderColor={primaryColour} readOnly />
                 </InputGroup>
-                <Flex justifyContent={'end'}>
-                    <Text fontSize={'2xs'} width={"70%"} mt={1} textAlign={'end'} fontWeight={'bold'} color={primaryColour}>{
-                        isUsernameValid === null
-                            ? '' : hasSplChars === null ? '' : hasSplChars === true
-                                ? 'Username must be atleast 6 chars and only be combination of letters and numbers. Other characters are not allowed!'
-                                : ''}</Text>
-                </Flex>
                 <InputGroup my={2}>
                     <InputLeftElement pointerEvents='none'>
                         <BiUserCheck color={primaryColour} />
@@ -207,8 +202,8 @@ function BasicDetails(props) {
                         {isPatronValid === null ? '' : isPatronValid ? <BiCheck role="button" color="green" /> : <BiInfoCircle role="button" color="red" />}
                     </InputRightElement>
                 </InputGroup>
-                <Flex justifyContent={'end'}>
-                    <Text fontSize={'2xs'} width={"70%"} mt={1} textAlign={'end'} fontWeight={'bold'} color={primaryColour}>{patronFeedback}</Text>
+                <Flex justifyContent={'end'} mb={5}>
+                    <Text fontSize={'2xs'} width={"70%"} textAlign={'end'} fontWeight={'bold'} color={primaryColour}>{patronFeedback}</Text>
                 </Flex>
                 <Flex px={3} my={2}>
                 <RadioGroup size={'sm'} colorScheme="orange" onChange={handleLabChange} value={selectedLab}>
@@ -266,7 +261,7 @@ function BasicDetails(props) {
             Your basic details are updated. A unique username is very important to identify yourself in the community. So we have given you a username - <b style={{color: primaryColour}}>{props.progress.data.username}</b>, which can be used to login.
         </Text>
         <Text marginY={5} fontSize={"sm"} textAlign={"justify"} color={grayColorModeValue}>
-            Now that we have completed most of the tasks, you can use your Username or Email to login <b style={{ color: primaryColour }} onClick={() => navigate('/login')}>here</b> or proceed further to complete your profile!
+            Now that we have completed most of the tasks, you can use your User ID or Email to login <b style={{ color: primaryColour }} onClick={() => navigate('/login')}>here</b> or proceed further to complete your profile!
         </Text>
         <Flex mt={5} justifyContent={'space-between'}>
             <Button my={"auto"} size={'sm'} colorScheme='orange' variant='ghost' onClick={props.decrementStepper}>Back</Button>

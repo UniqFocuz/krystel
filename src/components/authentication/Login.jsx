@@ -1,7 +1,7 @@
-import { Box, Button, Card, Divider, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Stack, Text, useColorMode, useToast } from "@chakra-ui/react";
+import { Box, Button, Card, Divider, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Stack, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { layout_md, maxWidthLayoutSm, primaryColour, primaryColourOpaced } from "../../lib/settings";
+import { maxWidthLayoutSm, primaryColour, primaryColourOpaced } from "../../lib/settings";
 import { AiOutlineUser } from "react-icons/ai";
 import { VscEye, VscEyeClosed, VscKey } from "react-icons/vsc";
 import { login, pingLogin, validatePreRegisterEmail, validateUsername } from "../../lib/api";
@@ -19,22 +19,35 @@ function Login(){
     const [loader, setloader] = useState(false)
     const [isPageLoading, setIsPageLoading] = useState(true)
     const [isUsernameValid, setIsUsernameValid] = useState(null); 
+    const [usernameFeedback, setUsernameFeedback] = useState(false)
     useEffect(() => {
         const validate = async () => {
             try {
                 if (cred.username === '') {
                   setIsUsernameValid(null); 
+                  setUsernameFeedback('')
                 } else {
                     if(cred.username.includes('@') === true){
                         const response = await validatePreRegisterEmail(cred.username)
                         setIsUsernameValid(response.data.exists);
+                        if(response.data.exists){
+                            setUsernameFeedback(`Welcome back ${response.data.name}!`)
+                        } else{
+                            setUsernameFeedback('')
+                        }
                     } else {
                         const response = await validateUsername(cred.username)
                         setIsUsernameValid(response.data.exists);
+                        if(response.data.exists){
+                            setUsernameFeedback(`Welcome back ${response.data.name}!`)
+                        } else{
+                            setUsernameFeedback('')
+                        }
                     }
                 }
               } catch (error) {
                 setIsUsernameValid(false);
+                setUsernameFeedback('')
               }
         };
     
@@ -125,16 +138,19 @@ function Login(){
             <Flex height={'100vh'}>
                 <Card padding={10} width="90%" maxWidth={maxWidthLayoutSm} m="auto">
                     <Text textAlign={'center'} color={primaryColour} fontSize={'2xl'} fontWeight={'bolder'}>log <sup>in</sup> </Text>
-                    <Stack marginY={5} spacing={4}>
+                    <Stack marginY={5}>
                         <InputGroup>
                             <InputLeftElement pointerEvents='none'>
                             <AiOutlineUser color={primaryColour} />
                             </InputLeftElement>
-                            <Input type='text' color={primaryColour} value={cred.username} onChange={handleUsernameChange}  placeholder='Username or Email' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
+                            <Input type='text' color={primaryColour} value={cred.username} onChange={handleUsernameChange}  placeholder='User ID or Email' fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
                             <InputRightElement color={primaryColour}>
                             {isUsernameValid === null ? '' : isUsernameValid ? <BiCheck role="button" color="green"/> : <BiInfoCircle role="button" color="red"/> }
                             </InputRightElement>
                         </InputGroup>
+                        <Flex justifyContent={'end'}>
+                            <Text fontSize={'2xs'} width={"70%"}textAlign={'end'} fontWeight={'bold'} color={"green"}>{usernameFeedback}</Text>
+                        </Flex>
 
                         <InputGroup>
                             <InputLeftElement pointerEvents='none'>

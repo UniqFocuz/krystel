@@ -66,12 +66,10 @@ function Tree() {
     }
 
     const handleSearchSubmit = async() => {
+        setIsLoading(true)
+        setSearchLoading(true)
         if((search !== '') && (search !== null) && (search !== undefined)){
-            setIsLoading(true)
-            setSearchLoading(true)
             pingTree(search)
-            setSearchLoading(false)
-            setIsLoading(false)
         } else{
             toast({
                 title: `Please enter a valid User ID!`,
@@ -80,6 +78,8 @@ function Tree() {
             })
 
         }
+        setSearchLoading(false)
+        setIsLoading(false)
     }
 
     const nativeNavigateNode = (username) => {

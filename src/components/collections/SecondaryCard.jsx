@@ -109,7 +109,7 @@ function SecondaryCard(){
                         <Text color={'green'} fontSize={'sm'} fontWeight={'bold'}> Power</Text>
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>x{user.kollectibles.powerCards}0</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>x{user.kollectibles.powerCards}</Text>
                     </Box>
                 </Flex>
             </Card>

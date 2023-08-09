@@ -17,23 +17,30 @@ function PrimaryCard() {
     const [activeIndex, setActiveIndex] = useState(0)
     const navigate = useNavigate()
     const handleHarvestKrystel = async () => {
-        user.harvestVolume >= 1 ?
-            await harvestKrystel()
-                .then((response) => {
-                    dispatch(setUserProfile(response.data.default))
-                    toast({
-                        title: response.data.message,
-                        variant: 'subtle',
-                        status: 'info',
-                    })
-                })
-            :
-            toast({
-                title: "Minimum Harvest should be 100 gem6",
-                variant: 'subtle',
-                status: 'warning',
-            })
+        // user.harvestVolume >= 1 ?
+        //     await harvestKrystel()
+        //         .then((response) => {
+        //             dispatch(setUserProfile(response.data.default))
+        //             toast({
+        //                 title: response.data.message,
+        //                 variant: 'subtle',
+        //                 status: 'info',
+        //             })
+        //         })
+        //     :
+        //     toast({
+        //         title: "Minimum Harvest should be 100 gem6",
+        //         variant: 'subtle',
+        //         status: 'warning',
+        //     })
+    }
 
+    const handleHarvest = () => {
+        toast({
+            title: "Harvest will be available soon!",
+            variant: 'subtle',
+            status: 'info',
+        })
     }
     const user = useSelector((state) => state.userReducer);
     const handleToggle = (index) => {
@@ -47,39 +54,33 @@ function PrimaryCard() {
                     <Card bg={primaryColourOpaced} border={"none"} display={"block"} borderBottomRadius={'none'}>
                         {
                             user.currentFabrication ?
-                                // <Box padding={5}>
-                                //     <Flex justifyContent={"end"} gap={2}>
-                                //         <Button gap={2} size={'xs'} padding={3}  color={whiteColorModeValue}>
-                                //             <Text fontSize={"2xs"}>Power Card Activated</Text> <IoBatteryChargingOutline color="green" size={20} />
-                                //         </Button>
-                                //         <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
-                                //             <BsFillDropletFill color="brown" size={12} /> <Text fontSize={"2xs"}>{user.fuel}%</Text>
-                                //         </Button>
-                                //         <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
-                                //             <Text fontWeight={"bold"} fontSize={"2xs"}>{user.multiplier.toFixed(1)}x</Text>
-                                //         </Button>
-                                //     </Flex>
-                                //     <Flex color={"white"} mt={5}>
-                                //         <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_5kg5gsqjaK.json" mode="bounce" background="transparent" speed="0.5" style={{ width: "50%", height: "50%" }} loop autoplay></lottie-player>
-                                //         <Box display={"flex"} width={"50%"}>
-                                //             <Box margin={"auto"} textAlign={"end"}>
-                                //                 <Text fontSize={'3xl'} >{krystelValuer(user.currentFabrication.fabricatedVolume)}</Text>
-                                //                 <Text fontSize={"md"} >
-                                //                     supplied in <b>{user.currentFabrication.daysFromCreation.slice(1)}</b>
-                                //                 </Text>
-                                //                 <Button size={'sm'} mt={10} onClick={() => handleHarvestKrystel()} color={whiteColorModeValue}>Harvest {user.harvestVolume} gem<sup>6</sup></Button>
-                                //                 <Text fontSize={"xs"} mt={2}>last harvest: <b>{user.harvestTime.slice(1)}</b> ago</Text>
-                                //             </Box>
-                                //         </Box>
-                                //     </Flex>
+                                <Box padding={5}>
+                                    <Flex justifyContent={"end"} gap={2}>
+                                        <Button gap={2} size={'xs'} padding={3}  color={whiteColorModeValue}>
+                                            <Text fontSize={"2xs"}>Power Card Activated</Text> <IoBatteryChargingOutline color="green" size={20} />
+                                        </Button>
+                                        <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
+                                            <BsFillDropletFill color="brown" size={12} /> <Text fontSize={"2xs"}>{user.fuel}%</Text>
+                                        </Button>
+                                        <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
+                                            <Text fontWeight={"bold"} fontSize={"2xs"}>{user.multiplier.toFixed(1)}x</Text>
+                                        </Button>
+                                    </Flex>
+                                    <Flex color={"white"} mt={5}>
+                                        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_5kg5gsqjaK.json" mode="bounce" background="transparent" speed="0.5" style={{ width: "50%", height: "50%" }} loop autoplay></lottie-player>
+                                        <Box display={"flex"} width={"50%"}>
+                                            <Box margin={"auto"} textAlign={"end"}>
+                                                <Text fontSize={'3xl'} >{krystelValuer(user.currentFabrication.fabricatedVolume)}</Text>
+                                                <Text fontSize={"md"} >
+                                                    supplied in <b>{user.currentFabrication.daysFromCreation.slice(1)}</b>
+                                                </Text>
+                                                <Button size={'sm'} mt={10} color={whiteColorModeValue} onClick={() => handleHarvest()}>Harvest {krystelValuer(user.harvestVolume)}</Button>
+                                                <Text fontSize={"xs"} mt={2}>last harvest: <b>{user.harvestTime.slice(1)}</b> ago</Text>
+                                            </Box>
+                                        </Box>
+                                    </Flex>
 
-                                // </Box>
-                                <>
-                                <Flex p={30} justifyContent={'center'}>
-                                    <Button size={'sm'} mt={3} color={whiteColorModeValue}>You are purchased!</Button>
-                                    
-                                </Flex>
-                                </>
+                                </Box>
                                 : <Flex p={5}>
                                     <Box m={"auto"} textAlign={"center"}>
                                         <Text fontSize={'sm'} color={"white"}>Start now, by installing a Krystelizer</Text>

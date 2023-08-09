@@ -51,7 +51,7 @@ function Navbar() {
                                     <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha">
                                         <VStack gap={5}>
                                             <WrapItem>
-                                                <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size={"xl"} />
+                                                <Avatar name={user.full_name} size={"xl"} />
                                             </WrapItem>
                                             <Text fontWeight={'bold'} color={whiteColorModeValue} fontSize={'sm'}>{user.username}</Text>
                                         </VStack>

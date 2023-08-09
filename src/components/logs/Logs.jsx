@@ -8,16 +8,20 @@ import { GoArrowSwitch } from "react-icons/go"
 import LogPanel from "./LogsTab/LogPanel"
 import { useSelector } from "react-redux"
 import PageLoader from "../collections/misc/PageLoader"
+import { Loader } from "three"
 
 function Logs(){
     const navigate = useNavigate()
     const [logs, setLogs] = useState()
+    const [fetching, setFetching] = useState(false)
     useEffect(() => {
+        setFetching(true)
         const fetchLogs = async() => {
             await fetchTransactions('all')
             .then((response) => {
                 setLogs(response.data)
             })
+            setFetching(false)
         }
         fetchLogs()
     }, [])
@@ -41,8 +45,12 @@ function Logs(){
                             <Tab><GoArrowSwitch/></Tab>
                         </TabList>
                         <TabPanels my={5}>
-                            <TabPanel p={0}>
+                            <TabPanel p={0}>{
+                                !fetching ?
                                 <LogPanel {...{logs}} />
+                                : 
+                                <PageLoader/>
+                                }
                             </TabPanel>
                         </TabPanels>
                     </Tabs>

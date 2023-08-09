@@ -41,19 +41,23 @@ function All({logs}){
                             </Flex>
                             <Flex width={"55%"}>
                                 <Box my={"auto"}>
-                                    <Text color={grayColorModeValue}>{log.type}</Text>
+                                    <Text color={grayColorModeValue}>{log.type}
+                                    {
+                                        log.type === 'Transfer' && (log.user === user.username ? ` to ${log.user}` : ` from ${log.user}`)
+                                    }
+                                    </Text>
                                     <Text fontSize={'2xs'} color={"gray"}>{getTimeDifferenceFromNow(convertToCountryTime(log.timeStamp, user.timezone))} - <i>#{log.txnId}</i></Text>
                                 </Box>
                             </Flex>
                             <Flex width={"20%"} justifyContent={'center'}>
-                                <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.user === user.username ? "green" : "red"}>
-                                    <Flex gap={1}>{log.user === user.username ? "+ " : "- "}
+                                <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.user !== user.username ? "green" : "red"}>
+                                    <Flex gap={1}>{log.user !== user.username ? "+ " : "- "}
                                         {
                                             log.type === 'Super Ore' ?
                                             <Text>{countValuer(log.amount)}</Text>
                                             : log.type === 'Power Card' ?
                                             <Text>{log.amount}</Text>
-                                            : <Text>{countValuer(log.amount)}</Text>
+                                            : <Text>{countValuer(log.amount)} </Text>
                                         }
                                     </Flex>
                                 </Badge>

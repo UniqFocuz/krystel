@@ -32,6 +32,8 @@ function KrystelizerTab(){
                 title: response.data.message,
                 variant: 'subtle',
                 status: 'success',
+                duration: 15000,
+                position: 'top'
             })
         })
         .catch((error) => {
@@ -40,6 +42,8 @@ function KrystelizerTab(){
                 title: error.response.data.message,
                 variant: 'subtle',
                 status: 'info',
+                duration: 10000,
+                position: 'top',
             })
         })
     }

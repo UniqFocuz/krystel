@@ -35,13 +35,17 @@ function All({logs}){
                                     <WrapItem m={"auto"}>
                                         <Avatar name='Power Card' size={'md'} m={"auto"} src='' bg={"red.400"} />
                                     </WrapItem>
-                                    : <Text>{countValuer(log.amount)}</Text>
+                                    : log.type === 'Purchase' ?
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name='Purchase' size={'md'} m={"auto"} src='' bg={"green.400"} />
+                                    </WrapItem>
+                                    :<Text>{countValuer(log.amount)}</Text>
                                 }
                             </Flex>
                             <Flex width={"55%"}>
                                 <Box my={"auto"}>
                                     <Text color={grayColorModeValue}>{log.type}</Text>
-                                    <Text fontSize={'2xs'} color={"gray"}>{getTimeDifferenceFromNow(convertToCountryTime(log.timeStamp, user.timezone))}</Text>
+                                    <Text fontSize={'2xs'} color={"gray"}>{getTimeDifferenceFromNow(convertToCountryTime(log.timeStamp, user.timezone))} - <i>#{log.txnId}</i></Text>
                                 </Box>
                             </Flex>
                             <Flex width={"20%"} justifyContent={'center'}>

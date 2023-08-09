@@ -72,19 +72,19 @@ function Navbar() {
                                         <Flex width={"180px"} gap={5}>
                                             <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha">
                                                 <VStack color={"white"}>
-                                                <Text fontWeight={'bold'}>{/*krystelValuer(user.kollectibles.totalKrystels)*/} 0 gem6</Text>
+                                                <Text fontWeight={'bold'}>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
                                                 <Text fontWeight={'thin'} fontSize={'xs'}>fabricated</Text>
                                                 </VStack>
                                             </Button>
                                         </Flex>
                                         <Flex width={"180px"} gap={5}>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" /*onClick={() => handleNavigate('/transfer')}*/><GoArrowSwitch color={whiteColorModeValue} size={30}/></Button>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/transfer')}><GoArrowSwitch color={whiteColorModeValue} size={30}/></Button>
                                             <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" /*onClick={() => handleNavigate('/buddies')}*/><FaUsers color={whiteColorModeValue} size={30}/></Button>
                                         </Flex>
                                     </VStack>
                                     <VStack gap={5}>
                                         <Flex width={"180px"} gap={5}>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" /*onClick={() => handleNavigate('/logs')}*/><BsFillJournalBookmarkFill color={whiteColorModeValue} size={25}/></Button>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/logs')}><BsFillJournalBookmarkFill color={whiteColorModeValue} size={25}/></Button>
                                             <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/facility')}><HiBeaker color={whiteColorModeValue} size={30} /></Button>
                                         </Flex>
                                         <Flex width={"180px"} gap={5}>

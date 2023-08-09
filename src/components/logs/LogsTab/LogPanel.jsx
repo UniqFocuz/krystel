@@ -46,8 +46,8 @@ function All({logs}){
                                 </Box>
                             </Flex>
                             <Flex width={"20%"} justifyContent={'center'}>
-                                <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.direction === 'receive' ? "green" : "red"}>
-                                    <Flex gap={1}>{log.direction === 'receive' ? "+ " : "- "}
+                                <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.user === user.username ? "green" : "red"}>
+                                    <Flex gap={1}>{log.user === user.username ? "+ " : "- "}
                                         {
                                             log.type === 'Super Ore' ?
                                             <Text>{countValuer(log.amount)}</Text>

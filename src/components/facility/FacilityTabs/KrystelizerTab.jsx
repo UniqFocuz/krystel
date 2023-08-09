@@ -58,10 +58,11 @@ function KrystelizerTab(){
                             response = await validateUsername(username)
                             setIsUsernameValid(response.data.exists);
                         }
+                            console.log(response.data)
                         if(!response.data.exists){
                             setUsernameFeedback('Invalid User ID or Email!')
                         } else{
-                            setUsernameFeedback('')
+                            setUsernameFeedback(`You are purchasing for ${response.data.name}!`)
                         }
                     }
                 } catch (error) {
@@ -93,7 +94,7 @@ function KrystelizerTab(){
                 {isUsernameValid === null ? '' : isUsernameValid ? <BiCheck role="button" color="green"/> : <BiInfoCircle role="button" color="red"/> }
                 </InputRightElement>
             </InputGroup>
-            <Text mt={2} textAlign={'right'} color={primaryColour} fontSize={'xs'}>{usernameFeedback}</Text>
+            <Text mt={2} mx={3} textAlign={'right'} color={primaryColour} fontSize={'xs'}>{usernameFeedback}</Text>
             <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={buyLoader}>Buy</Button>
         </Card>
         </>

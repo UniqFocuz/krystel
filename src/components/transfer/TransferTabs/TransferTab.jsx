@@ -95,7 +95,7 @@ function TransferTab(){
                         if(!response.data.exists){
                             setUsernameFeedback('Invalid User ID or Email!')
                         } else{
-                            setUsernameFeedback('')
+                            setUsernameFeedback(`You are transferring to ${response.data.name}`)
                         }
                     }
                 } else {
@@ -147,7 +147,7 @@ function TransferTab(){
                 {isUsernameValid === null ? '' : isUsernameValid ? <BiCheck role="button" color="green"/> : <BiInfoCircle role="button" color="red"/> }
                 </InputRightElement>
             </InputGroup>
-            <Text mt={2} textAlign={'right'} color={primaryColour} fontSize={'xs'}>{usernameFeedback}</Text>
+            <Text mx={3} mt={2} textAlign={'right'} color={primaryColour} fontSize={'xs'}>{usernameFeedback}</Text>
 
             <InputGroup px={3}>
                 <InputLeftElement pointerEvents='none'>

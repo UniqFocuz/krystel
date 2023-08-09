@@ -43,7 +43,7 @@ function All({logs}){
                                 <Box my={"auto"}>
                                     <Text color={grayColorModeValue}>{log.type}
                                     {
-                                        log.type === 'Transfer' && (log.user === user.username ? ` to ${log.user}` : ` from ${log.user}`)
+                                        log.type === 'Transfer' && (log.user === user.username ? ` to ${log.coordinate}` : ` from ${log.user}`)
                                     }
                                     </Text>
                                     <Text fontSize={'2xs'} color={"gray"}>{getTimeDifferenceFromNow(convertToCountryTime(log.timeStamp, user.timezone))} - <i>#{log.txnId}</i></Text>

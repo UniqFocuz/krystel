@@ -1,8 +1,5 @@
-import { Avatar, Badge, Box, Card, Flex, StatUpArrow, Text, VStack, WrapItem, useColorModeValue } from "@chakra-ui/react"
-import { SiCrystal } from "react-icons/si"
-import { primaryColour } from "../../../lib/settings"
+import { Avatar, Badge, Box, Card, Flex, Text, VStack, WrapItem, useColorModeValue } from "@chakra-ui/react"
 import { convertToCountryTime, countValuer, getTimeDifferenceFromNow } from "../../../lib/support"
-import { BiCheck, BiChevronRight } from "react-icons/bi"
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 
@@ -12,7 +9,7 @@ function All({logs}){
     const [currentLogs, setCurrentLogs] = useState()
     useEffect(() => {
         setCurrentLogs(logs)
-    })
+    }, [])
     return(
         currentLogs &&
         <>

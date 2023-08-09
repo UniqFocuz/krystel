@@ -1,50 +1,21 @@
-import { Box, Button, Flex, Icon, IconButton, Input, InputGroup, InputLeftElement, InputRightElement, Radio, RadioGroup, Select, Stack, Text, useColorModeValue, useToast } from "@chakra-ui/react"
+import { Box, Button, Flex, IconButton, Input, InputGroup, InputLeftElement, InputRightElement, Radio, RadioGroup, Stack, Text, useColorModeValue, useToast } from "@chakra-ui/react"
 import { primaryColour, primaryColourOpaced } from "../../../lib/settings"
-import { BiCheck, BiChevronRight, BiInfoCircle, BiSolidHeart, BiUserCheck, BiUserPlus } from "react-icons/bi"
+import { BiCheck, BiChevronRight, BiInfoCircle, BiSolidHeart, BiUserCheck } from "react-icons/bi"
 import { useEffect, useState } from "react"
 import { AiOutlineUser } from "react-icons/ai"
-import { profileBuilder, validatePatron, validateUsername } from "../../../lib/api"
+import { profileBuilder, validatePatron } from "../../../lib/api"
 import { LuCalendarHeart, LuCaseLower } from "react-icons/lu"
 import { useNavigate } from "react-router-dom"
 
 
 function BasicDetails(props) {
     const grayColorModeValue = useColorModeValue("gray.600")
-    const [isUsernameValid, setIsUsernameValid] = useState(null)
     const [isPatronValid, setisPatronValid] = useState(null)
     const [patronFeedback, setPatronFeedback] = useState('')
     const [isAgeValid, setIsAgeValid] = useState(null)
-    const [hasSplChars, setHasSplChars] = useState(null)
     const [selectedLab, setSelectedLab] = useState("alpha");
     const navigate = useNavigate()
     const toast = useToast()
-    const regex = (username) => {
-        return /^[a-zA-Z0-9]{6,}$/.test(username)
-    }
-    useEffect(() => {
-        const validate = async () => {
-            try {
-                if (props.progress.data.username === '') {
-                    setIsUsernameValid(null);
-                    setHasSplChars(null)
-                } else {
-                    if (regex(props.progress.data.username) === true) {
-                        const response = await validateUsername(props.progress.data.username)
-                        setIsUsernameValid(!response.data.exists)
-                        setHasSplChars(false)
-                    } else {
-                        setIsUsernameValid(false)
-                        setHasSplChars(true)
-                    }
-                }
-            } catch (error) {
-                setIsUsernameValid(false);
-            }
-        };
-        const typingTimeout = setTimeout(validate, 1000);
-        return () => clearTimeout(typingTimeout);
-    }, [props.progress.data.username]);
-
     useEffect(() => {
         const validate = async () => {
             try {
@@ -56,7 +27,7 @@ function BasicDetails(props) {
                     setisPatronValid(response.data.exists)
                     setPatronFeedback(response.data.message)
                 }
-            } catch (error) {
+            } catch(error) {
                 setisPatronValid(false);
                 setPatronFeedback('')
             }
@@ -152,7 +123,7 @@ function BasicDetails(props) {
                             props.setProgress({ ...props.progress, isPatronSet: true })
                             props.setIsLoading(false)
                         }, 3000)
-                    }) .catch((error) => {
+                    }).catch((error) => {
                         toast({
                             title: error.response.data.message,
                             variant: 'subtle',

@@ -112,7 +112,7 @@ function TransferTab(){
     const typingTimeout = setTimeout(validate, 500);
 
     return () => clearTimeout(typingTimeout);
-    }, [username]); 
+    }, [username, user.email, user.username]); 
 
     useEffect(() => {
         if(amount < 10){

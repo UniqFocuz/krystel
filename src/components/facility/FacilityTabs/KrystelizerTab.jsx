@@ -26,7 +26,7 @@ function KrystelizerTab(){
         .then((response) => {
             setBuyLoader(false)
             dispatch(setUserProfile({...user, kollectibles : {
-                ...user.kollectibles, ore : user.kollectibles.ore - 100
+                ...user.kollectibles, ore : user.kollectibles.ore - 1000
             }}))
             toast({
                 title: response.data.message,

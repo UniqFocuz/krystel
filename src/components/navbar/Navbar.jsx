@@ -1,11 +1,11 @@
-import { Avatar, Box, Button, ChakraProvider, Drawer, DrawerContent, DrawerOverlay, Flex, HStack, Text, VStack, WrapItem, extendTheme, useColorMode, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Box, Button, ChakraProvider, Drawer, DrawerContent, DrawerOverlay, Flex, Text, VStack, WrapItem, useColorMode, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import { BiSolidLockAlt, BiSolidLockOpen, BiSolidMoon, BiSolidSun, BiSolidUserX, BiX } from "react-icons/bi";
 import { BsFillGrid1X2Fill, BsFillJournalBookmarkFill, BsPlus } from "react-icons/bs";
 import { maxWidthLayoutSm, primaryColour, buttonTheme } from "../../lib/settings";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import "../../index.css"
 import { TbMailExclamation } from "react-icons/tb";
-import { RiDashboardFill, RiUserUnfollowLine } from "react-icons/ri";
+import { RiDashboardFill } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";

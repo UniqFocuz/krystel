@@ -1,4 +1,4 @@
-import { Avatar, AvatarBadge, AvatarGroup, Badge, Box, Button, Card, Center, Divider, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Stack, Text, useToast } from "@chakra-ui/react"
+import { Avatar, AvatarGroup, Badge, Box, Button, Card, Flex, Input, InputGroup, InputLeftElement, Text, useToast } from "@chakra-ui/react"
 import { maxWidthLayoutSm, primaryColour, primaryColourOpaced } from "../../lib/settings"
 import { IoChevronBackOutline } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
@@ -13,7 +13,6 @@ import { AiOutlineSearch } from "react-icons/ai"
 function Tree() {
     const navigate = useNavigate()
     const user = useSelector((state) => state.userReducer);
-    const [currentUser, setCurrentUser] = useState(null);
     const [data, setData] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     const [history, setHistory] = useState([])
@@ -22,7 +21,6 @@ function Tree() {
     const toast = useToast()
     useEffect(() => {
         if (user.isAuthenticated) {
-            setCurrentUser(user.username);
             pingTree(user.username);
         }
     }, [user.isAuthenticated, user.username]);
@@ -49,7 +47,6 @@ function Tree() {
     };
 
     const handleTop = () => {
-        setCurrentUser(user.username);
         nativeNavigateNode(user.username)
         setHistory([])
     }
@@ -85,7 +82,6 @@ function Tree() {
     const nativeNavigateNode = (username) => {
         setIsLoading(true)
         pingTree(username)
-        setCurrentUser(username);
         setTimeout(() => {
             setIsLoading(false)
         }, 1000)
@@ -95,7 +91,6 @@ function Tree() {
         setIsLoading(true)
         history.push(history.length === 0 ? user.username : data.username)
         pingTree(username)
-        setCurrentUser(username);
         setTimeout(() => {
             setIsLoading(false)
         }, 1000)

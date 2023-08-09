@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import "./styles/tree.css"
 import { Avatar, AvatarBadge, Box, Stack, Text } from '@chakra-ui/react';
 import { primaryColour } from '../../lib/settings';

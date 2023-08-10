@@ -45,7 +45,7 @@ const BinaryTree = ({ data, navigateNode }) => {
                         <div className="hv-item-child">
                             <div className="hv-item">{
                                 data.children.beta ?
-                                    <Box p={2} mx={8} textAlign={'center'} fontWeight={'bold'} color={primaryColour} role="button" onDoubleClick={() => navigateNode(data.children.alpha.username)}>
+                                    <Box p={2} mx={8} textAlign={'center'} fontWeight={'bold'} color={primaryColour} role="button" onDoubleClick={() => navigateNode(data.children.beta.username)}>
                                         <Avatar name={data.children.beta.name} size={'md'} mb={1} >
                                             <AvatarBadge bg={ data.children.beta.status === 'invalid' ? 'gray.400' : data.children.beta.status === 'inactive' ? 'red.300' : data.children.beta.status === 'active' && 'green.300' } boxSize='1em' />
                                         </Avatar>

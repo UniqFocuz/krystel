@@ -4,7 +4,7 @@ import { maxWidthLayoutSm, primaryColourOpaced } from "../../lib/settings";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Profile from "./SettingsTab/Profile";
-import { BiKey, BiSolidUser } from "react-icons/bi";
+import { BiCoin, BiCoinStack, BiKey, BiLock, BiLogoTelegram, BiSolidUser } from "react-icons/bi";
 import PageLoader from "../collections/misc/PageLoader";
 import Password from "./SettingsTab/Password";
 
@@ -25,9 +25,13 @@ function Settings() {
                 </Card>
                 <Card borderTopRadius={0} padding={5} marginBottom={20} height={"550px"} overflowX={"auto"}>
                     <Tabs size='md' variant='soft-rounded' colorScheme="orange">
-                        <TabList gap={2}>
+                        <TabList gap={2} overflow={'auto'} 
+                            css={{'::-webkit-scrollbar': {width: '0.5em',},'::-webkit-scrollbar-thumb': {backgroundColor: 'transparent',},}}>
                             <Tab gap={2}><BiSolidUser/> <Text fontSize={'xs'}>Profile</Text></Tab>
                             <Tab gap={2}><BiKey/> <Text fontSize={'xs'}>Password</Text></Tab>
+                            <Tab gap={2} isDisabled ><BiLock/> <Text fontSize={'xs'}>MFA</Text></Tab>
+                            <Tab gap={2} isDisabled ><BiCoinStack/> <Text fontSize={'xs'}>Payments</Text></Tab>
+                            <Tab gap={2} isDisabled ><BiLogoTelegram/> <Text fontSize={'xs'}>TGAuth</Text></Tab>
                         </TabList>
                         <TabPanels my={5}>
                             <TabPanel p={0}>

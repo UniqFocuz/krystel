@@ -22,7 +22,6 @@ function Tree() {
     useEffect(() => {
         if (user.isAuthenticated) {
             pingTree(user.username);
-            history.push(user.username)
         }
     }, [user.isAuthenticated, user.username]);
 
@@ -68,6 +67,7 @@ function Tree() {
         setSearchLoading(true)
         if((search !== '') && (search !== null) && (search !== undefined)){
             pingTree(search)
+            history.push(user.username)
         } else{
             toast({
                 title: `Please enter a valid User ID!`,

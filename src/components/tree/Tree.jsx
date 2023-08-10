@@ -22,6 +22,7 @@ function Tree() {
     useEffect(() => {
         if (user.isAuthenticated) {
             pingTree(user.username);
+            history.push(user.username)
         }
     }, [user.isAuthenticated, user.username]);
 

@@ -4,7 +4,9 @@ import { maxWidthLayoutSm, primaryColourOpaced } from "../../lib/settings";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Profile from "./SettingsTab/Profile";
-import { BiSolidUser } from "react-icons/bi";
+import { BiKey, BiSolidUser } from "react-icons/bi";
+import PageLoader from "../collections/misc/PageLoader";
+import Password from "./SettingsTab/Password";
 
 function Settings() {
     const navigate = useNavigate()
@@ -25,18 +27,21 @@ function Settings() {
                     <Tabs size='md' variant='soft-rounded' colorScheme="orange">
                         <TabList gap={2}>
                             <Tab gap={2}><BiSolidUser/> <Text fontSize={'xs'}>Profile</Text></Tab>
+                            <Tab gap={2}><BiKey/> <Text fontSize={'xs'}>Password</Text></Tab>
                         </TabList>
                         <TabPanels my={5}>
                             <TabPanel p={0}>
                                 <Profile/>
+                            </TabPanel>
+                            <TabPanel p={0}>
+                                <Password/>
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
                 </Card>
             </Box>
         </>
-        :
-        <></>
+        : <PageLoader/>
     )
 }
 

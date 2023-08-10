@@ -76,7 +76,11 @@ export const profileBuilderPing = () => {
 }
 
 export const setPassword = (password) => {
+    if(window.location.pathname === '/welcome'){
     return axios.post(`${baseURL}/auth/set-password`, { password }, RegistrationParams())
+    } else {
+    return axios.post(`${baseURL}/auth/set-password`, { password }, AccessParams())
+    }
 }
 
 export const sendVerificationLink = () => {
@@ -188,4 +192,8 @@ export const refillFuel = () => {
 
 export const fetchTree = (username) => {
     return axios.get(`${baseURL}/tree?username=${username}`, AccessParams())
+}
+
+export const updateProfile = (userInstance) => {
+    return axios.post(`${baseURL}/auth/profile/update`, {...userInstance}, AccessParams())
 }

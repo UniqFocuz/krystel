@@ -58,7 +58,7 @@ function Tree() {
     }
 
     const handleSearchChange = (e) => {
-        const search = e.target.value
+        const search = e.target.value.toUpperCase()
         setSearch(search)
     }
 

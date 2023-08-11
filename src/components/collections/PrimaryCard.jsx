@@ -17,22 +17,22 @@ function PrimaryCard() {
     const [activeIndex, setActiveIndex] = useState(0)
     const navigate = useNavigate()
     const handleHarvestKrystel = async () => {
-        // user.harvestVolume >= 1 ?
-        //     await harvestKrystel()
-        //         .then((response) => {
-        //             dispatch(setUserProfile(response.data.default))
-        //             toast({
-        //                 title: response.data.message,
-        //                 variant: 'subtle',
-        //                 status: 'info',
-        //             })
-        //         })
-        //     :
-        //     toast({
-        //         title: "Minimum Harvest should be 100 gem6",
-        //         variant: 'subtle',
-        //         status: 'warning',
-        //     })
+        user.harvestVolume >= 1 ?
+            await harvestKrystel()
+                .then((response) => {
+                    dispatch(setUserProfile(response.data.default))
+                    toast({
+                        title: response.data.message,
+                        variant: 'subtle',
+                        status: 'info',
+                    })
+                })
+            :
+            toast({
+                title: "Minimum Harvest should be 100 gem6",
+                variant: 'subtle',
+                status: 'warning',
+            })
     }
 
     const handleHarvest = () => {

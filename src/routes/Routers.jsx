@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import Transfer from "../components/transfer/Transfer";
 import Tree from "../components/tree/Tree";
 import Settings from "../components/settings/Settings";
+import Payout from "../components/payout/Payout";
 
 function Routers(){
     const toast = useToast()
@@ -66,6 +67,7 @@ function Routers(){
             <Route path="/transfer" element={<Transfer/>}/>
             <Route path="/laboratory" element={<Tree/>}/>
             <Route path="/settings" element={<Settings/>}/>
+            <Route path="/payout" element={<Payout/>}/>
         </Routes>
     )
 }

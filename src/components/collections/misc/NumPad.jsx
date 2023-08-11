@@ -12,7 +12,7 @@ const NumPad = ({ inputValue, setInputValue }) => {
     setInputValue(10);
   };
   const handleBackspaceButtonClick = () => {
-    setInputValue((prevValue) => prevValue.slice(0, -1))
+    setInputValue((prevValue) => prevValue.toString().slice(0, -1))
   };
 
   return (

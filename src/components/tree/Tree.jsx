@@ -29,6 +29,8 @@ function Tree() {
         await fetchTree(username)
         .then((response) => {
             setData(response.data);
+            setSearchLoading(false)
+            history.push(username)
             return true
         })
         .catch((error) => {
@@ -41,6 +43,7 @@ function Tree() {
             })
             setTimeout(() => {
                 setIsLoading(false)
+                setSearchLoading(false)
             }, 1000)
             return false
         })
@@ -63,21 +66,17 @@ function Tree() {
     }
 
     const handleSearchSubmit = async() => {
-        setIsLoading(true)
         setSearchLoading(true)
         if((search !== '') && (search !== null) && (search !== undefined)){
             pingTree(search)
-            history.push(user.username)
         } else{
             toast({
                 title: `Please enter a valid User ID!`,
                 variant: 'subtle',
                 status: 'warning',
             })
-
+            setHistory([])
         }
-        setSearchLoading(false)
-        setIsLoading(false)
     }
 
     const nativeNavigateNode = (username) => {

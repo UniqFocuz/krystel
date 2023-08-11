@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Box, Button, Card, Divider, Flex, Text, Tooltip, useColorModeValue } from "@chakra-ui/react";
+import { AbsoluteCenter, Box, Button, Card, Divider, Flex, Text, Tooltip, useColorModeValue, useToast } from "@chakra-ui/react";
 import { primaryColour, primaryColourOpaced } from "../../lib/settings";
 import { SiCrystal } from "react-icons/si"
 import { MdOutlineElectricBolt } from "react-icons/md"
@@ -13,12 +13,18 @@ function SecondaryCard(){
     const user = useSelector((state) => state.userReducer);
     const grayColorModeValue = useColorModeValue("white", "#2D3748")
     const dispatch = useDispatch()
+    const toast = useToast()
     const handleFuelRefill = async() => {
         await refillFuel()
         .then((response) => {
-            dispatch(setUserProfile({...user, fuel : (response.data.fuel/user.kollectibles.fuelCap)*100, kollectibles : {
-                ...user.kollectibles, fuel : response.data.fuel
+            dispatch(setUserProfile({...user, fuel : (response.data.fuel/user.kollectibles.fuelCap)*100, consumption : 1000, kollectibles : {
+                ...user.kollectibles, fuel : response.data.fuel,
             }}))
+            toast({
+                title: 'Fuel refill complete!',
+                variant: 'subtle',
+                status: 'info',
+            })
         })
         .catch((error) => {
         })
@@ -92,10 +98,10 @@ function SecondaryCard(){
                     </Box>
                     <Box my={'auto'} mr={'auto'} width={"55%"} display={"flex"} justifyContent={'start'} gap={3}>
                         <Text color={'brown'} fontSize={'sm'} my={'auto'} fontWeight={'bold'}> Fuel</Text>
-                        <Button my={'auto'} size="xs">Refill</Button>
+                        <Button my={'auto'} size="xs" onClick={() => handleFuelRefill()}>Refill</Button>
                     </Box>
                     <Box my={'auto'} textAlign={"end"} justifyContent={'end'}>
-                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{user.kollectibles.fuel} gal</Text>
+                        <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{parseInt(user.consumption)} gal</Text>
                         <Text fontWeight={'bolder'} fontSize={'xs'} color={"gray"}>Cap: {user.kollectibles.fuelCap} gal</Text>
                     </Box>
                 </Flex>

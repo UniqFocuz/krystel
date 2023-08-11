@@ -74,7 +74,7 @@ function PrimaryCard() {
                                                 <Text fontSize={"md"} >
                                                     supplied in <b>{user.currentFabrication.daysFromCreation.slice(1)}</b>
                                                 </Text>
-                                                <Button size={'sm'} mt={10} color={whiteColorModeValue} onClick={() => handleHarvest()}>Harvest {krystelValuer(user.harvestVolume)}</Button>
+                                                <Button size={'sm'} mt={10} color={whiteColorModeValue} onClick={() => handleHarvestKrystel()}>Harvest {krystelValuer(user.harvestVolume)}</Button>
                                                 <Text fontSize={"xs"} mt={2}>last harvest: <b>{user.harvestTime.slice(1)}</b> ago</Text>
                                             </Box>
                                         </Box>

@@ -63,6 +63,7 @@ function Password(){
     }
     const handleSubmitPassword = async () => {
         setIsLoading(true)
+        confirmPassword ?
         await setPassword(cred.password)
             .then((response) => {
                 toast({
@@ -82,6 +83,15 @@ function Password(){
             })
             .catch((error) => {
             })
+        : 
+            toast({
+                title: "Please enter a valid Password!",
+                variant: 'subtle',
+                status: 'warning',
+            })
+            setTimeout(() => {
+               setIsLoading(false)
+            }, 1000)
     }
 
     return(

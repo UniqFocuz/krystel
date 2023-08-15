@@ -65,6 +65,7 @@ function PasswordSetup(props) {
     }
     const handleSubmitPassword = async () => {
         props.setIsLoading(true)
+        confirmPassword ?
         await setPassword(cred.password)
             .then((response) => {
                 toast({
@@ -79,6 +80,15 @@ function PasswordSetup(props) {
             })
             .catch((error) => {
             })
+        : 
+        toast({
+            title: "Please enter a valid Password!",
+            variant: 'subtle',
+            status: 'warning',
+        })
+        setTimeout(() => {
+            props.setIsLoading(false)
+        }, 1000)
     }
 
     return (

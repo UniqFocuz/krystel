@@ -36,7 +36,7 @@ function All({logs}){
                                     <WrapItem m={"auto"}>
                                         <Avatar name='Purchase' size={'md'} m={"auto"} src='' bg={"green.400"} />
                                     </WrapItem>
-                                    :<Text>{countValuer(log.amount)}</Text>
+                                    :<Text>{countValuer(log.amount)}</Text> // Krystel
                                 }
                             </Flex>
                             <Flex width={"55%"}>

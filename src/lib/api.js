@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const DEBUG = false
+export const DEBUG = true
 
 let baseURL = ""
 
@@ -196,6 +196,10 @@ export const fetchTree = (username) => {
 
 export const updateProfile = (userInstance) => {
     return axios.post(`${baseURL}/auth/profile/update`, {...userInstance}, AccessParams())
+}
+
+export const fetchPayout = () => {
+    return axios.get(`${baseURL}/payout`, AccessParams())
 }
 
 export const payout = (payout, amount) => {

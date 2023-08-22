@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const DEBUG = true
+export const DEBUG = false
 
 let baseURL = ""
 
@@ -182,6 +182,9 @@ export const transferOre = (coordinate, amount) => {
     return axios.post(`${baseURL}/transfer`, { coordinate, amount }, AccessParams())
 }
 
+export const superOreTransfer = (amount) => {
+    return axios.post(`${baseURL}/convert/superore`, { amount }, AccessParams())
+}
 export const fetchTransactions = (query) => {
     return axios.get(`${baseURL}/logs?query=${query}`, AccessParams())
 }

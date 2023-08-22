@@ -31,12 +31,21 @@ function Routers(){
             dispatch(setUserProfile(response.data.default))
         })
         .catch((error) => {
-            navigate('/login')
             if(error.response.status === 401){
                 toast({
                     title: 'Session Expired',
                     variant: 'subtle',
                     status: 'error',
+                })
+                localStorage.removeItem('accessToken')
+                navigate('/login')
+                
+            }
+            if(error.response.status === 400){
+                toast({
+                    title: 'You are logged out!',
+                    variant: 'subtle',
+                    status: 'info',
                 })
                 localStorage.removeItem('accessToken')
             }

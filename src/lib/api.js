@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const DEBUG = false
+export const DEBUG = true
 
 let baseURL = ""
 

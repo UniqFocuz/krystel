@@ -11,6 +11,7 @@ import { MdOutlineElectricBolt } from "react-icons/md"
 import { BsFillDropletFill } from "react-icons/bs"
 import KrystelizerTab from "./FacilityTabs/KrystelizerTab"
 import PageLoader from "../collections/misc/PageLoader"
+import SuperOreTransfer from "./FacilityTabs/SuperOreTransfer"
 
 function Facility() {
     const navigate = useNavigate()
@@ -48,6 +49,7 @@ function Facility() {
                     <Tabs size='md' variant='soft-rounded' colorScheme="orange">
                         <TabList gap={2}>
                             <Tab><BiStar/></Tab>
+                            <Tab><Text fontSize={"xs"}>Defabricator</Text></Tab>
                             {/* <Tab><MdOutlineElectricBolt/></Tab>
                             <Tab><BsFillDropletFill/></Tab>
                             <Tab><BiSolidBattery/></Tab> */}
@@ -56,9 +58,9 @@ function Facility() {
                             <TabPanel p={0}>
                                 <KrystelizerTab/>
                             </TabPanel>
-                            <TabPanel>
-                                
-                            </TabPanel>
+                            {/* <TabPanel p={0}>
+                                <SuperOreTransfer/>
+                            </TabPanel> */}
                         </TabPanels>
                     </Tabs>
                 </Card>

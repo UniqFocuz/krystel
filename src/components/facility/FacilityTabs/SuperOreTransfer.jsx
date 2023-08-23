@@ -22,30 +22,30 @@ function SuperOreTransfer(){
     }
     const handleSubmit = async() => {
         setIsLoading(true)
-        await superOreTransfer(amount)
-        .then((response) => {
-            setIsLoading(false)
-            dispatch(setUserProfile({...user, kollectibles : {
-                ...user.kollectibles, superOre : user.kollectibles.superOre - amount, ore : user.kollectibles.ore + amount*0.95
-            }}))
-            toast({
-                title: response.data.message,
-                variant: 'subtle',
-                status: 'success',
-                duration: 15000,
-                position: 'top'
-            })
-        })
-        .catch((error) => {
-            setIsLoading(false)
-            toast({
-                title: error.response.data.message,
-                variant: 'subtle',
-                status: 'info',
-                duration: 10000,
-                position: 'top',
-            })
-        })
+        // await superOreTransfer(amount)
+        // .then((response) => {
+        //     setIsLoading(false)
+        //     dispatch(setUserProfile({...user, kollectibles : {
+        //         ...user.kollectibles, superOre : user.kollectibles.superOre - amount, ore : user.kollectibles.ore + amount*0.95
+        //     }}))
+        //     toast({
+        //         title: response.data.message,
+        //         variant: 'subtle',
+        //         status: 'success',
+        //         duration: 15000,
+        //         position: 'top'
+        //     })
+        // })
+        // .catch((error) => {
+        //     setIsLoading(false)
+        //     toast({
+        //         title: error.response.data.message,
+        //         variant: 'subtle',
+        //         status: 'info',
+        //         duration: 10000,
+        //         position: 'top',
+        //     })
+        // })
     }
     return(
         <>

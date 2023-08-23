@@ -58,9 +58,9 @@ function Facility() {
                             <TabPanel p={0}>
                                 <KrystelizerTab/>
                             </TabPanel>
-                            {/* <TabPanel p={0}>
+                            <TabPanel p={0}>
                                 <SuperOreTransfer/>
-                            </TabPanel> */}
+                            </TabPanel>
                         </TabPanels>
                     </Tabs>
                 </Card>

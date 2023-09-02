@@ -185,6 +185,11 @@ export const transferOre = (coordinate, amount) => {
 export const superOreTransfer = (amount) => {
     return axios.post(`${baseURL}/convert/superore`, { amount }, AccessParams())
 }
+
+export const krystelFragmentor = (amount) => {
+    return axios.post(`${baseURL}/convert/krystel`, { amount }, AccessParams())
+}
+
 export const fetchTransactions = (query) => {
     return axios.get(`${baseURL}/logs?query=${query}`, AccessParams())
 }

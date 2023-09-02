@@ -12,6 +12,7 @@ import { BsFillDropletFill } from "react-icons/bs"
 import KrystelizerTab from "./FacilityTabs/KrystelizerTab"
 import PageLoader from "../collections/misc/PageLoader"
 import SuperOreTransfer from "./FacilityTabs/SuperOreTransfer"
+import FragmentationTab from "./FacilityTabs/FragmentationTab"
 
 function Facility() {
     const navigate = useNavigate()
@@ -50,6 +51,7 @@ function Facility() {
                         <TabList gap={2}>
                             <Tab><BiStar/></Tab>
                             <Tab><Text fontSize={"xs"}>Defabricator</Text></Tab>
+                            <Tab><Text fontSize={"xs"}>Fragmentor</Text></Tab>
                             {/* <Tab><MdOutlineElectricBolt/></Tab>
                             <Tab><BsFillDropletFill/></Tab>
                             <Tab><BiSolidBattery/></Tab> */}
@@ -60,6 +62,9 @@ function Facility() {
                             </TabPanel>
                             <TabPanel p={0}>
                                 <SuperOreTransfer/>
+                            </TabPanel>
+                            <TabPanel p={0}>
+                                <FragmentationTab/>
                             </TabPanel>
                         </TabPanels>
                     </Tabs>

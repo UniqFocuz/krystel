@@ -74,24 +74,44 @@ function Payout(){
     
     const handleSubmit = async() => {
         setIsLoading(true)
-        await payout(payoutAddress, amount)
-        .then((response) => {
-            dispatch(setUserProfile({...user, kollectibles : {
-                ...user.kollectibles, krystel : (user.kollectibles.krystel - amount)
-            }}))
+        console.log(isAddressValid)
+        if(isAddressValid === true){
+            console.log("address correct")
+            if(isAmountValid === true){
+                await payout(payoutAddress, amount)
+                .then((response) => {
+                    dispatch(setUserProfile({...user, kollectibles : {
+                        ...user.kollectibles, krystel : (user.kollectibles.krystel - amount)
+                    }}))
+                    toast({
+                        title: response.data.message,
+                        variant: 'subtle',
+                        status: 'success',
+                    })
+                })
+                .catch((error) => {
+                    toast({
+                        title: error.response.data.message,
+                        variant: 'subtle',
+                        status: 'error',
+                    })
+                })
+            }
+            else{
+                toast({
+                    title: 'Invalid Amount!',
+                    variant: 'subtle',
+                    status: 'error',
+                })
+            }
+        }
+        else{
             toast({
-                title: response.data.message,
-                variant: 'subtle',
-                status: 'success',
-            })
-        })
-        .catch((error) => {
-            toast({
-                title: error.response.data.message,
+                title: 'Invalid Address!',
                 variant: 'subtle',
                 status: 'error',
             })
-        })
+        }
         setIsLoading(false)
     }
 

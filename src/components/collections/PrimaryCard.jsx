@@ -4,7 +4,7 @@ import { IoBatteryChargingOutline } from "react-icons/io5"
 import { primaryColour, primaryColourOpaced, secondaryColourOpaced } from "../../lib/settings";
 import { useDispatch, useSelector } from "react-redux";
 import { krystelValuer } from "../../lib/support";
-import { harvestKrystel } from "../../lib/api";
+import { dashboard, harvestKrystel } from "../../lib/api";
 import { setUserProfile } from "../../redux/userProfile/actions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -20,12 +20,53 @@ function PrimaryCard() {
         user.harvestVolume >= 1 ?
             await harvestKrystel()
                 .then((response) => {
-                    dispatch(setUserProfile(response.data.default))
+                    dashboard()
+                    .then((response) => {
+                        dispatch(setUserProfile(response.data.default))
+                    })
+                    .catch((error) => {
+                        if(error.response.status === 401){
+                            toast({
+                                title: 'Session Expired',
+                                variant: 'subtle',
+                                status: 'error',
+                            })
+                            localStorage.removeItem('accessToken')
+                            navigate('/login')
+                            
+                        }
+                        if(error.response.status === 400){
+                            toast({
+                                title: 'You are logged out!',
+                                variant: 'subtle',
+                                status: 'info',
+                            })
+                            localStorage.removeItem('accessToken')
+                        }
+                        if(error.response.status === 500){
+                            toast({
+                                title: 'An unexpected error occured!',
+                                variant: 'subtle',
+                                status: 'warning',
+                            })
+                            localStorage.removeItem('accessToken')
+                            navigate('/login')
+                        }
+                    });
                     toast({
                         title: response.data.message,
                         variant: 'subtle',
                         status: 'info',
                     })
+                })
+                .catch((error) => {
+                    if(error.response.status === 401){
+                        toast({
+                            title: error.response.data.message,
+                            variant: 'subtle',
+                            status: 'warning',
+                        })
+                    }
                 })
             :
             toast({

@@ -99,7 +99,7 @@ function Navbar() {
                                 </Flex>
                                 <Flex gap={5}>
                                     <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}><GiPayMoney className="flip" size={30}  /></Button>
-                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}><GiReceiveMoney size={30}/></Button>
+                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/payout')} fontSize={'2xl'}><GiReceiveMoney size={30}/></Button>
                                     <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/settings')}><HiMiniCog color={whiteColorModeValue} size={30} /></Button>
                                     <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={toggleColorMode}>{colorMode === "light" ? <BiSolidMoon color={whiteColorModeValue} size={30} /> : <BiSolidSun color={whiteColorModeValue} size={30} />}</Button>
                                 </Flex>

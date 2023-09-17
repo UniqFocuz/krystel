@@ -36,11 +36,21 @@ function Tree() {
         .catch((error) => {
             setData(user.username)
             nativeNavigateNode(user.username)
-            toast({
-                title: `Please enter a valid User ID!`,
-                variant: 'subtle',
-                status: 'warning',
-            })
+            console.log(error.response.data.status)
+            if(error.response.data.status === 400){
+                toast({
+                    title: `Please enter a valid User ID!`,
+                    variant: 'subtle',
+                    status: 'warning',
+                })
+            }
+            if(error.response.data.status === 401){
+                toast({
+                    title: `Search not Allowed!`,
+                    variant: 'subtle',
+                    status: 'error',
+                })
+            }
             setTimeout(() => {
                 setIsLoading(false)
                 setSearchLoading(false)

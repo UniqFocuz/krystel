@@ -36,6 +36,18 @@ function All({logs}){
                                     <WrapItem m={"auto"}>
                                         <Avatar name='Purchase' size={'md'} m={"auto"} src='' bg={"green.400"} />
                                     </WrapItem>
+                                    : log.type === 'Internal Conversion' ?
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name='Internal Conversion' size={'md'} m={"auto"} src='' bg={"purple.400"} />
+                                    </WrapItem>
+                                    : log.type === 'Pay In' ?
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name='Pay In' size={'md'} m={"auto"} src='' bg={"blue.400"} />
+                                    </WrapItem>
+                                    : log.type === 'Krystel' ?
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name='Krystel' size={'md'} m={"auto"} src='' bg={"orange.400"} />
+                                    </WrapItem>
                                     :<Text>{countValuer(log.amount)}</Text> // Krystel
                                 }
                             </Flex>

@@ -36,7 +36,6 @@ function Tree() {
         .catch((error) => {
             setData(user.username)
             nativeNavigateNode(user.username)
-            console.log(error.response.data.status)
             if(error.response.data.status === 400){
                 toast({
                     title: `Please enter a valid User ID!`,

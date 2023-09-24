@@ -13,6 +13,7 @@ import KrystelizerTab from "./FacilityTabs/KrystelizerTab"
 import PageLoader from "../collections/misc/PageLoader"
 import SuperOreTransfer from "./FacilityTabs/SuperOreTransfer"
 import FragmentationTab from "./FacilityTabs/FragmentationTab"
+import SuperFabricator from "./FacilityTabs/SuperFabricator"
 
 function Facility() {
     const navigate = useNavigate()
@@ -50,15 +51,16 @@ function Facility() {
                     <Tabs size='md' variant='soft-rounded' colorScheme="orange">
                         <TabList gap={2}>
                             <Tab><BiStar/></Tab>
+                            <Tab><Text fontSize={"xs"}>Super Fabricator</Text></Tab>
                             <Tab><Text fontSize={"xs"}>Defabricator</Text></Tab>
                             <Tab><Text fontSize={"xs"}>Fragmentor</Text></Tab>
-                            {/* <Tab><MdOutlineElectricBolt/></Tab>
-                            <Tab><BsFillDropletFill/></Tab>
-                            <Tab><BiSolidBattery/></Tab> */}
                         </TabList>
                         <TabPanels my={5}>
                             <TabPanel p={0}>
                                 <KrystelizerTab/>
+                            </TabPanel>
+                            <TabPanel p={0}>
+                                <SuperFabricator/>
                             </TabPanel>
                             <TabPanel p={0}>
                                 <SuperOreTransfer/>

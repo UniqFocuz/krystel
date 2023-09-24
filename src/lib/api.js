@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const DEBUG = false
+export const DEBUG = true
 
 let baseURL = ""
 
@@ -184,6 +184,10 @@ export const transferOre = (coordinate, amount) => {
 
 export const superOreTransfer = (amount) => {
     return axios.post(`${baseURL}/convert/superore`, { amount }, AccessParams())
+}
+
+export const superFabrication = (amount) => {
+    return axios.post(`${baseURL}/convert/superfabrication`, { amount }, AccessParams())
 }
 
 export const krystelFragmentor = (amount) => {

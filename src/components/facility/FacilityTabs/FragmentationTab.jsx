@@ -25,7 +25,7 @@ function FragmentationTab(){
         .then((response) => {
             setIsLoading(false)
             dispatch(setUserProfile({...user, kollectibles : {
-                ...user.kollectibles, krystel : user.kollectibles.krystel - (amount*1.05), ore : user.kollectibles.ore + amount/1000
+                ...user.kollectibles, krystel : user.kollectibles.krystel - amount, ore : user.kollectibles.ore + amount/1000
             }}))
             toast({
                 title: response.data.message,

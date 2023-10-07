@@ -77,9 +77,9 @@ export const profileBuilderPing = () => {
 
 export const setPassword = (password) => {
     if(window.location.pathname === '/welcome'){
-    return axios.post(`${baseURL}/auth/set-password`, { password }, RegistrationParams())
+        return axios.post(`${baseURL}/auth/set-password`, { password }, RegistrationParams())
     } else {
-    return axios.post(`${baseURL}/auth/set-password`, { password }, AccessParams())
+        return axios.post(`${baseURL}/auth/set-password`, { password }, AccessParams())
     }
 }
 

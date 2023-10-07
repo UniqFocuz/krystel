@@ -8,7 +8,14 @@ import TermsAndConditions from "./Legals/TermsAndConditions";
 import { useNavigate } from "react-router-dom";
 
 function ConfirmationTab(props){
-
+    const queryString = window.location.search;
+    const queryParams = {};
+    if (queryString) {
+    queryString.substring(1).split('&').forEach((pair) => {
+        const [key, value] = pair.split('=');
+        queryParams[key] = decodeURIComponent(value);
+    });
+    }
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [ legal, setLegal ] = useState('')
     const toast = useToast()
@@ -25,7 +32,12 @@ function ConfirmationTab(props){
             })
             setTimeout(() => {
                 props.setIsLoading(false)
-                navigate('/welcome')
+                if((queryParams.patron != undefined) & (queryParams != null)){
+                    navigate(`/welcome?patron=${queryParams.patron}`)
+                }
+                else{
+                    navigate('/welcome')
+                }
             }, 3000)
         }).catch((error) => {
             toast({

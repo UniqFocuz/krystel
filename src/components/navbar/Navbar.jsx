@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, ChakraProvider, Drawer, DrawerContent, DrawerOverlay, Flex, Text, VStack, WrapItem, useColorMode, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Box, Button, ChakraProvider, Drawer, DrawerContent, DrawerOverlay, Flex, Text, VStack, WrapItem, useColorMode, useColorModeValue, useDisclosure, useToast } from "@chakra-ui/react";
 import { BiSolidLockAlt, BiSolidLockOpen, BiSolidMoon, BiSolidSun, BiSolidUserX, BiX } from "react-icons/bi";
 import { BsFillGrid1X2Fill, BsFillJournalBookmarkFill, BsPlus } from "react-icons/bs";
 import { maxWidthLayoutSm, primaryColour, buttonTheme } from "../../lib/settings";
@@ -13,7 +13,7 @@ import { HiBeaker, HiMiniCog } from "react-icons/hi2";
 import { GoArrowSwitch } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { krystelValuer, countValuer } from "../../lib/support";
+import { krystelValuer, countValuer, copyToClipboard } from "../../lib/support";
 
 function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -21,12 +21,14 @@ function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
     const navigate = useNavigate()
+    const toast = useToast()
     
     const user = useSelector((state) => state.userReducer);
     const handleNavigate = (route) => {
         onClose()
         navigate(route)
     }
+
     return (
         <ChakraProvider theme={buttonTheme}>
             <Box display={"flex"} padding={5} position={'fixed'} width={"100%"} zIndex={999}>
@@ -48,7 +50,7 @@ function Navbar() {
                             </Flex>
                             <VStack gap={5}>
                                 <Flex gap={5}>
-                                    <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha">
+                                    <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha" onClick={() => {copyToClipboard(`https://www.krystel.io/register?patron=${user.username}`, toast, "Patron Link")}}>
                                         <VStack gap={5}>
                                             <WrapItem>
                                                 <Avatar name={user.full_name} size={"xl"} />

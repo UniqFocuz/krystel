@@ -51,11 +51,12 @@ function Navbar() {
                             <VStack gap={5}>
                                 <Flex gap={5}>
                                     <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha" onClick={() => {copyToClipboard(`https://www.krystel.io/register?patron=${user.username}`, toast, "Patron Link")}}>
-                                        <VStack gap={5}>
-                                            <WrapItem>
+                                        <VStack>
+                                            <WrapItem mb={1}>
                                                 <Avatar name={user.full_name} size={"xl"} />
                                             </WrapItem>
-                                            <Text fontWeight={'bold'} color={whiteColorModeValue} fontSize={'sm'}>{user.username}</Text>
+                                            <Text fontWeight={'bold'} pb={0} color={whiteColorModeValue} fontSize={'sm'}>{user.username}</Text>
+                                            <Text fontSize={'2xs'}>Click to copy Patron Link</Text>
                                         </VStack>
                                     </Button>
                                     <VStack gap={5}>

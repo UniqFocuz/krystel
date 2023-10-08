@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PageLoader from "./misc/PageLoader";
 import { BiLeaf, BiPulse, BiSolidLeaf } from "react-icons/bi";
+import HUDLoader from "./misc/HUDLoader";
 
 function PrimaryCard() {
     const dispatch = useDispatch()
@@ -112,7 +113,7 @@ function PrimaryCard() {
                                         </Button>
                                     </Flex>
                                     <Flex color={"white"} mt={5}>
-                                        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_5kg5gsqjaK.json" mode="bounce" background="transparent" speed="0.5" style={{ width: "50%", height: "50%" }} loop autoplay></lottie-player>
+                                        <HUDLoader/>
                                         <Box display={"flex"} width={"50%"}>
                                             <Box margin={"auto"} textAlign={"end"}>
                                                 <Text fontSize={'3xl'} >{krystelValuer(user.currentFabrication.fabricatedVolume)}</Text>

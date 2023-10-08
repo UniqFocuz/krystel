@@ -1,6 +1,6 @@
 import { Box, Button, Card, Center, Flex, TabPanel, TabPanels, Tabs, Text, useColorModeValue, useToast } from "@chakra-ui/react";
 import { BsFillDropletFill } from "react-icons/bs";
-import { IoBatteryChargingOutline } from "react-icons/io5"
+import { IoBatteryChargingOutline, IoPulseSharp } from "react-icons/io5"
 import { primaryColour, primaryColourOpaced, secondaryColourOpaced } from "../../lib/settings";
 import { useDispatch, useSelector } from "react-redux";
 import { krystelValuer } from "../../lib/support";
@@ -9,6 +9,7 @@ import { setUserProfile } from "../../redux/userProfile/actions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PageLoader from "./misc/PageLoader";
+import { BiLeaf, BiPulse, BiSolidLeaf } from "react-icons/bi";
 
 function PrimaryCard() {
     const dispatch = useDispatch()
@@ -98,13 +99,16 @@ function PrimaryCard() {
                                 <Box padding={5}>
                                     <Flex justifyContent={"end"} gap={2}>
                                         <Button gap={2} size={'xs'} padding={3}  color={whiteColorModeValue}>
-                                            <Text fontSize={"2xs"}>Power Card Activated</Text> <IoBatteryChargingOutline color="green" size={20} />
+                                            <IoBatteryChargingOutline color="green" size={20} /><Text fontSize={"2xs"}>Power Card Activated</Text> 
                                         </Button>
                                         <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
                                             <BsFillDropletFill color="brown" size={12} /> <Text fontSize={"2xs"}>{user.fuel}%</Text>
                                         </Button>
                                         <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
                                             <Text fontWeight={"bold"} fontSize={"2xs"}>{user.multiplier.toFixed(1)}x</Text>
+                                        </Button>
+                                        <Button gap={2} size={'xs'} padding={3}  color={whiteColorModeValue}>
+                                            <IoPulseSharp color="green" size={15} /><Text fontSize={"2xs"}>{user.efficiency}%</Text> 
                                         </Button>
                                     </Flex>
                                     <Flex color={"white"} mt={5}>

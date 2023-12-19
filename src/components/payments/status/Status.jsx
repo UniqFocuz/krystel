@@ -121,7 +121,7 @@ function Status(props){
                     </Flex>
                         <Box textAlign={'justify'} color={'gray'} mt={5}>
                             <Text fontSize={'xs'}>
-                                There was an error occured. We sincerly regret for this event. Please contact us if there's a deposit that is not reflected with the <b>Deposit ID - {props.deposit.params.order_number}</b>
+                                Your deposit is expired, however any amount settled will be reflected to your account. Please contact us if there's a deposit that is not reflected with the <b>Deposit ID - {props.deposit.params.order_number}</b>
                             </Text>
                     </Box>
                 </Box>

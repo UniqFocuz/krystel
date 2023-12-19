@@ -36,6 +36,18 @@ function All({logs}){
                                     <WrapItem m={"auto"}>
                                         <Avatar name='Purchase' size={'md'} m={"auto"} src='' bg={"green.400"} />
                                     </WrapItem>
+                                    : log.type === 'Internal Conversion' ?
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name='Internal Conversion' size={'md'} m={"auto"} src='' bg={"purple.400"} />
+                                    </WrapItem>
+                                    : log.type === 'Pay In' ?
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name='Pay In' size={'md'} m={"auto"} src='' bg={"blue.400"} />
+                                    </WrapItem>
+                                    : log.type === 'Krystel' ?
+                                    <WrapItem m={"auto"}>
+                                        <Avatar name='Krystel' size={'md'} m={"auto"} src='' bg={"orange.400"} />
+                                    </WrapItem>
                                     :<Text>{countValuer(log.amount)}</Text> // Krystel
                                 }
                             </Flex>
@@ -50,17 +62,28 @@ function All({logs}){
                                 </Box>
                             </Flex>
                             <Flex width={"20%"} justifyContent={'center'}>
-                                <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.user !== user.username ? "green" : "red"}>
-                                    <Flex gap={1}>{log.user !== user.username ? "+ " : "- "}
-                                        {
-                                            log.type === 'Super Ore' ?
-                                            <Text>{countValuer(log.amount)}</Text>
-                                            : log.type === 'Power Card' ?
-                                            <Text>{log.amount}</Text>
-                                            : <Text>{countValuer(log.amount)} </Text>
-                                        }
-                                    </Flex>
-                                </Badge>
+                                {
+                                    log.type === 'Krystel' | log.type === 'Pay In' ?
+                                    <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.user === user.username ? "green" : "red"}>
+                                        <Flex gap={1}>{log.user === user.username ? "+ " : "- "}
+                                            {
+                                                <Text>{countValuer(log.amount)} </Text>
+                                            }
+                                        </Flex>
+                                    </Badge>
+                                    : 
+                                    <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.user !== user.username ? "green" : "red"}>
+                                        <Flex gap={1}>{log.user !== user.username ? "+ " : "- "}
+                                            {
+                                                log.type === 'Super Ore' ?
+                                                <Text>{countValuer(log.amount)}</Text>
+                                                : log.type === 'Power Card' ?
+                                                <Text>{log.amount}</Text>
+                                                : <Text>{countValuer(log.amount)} </Text>
+                                            }
+                                        </Flex>
+                                    </Badge>
+                                }
                             </Flex>
                             {/* <Flex width={"5%"}  justifyContent={'end'}>
                                 <Box my={"auto"}><BiChevronRight size={20}/></Box>

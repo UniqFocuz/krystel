@@ -17,6 +17,26 @@ function BasicDetails(props) {
     const navigate = useNavigate()
     const toast = useToast()
     useEffect(() => {
+        const queryString = window.location.search;
+        const queryParams = {};
+        if (queryString) {
+            queryString.substring(1).split('&').forEach((pair) => {
+                const [key, value] = pair.split('=');
+                queryParams[key] = decodeURIComponent(value);
+            });
+            }
+            if((queryParams.patron != undefined) & (queryParams != null)){{
+                console.log("hello")
+                props.setProgress({
+                    ...props.progress, data: {
+                        ...props.progress.data, patron: queryParams.patron
+                    }
+                })
+            }
+        }
+
+    }, [])
+    useEffect(() => {
         const validate = async () => {
             try {
                 if (props.progress.data.patron === '') {

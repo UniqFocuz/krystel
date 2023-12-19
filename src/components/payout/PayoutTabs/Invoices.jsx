@@ -26,7 +26,7 @@ function Invoices(){
         <>
         {
             invoices.map((item, index) => (
-                <Card p={7} key={index}>
+                <Card p={7} key={index} mb={5}>
                     <Flex gap={3} justifyContent={"end"} mb={3}>
                         <Button py={1} px={3} borderRadius={"20px"} size={'xs'} fontWeight={"bold"} fontSize={'2xs'} >{item.daysFromCreation[1]} ago</Button>
                         <Button py={1} px={3} borderRadius={"20px"} size={'xs'} fontWeight={"bold"} fontSize={'2xs'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} >#{item.withdrawId}</Button>

@@ -1,11 +1,11 @@
 export function copyToClipboard(text, toast, prompt) {
     navigator.clipboard.writeText(text)
       .then(() => {
-            toast({
-                title: `${prompt} copied to Clipboard!`,
-                variant: 'subtle',
-                status: 'info',
-            })
+          toast({
+              title: `${prompt} copied to Clipboard!`,
+              variant: 'subtle',
+              status: 'info',
+          })
       })
 }
 
@@ -44,7 +44,7 @@ export function krystelValuer(value){
 
 export function energyValuer(value){
   if(value < 1000){
-    return value.toLocaleString() + " Wh"
+    return value.toLocaleString() + ""
   }
   else{
     return (Math.floor(value/10000)).toFixed(0).toLocaleString()

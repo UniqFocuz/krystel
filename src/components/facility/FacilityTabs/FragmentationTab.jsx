@@ -2,17 +2,17 @@ import { Box, Button, Card, Flex, Input, InputGroup, InputLeftElement, InputRigh
 import { useDispatch, useSelector } from "react-redux";
 import { primaryColour, primaryColourOpaced } from "../../../lib/settings";
 import { AiOutlineUser } from "react-icons/ai";
-import { BiCheck, BiInfoCircle } from "react-icons/bi";
 import { useState } from "react";
 import NumPad from "../../collections/misc/NumPad";
-import { superOreTransfer, superOreTransferOre } from "../../../lib/api";
+import { krystelFragmentor} from "../../../lib/api";
 import { setUserProfile } from "../../../redux/userProfile/actions";
+import { krystelValuer } from "../../../lib/support";
 
-function SuperOreTransfer(){
+function FragmentationTab(){
     const user = useSelector((state) => state.userReducer);
     const dispatch = useDispatch()
     const toast = useToast()
-    const [amount, setAmount] = useState(10)
+    const [amount, setAmount] = useState(10000)
     const [amountFeedback, setAmountFeedback] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const handleAmountChange = (e) => {
@@ -21,11 +21,11 @@ function SuperOreTransfer(){
     }
     const handleSubmit = async() => {
         setIsLoading(true)
-        await superOreTransfer(amount)
+        await krystelFragmentor(amount)
         .then((response) => {
             setIsLoading(false)
             dispatch(setUserProfile({...user, kollectibles : {
-                ...user.kollectibles, superOre : user.kollectibles.superOre - amount, ore : user.kollectibles.ore + amount*0.95
+                ...user.kollectibles, krystel : user.kollectibles.krystel - amount, ore : user.kollectibles.ore + amount/1000
             }}))
             toast({
                 title: response.data.message,
@@ -50,10 +50,10 @@ function SuperOreTransfer(){
         <>
         <Card p={5}>
             <Flex px={3} justifyContent={"end"} mb={3}>
-                <Button borderRadius={"20px"} size={'sm'} fontSize={'2xs'}>{user.kollectibles.superOre} S.Ores</Button>
+                <Button borderRadius={"20px"} size={'sm'} fontSize={'2xs'}>{krystelValuer(user.kollectibles.krystel)}</Button>
             </Flex>
             <Box px={3}>
-                <Text textAlign={'justify'} fontSize={'xs'} color={'gray'} mb={5}>Defabricator converts your Super Ores to Naive Ore. This process can be used to exchange your community rewards to Naive ore for further Research processes. A surcharge of 5% is levied and sent to the community</Text>
+                <Text textAlign={'justify'} fontSize={'xs'} color={'gray'} mb={5}>Fragmentor converts your Krystel to Naive Ore. This process can be used to exchange your community rewards to Naive ore for further Research processes. A surcharge of 5% is levied and sent to the community</Text>
                 <InputGroup px={3}>
                     <InputLeftElement pointerEvents='none'>
                     <AiOutlineUser color={primaryColour} />
@@ -70,4 +70,4 @@ function SuperOreTransfer(){
     )
 }
 
-export default SuperOreTransfer
+export default FragmentationTab

@@ -77,9 +77,9 @@ export const profileBuilderPing = () => {
 
 export const setPassword = (password) => {
     if(window.location.pathname === '/welcome'){
-    return axios.post(`${baseURL}/auth/set-password`, { password }, RegistrationParams())
+        return axios.post(`${baseURL}/auth/set-password`, { password }, RegistrationParams())
     } else {
-    return axios.post(`${baseURL}/auth/set-password`, { password }, AccessParams())
+        return axios.post(`${baseURL}/auth/set-password`, { password }, AccessParams())
     }
 }
 
@@ -184,6 +184,14 @@ export const transferOre = (coordinate, amount) => {
 
 export const superOreTransfer = (amount) => {
     return axios.post(`${baseURL}/convert/superore`, { amount }, AccessParams())
+}
+
+export const superFabrication = (amount) => {
+    return axios.post(`${baseURL}/convert/superfabrication`, { amount }, AccessParams())
+}
+
+export const krystelFragmentor = (amount) => {
+    return axios.post(`${baseURL}/convert/krystel`, { amount }, AccessParams())
 }
 
 export const fetchTransactions = (query) => {

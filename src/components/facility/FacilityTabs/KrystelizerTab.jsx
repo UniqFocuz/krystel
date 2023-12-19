@@ -86,7 +86,7 @@ function KrystelizerTab(){
         <Card p={5}>
             <Flex px={3} justifyContent={"space-between"} mb={3}>
                 <Text mb={3} my={"auto"} fontWeight={'bold'} fontSize={'sm'} color={primaryColour}>Purchase Krystelizer</Text>
-                <Button borderRadius={"20px"} size={'sm'} fontSize={'2xs'}>{user.kollectibles.ore} Ores</Button>
+                <Button borderRadius={"20px"} size={'sm'} fontSize={'2xs'}>{user.kollectibles.ore.toFixed(0)} Ores</Button>
             </Flex>
         
             <InputGroup px={3}>

@@ -22,7 +22,7 @@ function DepositInvoice(props){
                 pending: pending,
             })
             setSettledAmount(parseFloat(response.data.data.pending_sum).toFixed(6))
-            switch(deposit === {} ? deposit : response.data.data.status) {
+            switch(deposit == {} ? deposit : response.data.data.status) {
                 case "new":
                 setActiveStep(0)
                 break

@@ -1,14 +1,16 @@
 import { Box, Button, Card, Center, Flex, TabPanel, TabPanels, Tabs, Text, useColorModeValue, useToast } from "@chakra-ui/react";
 import { BsFillDropletFill } from "react-icons/bs";
-import { IoBatteryChargingOutline } from "react-icons/io5"
+import { IoBatteryChargingOutline, IoPulseSharp } from "react-icons/io5"
 import { primaryColour, primaryColourOpaced, secondaryColourOpaced } from "../../lib/settings";
 import { useDispatch, useSelector } from "react-redux";
 import { krystelValuer } from "../../lib/support";
-import { harvestKrystel } from "../../lib/api";
+import { dashboard, harvestKrystel } from "../../lib/api";
 import { setUserProfile } from "../../redux/userProfile/actions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PageLoader from "./misc/PageLoader";
+import { BiLeaf, BiPulse, BiSolidLeaf } from "react-icons/bi";
+import HUDLoader from "./misc/HUDLoader";
 
 function PrimaryCard() {
     const dispatch = useDispatch()
@@ -20,12 +22,53 @@ function PrimaryCard() {
         user.harvestVolume >= 1 ?
             await harvestKrystel()
                 .then((response) => {
-                    dispatch(setUserProfile(response.data.default))
+                    dashboard()
+                    .then((response) => {
+                        dispatch(setUserProfile(response.data.default))
+                    })
+                    .catch((error) => {
+                        if(error.response.status === 401){
+                            toast({
+                                title: 'Session Expired',
+                                variant: 'subtle',
+                                status: 'error',
+                            })
+                            localStorage.removeItem('accessToken')
+                            navigate('/login')
+                            
+                        }
+                        if(error.response.status === 400){
+                            toast({
+                                title: 'You are logged out!',
+                                variant: 'subtle',
+                                status: 'info',
+                            })
+                            localStorage.removeItem('accessToken')
+                        }
+                        if(error.response.status === 500){
+                            toast({
+                                title: 'An unexpected error occured!',
+                                variant: 'subtle',
+                                status: 'warning',
+                            })
+                            localStorage.removeItem('accessToken')
+                            navigate('/login')
+                        }
+                    });
                     toast({
                         title: response.data.message,
                         variant: 'subtle',
                         status: 'info',
                     })
+                })
+                .catch((error) => {
+                    if(error.response.status === 401){
+                        toast({
+                            title: error.response.data.message,
+                            variant: 'subtle',
+                            status: 'warning',
+                        })
+                    }
                 })
             :
             toast({
@@ -57,7 +100,7 @@ function PrimaryCard() {
                                 <Box padding={5}>
                                     <Flex justifyContent={"end"} gap={2}>
                                         <Button gap={2} size={'xs'} padding={3}  color={whiteColorModeValue}>
-                                            <Text fontSize={"2xs"}>Power Card Activated</Text> <IoBatteryChargingOutline color="green" size={20} />
+                                            <IoBatteryChargingOutline color="green" size={20} /><Text fontSize={"2xs"}>Power Card Activated</Text> 
                                         </Button>
                                         <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
                                             <BsFillDropletFill color="brown" size={12} /> <Text fontSize={"2xs"}>{user.fuel}%</Text>
@@ -65,9 +108,12 @@ function PrimaryCard() {
                                         <Button gap={1} size={'xs'} padding={3}  color={whiteColorModeValue}>
                                             <Text fontWeight={"bold"} fontSize={"2xs"}>{user.multiplier.toFixed(1)}x</Text>
                                         </Button>
+                                        <Button gap={2} size={'xs'} padding={3}  color={whiteColorModeValue}>
+                                            <IoPulseSharp color="green" size={15} /><Text fontSize={"2xs"}>{user.efficiency}%</Text> 
+                                        </Button>
                                     </Flex>
                                     <Flex color={"white"} mt={5}>
-                                        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_5kg5gsqjaK.json" mode="bounce" background="transparent" speed="0.5" style={{ width: "50%", height: "50%" }} loop autoplay></lottie-player>
+                                        <HUDLoader/>
                                         <Box display={"flex"} width={"50%"}>
                                             <Box margin={"auto"} textAlign={"end"}>
                                                 <Text fontSize={'3xl'} >{krystelValuer(user.currentFabrication.fabricatedVolume)}</Text>

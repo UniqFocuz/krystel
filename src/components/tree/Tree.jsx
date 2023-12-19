@@ -26,27 +26,38 @@ function Tree() {
     }, [user.isAuthenticated, user.username]);
 
     const pingTree = async (username) => {
-        await fetchTree(username)
-        .then((response) => {
-            setData(response.data);
-            setSearchLoading(false)
-            history.push(username)
-            return true
-        })
-        .catch((error) => {
-            setData(user.username)
-            nativeNavigateNode(user.username)
-            toast({
-                title: `Please enter a valid User ID!`,
-                variant: 'subtle',
-                status: 'warning',
-            })
-            setTimeout(() => {
-                setIsLoading(false)
+            await fetchTree(username)
+            .then((response) => {
+                setData(response.data);
                 setSearchLoading(false)
-            }, 1000)
-            return false
-        })
+                history.push(username)
+                return true
+            })
+            .catch((error) => {
+                setData(user.username)
+                if(user.patron!=user.username){
+                    nativeNavigateNode(user.username)
+                }
+                if(error.response.data.status === 400){
+                    toast({
+                        title: `Please enter a valid User ID!`,
+                        variant: 'subtle',
+                        status: 'warning',
+                    })
+                }
+                if(error.response.data.status === 401){
+                    toast({
+                        title: `Search not Allowed!`,
+                        variant: 'subtle',
+                        status: 'error',
+                    })
+                }
+                setTimeout(() => {
+                    setIsLoading(false)
+                    setSearchLoading(false)
+                }, 1000)
+                return false
+            })
     };
 
     const handleTop = () => {

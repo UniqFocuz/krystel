@@ -26,7 +26,7 @@ function Pending(props){
                 <Input type='text' textAlign={'center'} color={'red'} maxWidth={'350px'} value={walletHash} fontSize={'sm'} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour} readOnly />
             </Box>
             <Flex gap={3} mt={3}>
-                <Button size={'xs'} onClick={() => copyToClipboard(props.deposit.walletHash, toast, "Address")}>Copy Address</Button>
+                <Button size={'xs'} onClick={() => copyToClipboard(props.deposit.wallet_hash, toast, "Address")}>Copy Address</Button>
                 <Button size={'xs'} onClick={() => copyToClipboard(props.deposit.amount, toast, "Amount")}>Copy Amount</Button>
                 <Button size={'xs'} onClick={props.verifyDepositStatus} isLoading={props.isRefreshLoading} >Refresh</Button>
             </Flex>

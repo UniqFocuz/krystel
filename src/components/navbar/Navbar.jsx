@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, ChakraProvider, Drawer, DrawerContent, DrawerOverlay, Flex, Text, VStack, WrapItem, useColorMode, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Box, Button, ChakraProvider, Drawer, DrawerContent, DrawerOverlay, Flex, Text, VStack, WrapItem, useColorMode, useColorModeValue, useDisclosure, useToast } from "@chakra-ui/react";
 import { BiSolidLockAlt, BiSolidLockOpen, BiSolidMoon, BiSolidSun, BiSolidUserX, BiX } from "react-icons/bi";
 import { BsFillGrid1X2Fill, BsFillJournalBookmarkFill, BsPlus } from "react-icons/bs";
 import { maxWidthLayoutSm, primaryColour, buttonTheme } from "../../lib/settings";
@@ -13,7 +13,7 @@ import { HiBeaker, HiMiniCog } from "react-icons/hi2";
 import { GoArrowSwitch } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { krystelValuer, countValuer } from "../../lib/support";
+import { krystelValuer, countValuer, copyToClipboard } from "../../lib/support";
 
 function Navbar() {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -21,12 +21,14 @@ function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
     const navigate = useNavigate()
+    const toast = useToast()
     
     const user = useSelector((state) => state.userReducer);
     const handleNavigate = (route) => {
         onClose()
         navigate(route)
     }
+
     return (
         <ChakraProvider theme={buttonTheme}>
             <Box display={"flex"} padding={5} position={'fixed'} width={"100%"} zIndex={999}>
@@ -48,12 +50,13 @@ function Navbar() {
                             </Flex>
                             <VStack gap={5}>
                                 <Flex gap={5}>
-                                    <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha">
-                                        <VStack gap={5}>
-                                            <WrapItem>
+                                    <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha" onClick={() => {copyToClipboard(`https://www.krystel.io/register?patron=${user.username}`, toast, "Patron Link")}}>
+                                        <VStack>
+                                            <WrapItem mb={1}>
                                                 <Avatar name={user.full_name} size={"xl"} />
                                             </WrapItem>
-                                            <Text fontWeight={'bold'} color={whiteColorModeValue} fontSize={'sm'}>{user.username}</Text>
+                                            <Text fontWeight={'bold'} pb={0} color={whiteColorModeValue} fontSize={'sm'}>{user.username}</Text>
+                                            <Text fontSize={'2xs'}>Click to copy Patron Link</Text>
                                         </VStack>
                                     </Button>
                                     <VStack gap={5}>
@@ -98,8 +101,8 @@ function Navbar() {
                                     </VStack>
                                 </Flex>
                                 <Flex gap={5}>
-                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}><GiPayMoney className="flip" size={30}  /></Button>
-                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" fontSize={'2xl'}><GiReceiveMoney size={30}/></Button>
+                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/payin')} fontSize={'2xl'}><GiPayMoney className="flip" size={30}  /></Button>
+                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/payout')} fontSize={'2xl'}><GiReceiveMoney size={30}/></Button>
                                     <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/settings')}><HiMiniCog color={whiteColorModeValue} size={30} /></Button>
                                     <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={toggleColorMode}>{colorMode === "light" ? <BiSolidMoon color={whiteColorModeValue} size={30} /> : <BiSolidSun color={whiteColorModeValue} size={30} />}</Button>
                                 </Flex>

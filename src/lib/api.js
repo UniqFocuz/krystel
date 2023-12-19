@@ -185,6 +185,7 @@ export const transferOre = (coordinate, amount) => {
 export const superOreTransfer = (amount) => {
     return axios.post(`${baseURL}/convert/superore`, { amount }, AccessParams())
 }
+
 export const fetchTransactions = (query) => {
     return axios.get(`${baseURL}/logs?query=${query}`, AccessParams())
 }
@@ -195,6 +196,10 @@ export const refillFuel = () => {
 
 export const fetchTree = (username) => {
     return axios.get(`${baseURL}/tree?username=${username}`, AccessParams())
+}
+
+export const fetchShifts = (username) => {
+    return axios.get(`${baseURL}/shifts?username=${username}`, AccessParams())
 }
 
 export const updateProfile = (userInstance) => {

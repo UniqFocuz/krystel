@@ -17,6 +17,7 @@ import Transfer from "../components/transfer/Transfer";
 import Tree from "../components/tree/Tree";
 import Settings from "../components/settings/Settings";
 import Payout from "../components/payout/Payout";
+import Shift from "../components/shift/Shift";
 
 function Routers(){
     const toast = useToast()
@@ -74,6 +75,7 @@ function Routers(){
             <Route path="/facility" element={<Facility/>}/>
             <Route path="/logs" element={<Logs/>}/>
             <Route path="/transfer" element={<Transfer/>}/>
+            <Route path="/shift" element={<Shift/>}/>
             <Route path="/laboratory" element={<Tree/>}/>
             <Route path="/settings" element={<Settings/>}/>
             <Route path="/payout" element={<Payout/>}/>

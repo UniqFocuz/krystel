@@ -16,7 +16,7 @@ function Dashboard(){
         <>
             <Box width={maxWidthLayoutSm} mx="auto" pt={"80px"}>
                 <PrimaryCard/>
-                <Countdown minutes={84}/>
+                {/* <Countdown minutes={84}/> */}
                 <SecondaryCard/>
             </Box>
         </>

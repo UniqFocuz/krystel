@@ -2,12 +2,14 @@ import { Box, Text } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { primaryColour, primaryColourOpaced } from '../../lib/settings';
 
-function Countdown({ futureDate }) {
+function Countdown({ minutes }) {
+  const futureDate = new Date();
+  futureDate.setMinutes(futureDate.getMinutes() + minutes);
+
   const calculateTimeRemaining = () => {
-    const now = new Date().getTime();
-    const future = new Date(futureDate).getTime();
-    const timeLeft = Math.max(0, future - now);
-    return Math.floor(timeLeft / 1000); // Convert to seconds
+    const now = new Date();
+    const timeLeft = Math.max(0, futureDate - now);
+    return Math.floor(timeLeft / 1000);
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeRemaining());
@@ -28,14 +30,13 @@ function Countdown({ futureDate }) {
   }, []);
 
   const hours = Math.floor(timeLeft / 3600);
-  const minutes = Math.floor((timeLeft % 3600) / 60);
+  const minutesLeft = Math.floor((timeLeft % 3600) / 60);
   const seconds = timeLeft % 60;
-
   return (
     <Box textAlign={'center'} p={3} my={3} shadow={"md"} color={"white"} bg={primaryColourOpaced} rounded={5}>
       <Text>New Update in</Text>
       <Text fontSize={"3xl"}>
-        {String(hours).padStart(2, '0')}h {String(minutes).padStart(2, '0')}m {String(seconds).padStart(2, '0')}s
+        {String(hours).padStart(2, '0')}h {String(minutesLeft).padStart(2, '0')}m {String(seconds).padStart(2, '0')}s
       </Text>
     </Box>
   );

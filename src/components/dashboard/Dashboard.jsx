@@ -10,12 +10,13 @@ function Dashboard(){
 
     const user = useSelector((state) => state.userReducer);
     const futureDate = new Date('2023-12-19T11:59:59').toISOString()
+    const timeZone = 'America/New_York'
     return(
         user.isAuthenticated ?
         <>
             <Box width={maxWidthLayoutSm} mx="auto" pt={"80px"}>
                 <PrimaryCard/>
-                <Countdown futureDate={futureDate} />
+                <Countdown minutes={84}/>
                 <SecondaryCard/>
             </Box>
         </>

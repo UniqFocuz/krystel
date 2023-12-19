@@ -32,7 +32,7 @@ function ShiftTable(){
                 </Thead>
                 <Tbody>
                     {
-                        shifts.length !== 0 &&
+                        shifts.length !== 0 ?
                         [...shifts].reverse().map((shift, index,) => (
                             <Tr key={index}>
                                 <Td isNumeric fontSize={13} textAlign={'center'}>{shifts.length - index}</Td>
@@ -40,6 +40,12 @@ function ShiftTable(){
                                 <Td fontSize={13} textAlign={'center'}>{shift.beta ? shift.beta.username : '-'}</Td>
                             </Tr>
                         ))
+                        :
+                        <Tr>
+                            <Td colSpan={3} textAlign={'center'} fontSize={'xs'}>
+                                No shifts Available
+                            </Td>
+                        </Tr>
                     }
                 </Tbody>
             </Table>

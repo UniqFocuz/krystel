@@ -82,7 +82,7 @@ function Navbar() {
                                         </Flex>
                                         <Flex width={"180px"} gap={5}>
                                             <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/transfer')}><GoArrowSwitch color={whiteColorModeValue} size={30}/></Button>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" /*onClick={() => handleNavigate('/buddies')}*/><FaUsers color={whiteColorModeValue} size={30}/></Button>
+                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/shift')}><FaUsers color={whiteColorModeValue} size={30}/></Button>
                                         </Flex>
                                     </VStack>
                                     <VStack gap={5}>

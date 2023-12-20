@@ -112,15 +112,15 @@ function PrimaryCard() {
                                             <IoPulseSharp color="green" size={15} /><Text fontSize={"2xs"}>{user.efficiency}%</Text> 
                                         </Button>
                                     </Flex>
-                                    <Flex color={"white"} mt={5}>
+                                    <Flex color={"white"} mt={6}>
                                         <HUDLoader/>
                                         <Box display={"flex"} width={"50%"}>
                                             <Box margin={"auto"} textAlign={"end"}>
                                                 <Text fontSize={'3xl'} >{krystelValuer(user.currentFabrication.fabricatedVolume)}</Text>
-                                                <Text fontSize={"md"} >
-                                                    supplied in <b>{user.currentFabrication.daysFromCreation.slice(1)}</b>
+                                                <Text fontSize={'xs'} mt={1}>
+                                                    <b>~ ${(user.currentFabrication.fabricatedVolume/10000).toFixed(2)}</b> supplied in <b>{user.currentFabrication.daysFromCreation.slice(1)}</b>
                                                 </Text>
-                                                <Button size={'sm'} mt={10} color={whiteColorModeValue} onClick={() => handleHarvestKrystel()}>Harvest {krystelValuer(user.harvestVolume)}</Button>
+                                                <Button size={'sm'} mt={5} color={whiteColorModeValue} onClick={() => handleHarvestKrystel()}>Harvest {krystelValuer(user.harvestVolume)}</Button>
                                                 <Text fontSize={"xs"} mt={2}>last harvest: <b>{user.harvestTime.slice(1)}</b> ago</Text>
                                             </Box>
                                         </Box>

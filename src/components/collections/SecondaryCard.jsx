@@ -48,6 +48,7 @@ function SecondaryCard(){
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
                         <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{krystelValuer(user.kollectibles.krystel)}</Text>
+                        <Text fontSize={"2xs"} color={"blackAlpha.600"}>~ ${(user.kollectibles.krystel/10000).toFixed(2)}</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -61,6 +62,7 @@ function SecondaryCard(){
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
                         <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{user.kollectibles.ore} Units</Text>
+                        <Text fontSize={"2xs"} color={"blackAlpha.600"}>~ ${(user.kollectibles.ore/10).toFixed(2)}</Text>
                     </Box>
                 </Flex>
             </Card>
@@ -74,6 +76,7 @@ function SecondaryCard(){
                     </Box>
                     <Box my={'auto'} textAlign={"end"}>
                         <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{user.kollectibles.superOre} Units</Text>
+                        <Text fontSize={"2xs"} color={"blackAlpha.600"}>~ ${(user.kollectibles.superOre/10).toFixed(2)}</Text>
                     </Box>
                 </Flex>
             </Card>

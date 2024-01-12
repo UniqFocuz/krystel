@@ -21,7 +21,7 @@ function Dashboard(){
                 <Flex p={5} bg={'white'} boxShadow={"md"} justifyContent={'center'} gap={2} fontSize={'sm'}>
                     <Text color={primaryColour} fontWeight={'bold'}>Total Supply:</Text>
                     <Text>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
-                    <Text color={"blackAlpha.600"}>(~ ${(user.kollectibles.totalKrystels/1000).toFixed(2)})</Text>
+                    <Text color={"blackAlpha.600"}>(~ ${(user.kollectibles.totalKrystels/10000).toFixed(2)})</Text>
                 </Flex>
                 <SecondaryCard/>
             </Box>

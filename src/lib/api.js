@@ -210,6 +210,10 @@ export const fetchShifts = (username) => {
     return axios.get(`${baseURL}/shifts?username=${username}`, AccessParams())
 }
 
+export const fetchWorkers = (username) => {
+    return axios.get(`${baseURL}/directs?username=${username}`, AccessParams())
+}
+
 export const updateProfile = (userInstance) => {
     return axios.post(`${baseURL}/auth/profile/update`, {...userInstance}, AccessParams())
 }

@@ -153,7 +153,7 @@ function Tree() {
                                                         <Badge m={"auto"} fontSize={'2xs'} py={1} role="button" px={3} onClick={handleBack} borderRadius={15}>Back</Badge>
                                                     </Flex>
                                                 }
-                                                <Flex gap={2} ml={"auto"}>
+                                                <Flex gap={2} ml={"auto"} role="button" onClick={() => navigate('/shift?tab=1')}>
                                                     <AvatarGroup size='xs' max={3}>
                                                         {
                                                             data.researchers.map((item, index) => (

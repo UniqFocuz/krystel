@@ -1,10 +1,11 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Flex, Text } from "@chakra-ui/react"
 import PrimaryCard from "../collections/PrimaryCard"
 import SecondaryCard from "../collections/SecondaryCard"
-import { maxWidthLayoutSm } from "../../lib/settings"
+import { maxWidthLayoutSm, primaryColour } from "../../lib/settings"
 import { useSelector } from "react-redux";
 import PageLoader from "../collections/misc/PageLoader";
 import Countdown from "./Countdown"
+import { krystelValuer } from "../../lib/support";
 
 function Dashboard(){
 
@@ -17,6 +18,11 @@ function Dashboard(){
             <Box width={maxWidthLayoutSm} mx="auto" pt={"80px"}>
                 <PrimaryCard/>
                 {/* <Countdown minutes={84}/> */}
+                <Flex p={5} bg={'white'} boxShadow={"md"} justifyContent={'center'} gap={2} fontSize={'sm'}>
+                    <Text color={primaryColour} fontWeight={'bold'}>Total Supply:</Text>
+                    <Text>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
+                    <Text color={"blackAlpha.600"}>(~ ${(user.kollectibles.totalKrystels/1000).toFixed(2)})</Text>
+                </Flex>
                 <SecondaryCard/>
             </Box>
         </>

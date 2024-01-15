@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
 import HomePage from "../components/HomePage";
 import Login from "../components/authentication/Login";
@@ -33,6 +33,7 @@ function Routers(){
             dispatch(setUserProfile(response.data.default))
         })
         .catch((error) => {
+            console.log(error.response.status)
             if(error.response.status === 401){
                 toast({
                     title: 'Session Expired',
@@ -64,7 +65,6 @@ function Routers(){
     },[location.pathname, dispatch, navigate, toast])
     return (
         <Routes>
-            <Route path="/" element={<HomePage/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/logout" element={<Logout/>}/>
             <Route path="/register" element={<Register/>}/>
@@ -81,6 +81,7 @@ function Routers(){
             <Route path="/settings" element={<Settings/>}/>
             <Route path="/payin" element={<Payin/>}/>
             <Route path="/payout" element={<Payout/>}/>
+            <Route path="/*" element={<Navigate to="/login" />} />
         </Routes>
     )
 }

@@ -27,6 +27,16 @@ function Login(){
                   setIsUsernameValid(null); 
                   setUsernameFeedback('')
                 } else {
+                    if (cred.username.includes('#') === true){
+                        const response = await validateUsername(cred.username.slice(1,))
+                        setIsUsernameValid(response.data.exists);
+                        if(response.data.exists){
+                            setUsernameFeedback(`Welcome back ${response.data.name}!`)
+                        } else{
+                            setUsernameFeedback('')
+                        }
+
+                    } else
                     if(cred.username.includes('@') === true){
                         const response = await validatePreRegisterEmail(cred.username)
                         setIsUsernameValid(response.data.exists);

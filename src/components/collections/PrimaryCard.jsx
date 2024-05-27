@@ -17,8 +17,10 @@ function PrimaryCard() {
     const toast = useToast()
     const whiteColorModeValue = useColorModeValue(primaryColour, "white")
     const [activeIndex, setActiveIndex] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
     const handleHarvestKrystel = async () => {
+        setIsLoading(true)
         user.harvestVolume >= 1 ?
             await harvestKrystel()
                 .then((response) => {
@@ -76,6 +78,7 @@ function PrimaryCard() {
                 variant: 'subtle',
                 status: 'warning',
             })
+        setIsLoading(false)
     }
 
     const handleHarvest = () => {
@@ -120,7 +123,7 @@ function PrimaryCard() {
                                                 <Text fontSize={'xs'} mt={1}>
                                                     <b>~ ${(user.currentFabrication.fabricatedVolume/10000).toFixed(2)}</b> supplied in <b>{user.currentFabrication.daysFromCreation.slice(1)}</b>
                                                 </Text>
-                                                <Button size={'sm'} mt={5} color={whiteColorModeValue} onClick={() => handleHarvestKrystel()}>Harvest {krystelValuer(user.harvestVolume)}</Button>
+                                                <Button size={'sm'} mt={5} color={whiteColorModeValue} onClick={() => handleHarvestKrystel()} isLoading={isLoading}>Harvest {krystelValuer(user.harvestVolume)}</Button>
                                                 <Text fontSize={"xs"} mt={2}>last harvest: <b>{user.harvestTime.slice(1)}</b> ago</Text>
                                             </Box>
                                         </Box>

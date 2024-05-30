@@ -9,7 +9,7 @@ import { setUserProfile } from "../../../redux/userProfile/actions";
 
 function SuperFabricator(){
     const user = useSelector((state) => state.userReducer);
-    const [amount, setAmount] = useState(10)
+    const [amount, setAmount] = useState(100)
     const toast = useToast()
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)

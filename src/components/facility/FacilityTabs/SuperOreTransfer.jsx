@@ -12,7 +12,7 @@ function SuperOreTransfer(){
     const user = useSelector((state) => state.userReducer);
     const dispatch = useDispatch()
     const toast = useToast()
-    const [amount, setAmount] = useState(10)
+    const [amount, setAmount] = useState(100)
     const [amountFeedback, setAmountFeedback] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const handleAmountChange = (e) => {

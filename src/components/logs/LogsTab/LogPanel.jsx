@@ -65,13 +65,19 @@ function All({logs}){
                                 {
                                     log.type === 'Krystel' | log.type === 'Pay In' ?
                                     <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.user === user.username ? "green" : "red"}>
-                                        <Flex gap={1}>{log.user === user.username ? "+ " : "- "}
-                                            {
-                                                <Text>{countValuer(log.amount)} </Text>
-                                            }
-                                        </Flex>
-                                    </Badge>
-                                    : 
+                                            <Flex gap={1}>{log.user === user.username ? "+ " : "- "}
+                                                {
+                                                    <Text>{countValuer(log.amount)} </Text>
+                                                }
+                                            </Flex>
+                                        </Badge>
+                                    : log.type === 'Internal Conversion' ?
+                                        <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.direction === 'receive' ? "green" : "red"}>
+                                            <Flex gap={1}>{log.direction === 'receive' ? "+ " : "- "}
+                                                    <Text>{countValuer(log.amount)}</Text>
+                                            </Flex>
+                                        </Badge>
+                                    :
                                     <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.user !== user.username ? "green" : "red"}>
                                         <Flex gap={1}>{log.user !== user.username ? "+ " : "- "}
                                             {

@@ -108,8 +108,8 @@ function Navbar() {
                                         <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={toggleColorMode}>{colorMode === "light" ? <BiSolidMoon color={whiteColorModeValue} size={30} /> : <BiSolidSun color={whiteColorModeValue} size={30} />}</Button>
                                     </Flex>
                                     <Flex gap={5} ml={0} mr={'auto'}>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/grow')} fontSize={'2xl'}><HiOutlineBriefcase className="flip" size={30}  /></Button>
-                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/grow')} fontSize={'2xl'}><FaShop className="flip" size={30}  /></Button>
+                                        {/* <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/grow')} fontSize={'2xl'}><HiOutlineBriefcase className="flip" size={30}  /></Button>
+                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/grow')} fontSize={'2xl'}><FaShop className="flip" size={30}  /></Button> */}
                                     </Flex>
                                 </VStack>
                             </VStack>

@@ -1,14 +1,14 @@
-import { Box, Button, Card, Center, Flex, Input, InputGroup, InputLeftAddon, InputLeftElement, InputRightAddon, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure, useToast } from "@chakra-ui/react"
-import NumPad from "../../collections/misc/NumPad"
-import { AiOutlineUser } from "react-icons/ai"
-import { primaryColour, primaryColourOpaced } from "../../../lib/settings"
-import { BiCheck, BiInfoCircle } from "react-icons/bi";
+import { Box, Button, Card, Center, Flex, Input, InputGroup, InputLeftAddon, InputLeftElement, InputRightAddon, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useDisclosure, useToast } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { createDepositInvoice, depositPing } from "../../../lib/api";
-import { getTimeDifferenceFromNow } from "../../../lib/support";
-import { useNavigate } from "react-router-dom";
+import { AiOutlineUser } from "react-icons/ai";
+import { BiCheck, BiInfoCircle } from "react-icons/bi";
 import { VscEye } from "react-icons/vsc";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createDepositInvoice, depositPing } from "../../../lib/api";
+import { primaryColour, primaryColourOpaced } from "../../../lib/settings";
+import { getTimeDifferenceFromNow } from "../../../lib/support";
+import NumPad from "../../collections/misc/NumPad";
 import DepositInvoice from "../../payments/DepositInvoice";
 
 function PayinTab(){
@@ -24,8 +24,6 @@ function PayinTab(){
     const [amountFeedback, setAmountFeedback] = useState('')
     const [activeIndex, setActiveIndex] = useState(1)
     const [allDeposits, setAllDeposit] = useState([])
-    const [canEdit, setCanEdit] = useState(false)
-    const [payoutAddress, setPayoutAddress] = useState(false)
     const handleAmountChange = (e) => {
         const amount = e.target.value
         setAmount(amount)
@@ -33,8 +31,6 @@ function PayinTab(){
     const loadPage = async() => {
         await depositPing('deposit')
         .then((response) => {
-            setCanEdit(response.data.canEdit)
-            setPayoutAddress(response.data.payoutAddress)
             setAllDeposit(response.data.invoices)
         })
     }
@@ -48,12 +44,6 @@ function PayinTab(){
         }
     }, [amount])
     useEffect(() => {
-        const loadPage = async() => {
-            await depositPing('deposit')
-            .then((response) => {
-                setAllDeposit(response.data.invoices)
-            })
-        }
         loadPage()
     }, []) 
     const handleCreateDeposit = async() => {
@@ -156,7 +146,7 @@ function PayinTab(){
                 <ModalHeader></ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <DepositInvoice {...{currentDeposit, canEdit, payoutAddress}}/>
+                    <DepositInvoice {...{currentDeposit}}/>
                 </ModalBody>
                 </ModalContent>
             </Modal>

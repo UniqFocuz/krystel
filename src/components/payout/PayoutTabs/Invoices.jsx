@@ -13,7 +13,6 @@ function Invoices(){
             await fetchPayout()
             .then((response) => {
                 setInvoices(response.data)
-                console.log(response.data)
             })
             .catch((error) => {
                 console.log(error)

@@ -1,12 +1,14 @@
 import { Box, Card, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { maxWidthLayoutSm, primaryColourOpaced } from "../../lib/settings";
+import { BiCoinStack, BiKey, BiLock, BiLogoTelegram, BiSolidUser } from "react-icons/bi";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Profile from "./SettingsTab/Profile";
-import { BiCoin, BiCoinStack, BiKey, BiLock, BiLogoTelegram, BiSolidUser } from "react-icons/bi";
+import { maxWidthLayoutSm, primaryColourOpaced } from "../../lib/settings";
 import PageLoader from "../collections/misc/PageLoader";
 import Password from "./SettingsTab/Password";
+import Profile from "./SettingsTab/Profile";
+import AddressSettings from "./SettingsTab/Address";
+import Address from "./SettingsTab/Address";
 
 function Settings() {
     const navigate = useNavigate()
@@ -30,7 +32,7 @@ function Settings() {
                             <Tab gap={2}><BiSolidUser/> <Text fontSize={'xs'}>Profile</Text></Tab>
                             <Tab gap={2}><BiKey/> <Text fontSize={'xs'}>Password</Text></Tab>
                             <Tab gap={2} isDisabled ><BiLock/> <Text fontSize={'xs'}>MFA</Text></Tab>
-                            <Tab gap={2} isDisabled ><BiCoinStack/> <Text fontSize={'xs'}>Payments</Text></Tab>
+                            <Tab gap={2} ><BiCoinStack/> <Text fontSize={'xs'}>Payments</Text></Tab>
                             <Tab gap={2} isDisabled ><BiLogoTelegram/> <Text fontSize={'xs'}>TGAuth</Text></Tab>
                         </TabList>
                         <TabPanels my={5}>
@@ -39,6 +41,10 @@ function Settings() {
                             </TabPanel>
                             <TabPanel p={0}>
                                 <Password/>
+                            </TabPanel>
+                            <TabPanel></TabPanel>
+                            <TabPanel p={0}>
+                                <Address/>
                             </TabPanel>
                         </TabPanels>
                     </Tabs>

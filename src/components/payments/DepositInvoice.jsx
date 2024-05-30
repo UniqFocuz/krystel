@@ -1,10 +1,10 @@
-import { Box, Spinner, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, TabPanel, TabPanels, Tabs, Text, useSteps } from "@chakra-ui/react";
+import { Box, Spinner, Step, StepDescription, StepIcon, StepIndicator, StepSeparator, StepStatus, StepTitle, Stepper, Text, useSteps } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import NewInvoice from "./status/New";
 import { GoDotFill } from "react-icons/go";
-import Finished from "./status/Finished";
-import Pending from "./status/Pending";
 import { verifyDeposit } from "../../lib/api";
+import Finished from "./status/Finished";
+import NewInvoice from "./status/New";
+import Pending from "./status/Pending";
 import Status from "./status/Status";
 
 function DepositInvoice(props){
@@ -87,7 +87,7 @@ function DepositInvoice(props){
         deposit.status?
         <>
         {
-            deposit.status === "new" || deposit.status === "pending" || deposit.status === "prnding internal" ?
+            deposit.status === "new" || deposit.status === "pending" || deposit.status === "pending internal" ?
                 <Stepper size={'sm'} colorScheme={'red'} index={activeStep} orientation='vertical'  gap='0'>
                 {steps.map((step, index) => (
                     <Step key={index}>
@@ -107,7 +107,7 @@ function DepositInvoice(props){
                 ))}
                 </Stepper>
             :
-            <Status {...{deposit}} canEdit={props.canEdit} payoutAddress={props.payoutAddress}/>
+            <Status {...{deposit}}/>
 
 
         }

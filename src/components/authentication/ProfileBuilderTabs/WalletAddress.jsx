@@ -1,12 +1,12 @@
-import { Box, Button, Center, Flex, HStack, IconButton, Input, InputGroup, InputLeftAddon, InputRightAddon, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure, useToast } from "@chakra-ui/react"
-import { primaryColour, primaryColourOpaced } from "../../../lib/settings"
-import { BiChevronRight } from "react-icons/bi"
+import { Box, Button, Center, Flex, IconButton, Input, InputGroup, InputLeftAddon, InputRightAddon, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure, useToast } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
-import { createDepositInvoice, depositPing } from "../../../lib/api"
+import { BiChevronRight } from "react-icons/bi"
 import { VscEye } from "react-icons/vsc"
-import DepositInvoice from "../../payments/DepositInvoice"
-import { getTimeDifferenceFromNow } from "../../../lib/support"
 import { useNavigate } from "react-router-dom"
+import { createDepositInvoice, depositPing } from "../../../lib/api"
+import { primaryColour, primaryColourOpaced } from "../../../lib/settings"
+import { getTimeDifferenceFromNow } from "../../../lib/support"
+import DepositInvoice from "../../payments/DepositInvoice"
 
 function WalletAddress(props){
     const grayColorModeValue = useColorModeValue("gray.600")

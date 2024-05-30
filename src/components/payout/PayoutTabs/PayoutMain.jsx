@@ -1,61 +1,29 @@
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Card, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Stack, Text, useToast } from "@chakra-ui/react";
-import { maxWidthLayoutSm, primaryColour, primaryColourOpaced } from "../../../lib/settings";
-import { CgRename } from "react-icons/cg";
+import { Button, Card, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Stack, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { TbHexagonLetterK } from "react-icons/tb";
 import { BiCheck, BiInfoCircle } from "react-icons/bi";
-import { krystelValuer } from "../../../lib/support";
-import NumPad from "../../collections/misc/NumPad";
+import { CgRename } from "react-icons/cg";
+import { TbHexagonLetterK } from "react-icons/tb";
+import { useDispatch, useSelector } from "react-redux";
 import { payout } from "../../../lib/api";
+import { primaryColour, primaryColourOpaced } from "../../../lib/settings";
+import { krystelValuer } from "../../../lib/support";
 import { setUserProfile } from "../../../redux/userProfile/actions";
+import NumPad from "../../collections/misc/NumPad";
 
-function Payout(){
-    const [payoutAddress, setPayoutAddress] = useState(''); 
+function Payout(){ 
     const [amount, setAmount] = useState(100000); 
-    const [isAddressValid, setIsAddressValid] = useState(null); 
     const [isAmountValid, setIsAmountValid] = useState(null); 
     const [amountFeedback, setAmountFeedback] = useState('')
-    const [addressFeedback, setAddressFeedback] = useState('')
     const [isLoading, setIsLoading] = useState(null); 
     const user = useSelector((state) => state.userReducer);
-    const tronAddressRegex = /^(T[a-km-zA-HJ-NP-Z0-9]{33})$/;
     const toast = useToast()
     const dispatch = useDispatch()
 
-    function isValidTronAddress(address) {
-      return tronAddressRegex.test(address);
-    }
-
-    const handlePayoutAddressChange = (e) => {
-        const address = e.target.value
-        setPayoutAddress(address)
-    }
 
     const handleAmountChange = (e) => {
         const address = e.target.value
         setAmount(address)
     }
-
-    useEffect(() => {
-        if(payoutAddress){
-            const valid = isValidTronAddress(payoutAddress)
-            setIsAddressValid(valid)
-            if(valid){
-                setAddressFeedback('')
-                setIsAddressValid(true)
-            }
-            else{
-                setAddressFeedback('Invalid Payout Address!')
-                setIsAddressValid(false)
-            }
-        }
-        else{
-            setAddressFeedback('')
-            setIsAddressValid(null)
-        }
-    }, [payoutAddress])
 
     useEffect(() => {
         if(user.kollectibles.krystel >= amount){
@@ -74,40 +42,29 @@ function Payout(){
     
     const handleSubmit = async() => {
         setIsLoading(true)
-        console.log(isAddressValid)
-        if(isAddressValid === true){
-            console.log("address correct")
-            if(isAmountValid === true){
-                await payout(payoutAddress, amount)
-                .then((response) => {
-                    dispatch(setUserProfile({...user, kollectibles : {
-                        ...user.kollectibles, krystel : (user.kollectibles.krystel - amount)
-                    }}))
-                    toast({
-                        title: response.data.message,
-                        variant: 'subtle',
-                        status: 'success',
-                    })
-                })
-                .catch((error) => {
-                    toast({
-                        title: error.response.data.message,
-                        variant: 'subtle',
-                        status: 'error',
-                    })
-                })
-            }
-            else{
+        if(isAmountValid === true){
+            await payout(user.payoutAddress, amount)
+            .then((response) => {
+                dispatch(setUserProfile({...user, kollectibles : {
+                    ...user.kollectibles, krystel : (user.kollectibles.krystel - amount)
+                }}))
                 toast({
-                    title: 'Invalid Amount!',
+                    title: response.data.message,
+                    variant: 'subtle',
+                    status: 'success',
+                })
+            })
+            .catch((error) => {
+                toast({
+                    title: error.response.data.message,
                     variant: 'subtle',
                     status: 'error',
                 })
-            }
+            })
         }
         else{
             toast({
-                title: 'Invalid Address!',
+                title: 'Invalid Amount!',
                 variant: 'subtle',
                 status: 'error',
             })
@@ -126,12 +83,9 @@ function Payout(){
                         <InputLeftElement pointerEvents='none'>
                         <CgRename color={primaryColour} />
                         </InputLeftElement>
-                        <Input type='text' placeholder='Payout Address' value={payoutAddress} onChange={handlePayoutAddressChange} fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
-                        <InputRightElement color={primaryColour}>
-                        {isAddressValid === null ? '' : isAddressValid ? <BiCheck role="button" color="green"/> : <BiInfoCircle role="button" color="red"/> }
-                        </InputRightElement>
+                        <Input type='text' placeholder='Payout Address' value={user.payoutAddress} readOnly fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour}/>
+
                     </InputGroup>
-                    <Text mx={3} color={'red'} fontSize={'xs'} textAlign={'end'} >{addressFeedback}</Text>
                     <InputGroup px={3}>
                         <InputLeftElement pointerEvents='none'>
                         <TbHexagonLetterK color={primaryColour} />
@@ -144,7 +98,7 @@ function Payout(){
                     <Text mx={3} color={isAmountValid ? "green" : 'red'} fontSize={'xs'} textAlign={'end'} >{amountFeedback}</Text>
                     <NumPad inputValue={amount} setInputValue={setAmount} />
                 </Stack>
-                <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={handleSubmit} isLoading={isLoading}>Make Payout</Button>
+                <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} isLoading={isLoading}>Make Payout</Button>
             </Card>
         </>
     )

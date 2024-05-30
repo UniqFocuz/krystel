@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const DEBUG = false
+export const DEBUG = true
 
 let baseURL = ""
 
@@ -151,9 +151,9 @@ export const verifyDeposit = (id) => {
 
 export const fetchWalletAddresFromNetwork = (id) => {
     if(window.location.pathname === '/welcome'){
-        return axios.post(`${baseURL}/deposit/getAddress`, {id}, RegistrationParams())
+        return axios.post(`${baseURL}/verifyAddress`, {id}, RegistrationParams())
     } else{
-        return axios.post(`${baseURL}/deposit/getAddress`, {id}, AccessParams())
+        return axios.post(`${baseURL}/verifyAddress`, {id}, AccessParams())
     }
 }
 
@@ -226,3 +226,15 @@ export const payout = (payout, amount) => {
     return axios.post(`${baseURL}/payout`, {payout, amount}, AccessParams())
 }
 
+// Tool API
+export const categories = () => {
+    return axios.get(`${baseURL}/categories`, AccessParams())
+}
+
+export const businesses = (id) => {
+    return axios.get(`${baseURL}/categories/${id}`, AccessParams())
+}
+
+export const businessDetail = (id) => {
+    return axios.get(`${baseURL}/businesses/${id}`, AccessParams())
+}

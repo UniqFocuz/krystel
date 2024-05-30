@@ -9,10 +9,11 @@ import { RiDashboardFill } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
-import { HiBeaker, HiMiniCog } from "react-icons/hi2";
+import { HiBeaker, HiMiniCog, HiOutlineBriefcase } from "react-icons/hi2";
 import { GoArrowSwitch } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaShop } from "react-icons/fa6";
 import { krystelValuer, countValuer, copyToClipboard } from "../../lib/support";
 
 function Navbar() {
@@ -43,70 +44,74 @@ function Navbar() {
                             {
                             user.isAuthenticated ? 
                             <VStack>
-                            <Flex width={"100%"} justifyContent={"end"} textAlign={"end"} gap={2} color={whiteColorModeValue}>
-                                <Flex gap={1}>{ user.isMFAEnabled ? <BiSolidLockAlt /> : <BiSolidLockOpen /> } <Text fontWeight={'bolder'} fontSize={'xs'}>MFA</Text></Flex>
-                                { !user.isVerified && <TbMailExclamation/> }
-                                { user.isProfileComplete && <BiSolidUserX size={18}/> }
-                            </Flex>
-                            <VStack gap={5}>
-                                <Flex gap={5}>
-                                    <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha" onClick={() => {copyToClipboard(`https://www.krystel.io/register?patron=${user.username}`, toast, "Patron Link")}}>
-                                        <VStack>
-                                            <WrapItem mb={1}>
-                                                <Avatar name={user.full_name} size={"xl"} />
-                                            </WrapItem>
-                                            <Text fontWeight={'bold'} pb={0} color={whiteColorModeValue} fontSize={'sm'}>{user.username}</Text>
-                                            <Text fontSize={'2xs'}>Click to copy Patron Link</Text>
+                                <Flex width={"100%"} justifyContent={"end"} textAlign={"end"} gap={2} color={whiteColorModeValue}>
+                                    <Flex gap={1}>{ user.isMFAEnabled ? <BiSolidLockAlt /> : <BiSolidLockOpen /> } <Text fontWeight={'bolder'} fontSize={'xs'}>MFA</Text></Flex>
+                                    { !user.isVerified && <TbMailExclamation/> }
+                                    { user.isProfileComplete && <BiSolidUserX size={18}/> }
+                                </Flex>
+                                <VStack gap={5}>
+                                    <Flex gap={5}>
+                                        <Button display={"flex"} height={"180px"} width={"180px"} colorScheme="whiteAlpha" onClick={() => {copyToClipboard(`https://www.krystel.io/register?patron=${user.username}`, toast, "Patron Link")}}>
+                                            <VStack>
+                                                <WrapItem mb={1}>
+                                                    <Avatar name={user.full_name} size={"xl"} />
+                                                </WrapItem>
+                                                <Text fontWeight={'bold'} pb={0} color={whiteColorModeValue} fontSize={'sm'}>{user.username}</Text>
+                                                <Text fontSize={'2xs'}>Click to copy Patron Link</Text>
+                                            </VStack>
+                                        </Button>
+                                        <VStack gap={5}>
+                                            <Flex width={"180px"} gap={5}>
+                                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/dashboard')}}><RiDashboardFill color={whiteColorModeValue} size={30}/></Button>
+                                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={onClose}><BiX color={whiteColorModeValue} size={35} /></Button>
+                                            </Flex>
+                                            <Flex width={"180px"} gap={5}>
+                                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/register')}}><BsPlus color={whiteColorModeValue} size={40}/></Button>
+                                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/logout')}}><IoMdLogOut color={whiteColorModeValue} size={30} /></Button>
+                                            </Flex>
                                         </VStack>
-                                    </Button>
-                                    <VStack gap={5}>
-                                        <Flex width={"180px"} gap={5}>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/dashboard')}}><RiDashboardFill color={whiteColorModeValue} size={30}/></Button>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={onClose}><BiX color={whiteColorModeValue} size={35} /></Button>
-                                        </Flex>
-                                        <Flex width={"180px"} gap={5}>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/register')}}><BsPlus color={whiteColorModeValue} size={40}/></Button>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => {handleNavigate('/logout')}}><IoMdLogOut color={whiteColorModeValue} size={30} /></Button>
-                                        </Flex>
-                                    </VStack>
-                                </Flex>
-                                <Flex gap={5}>
-                                    <VStack gap={5}>
-                                        <Flex width={"180px"} gap={5}>
-                                            <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha">
-                                                <VStack color={"white"}>
-                                                <Text fontWeight={'bold'}>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
-                                                <Text fontWeight={'thin'} fontSize={'xs'}>fabricated</Text>
-                                                </VStack>
-                                            </Button>
-                                        </Flex>
-                                        <Flex width={"180px"} gap={5}>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/transfer')}><GoArrowSwitch color={whiteColorModeValue} size={30}/></Button>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/shift')}><FaUsers color={whiteColorModeValue} size={30}/></Button>
-                                        </Flex>
-                                    </VStack>
-                                    <VStack gap={5}>
-                                        <Flex width={"180px"} gap={5}>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/logs')}><BsFillJournalBookmarkFill color={whiteColorModeValue} size={25}/></Button>
-                                            <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/facility')}><HiBeaker color={whiteColorModeValue} size={30} /></Button>
-                                        </Flex>
-                                        <Flex width={"180px"} gap={5}>
-                                            <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/laboratory')}>
-                                                <VStack color={"white"}>
-                                                    <Text fontWeight={'bold'}>{countValuer(user.alphaPopulation)} + {countValuer(user.betaPopulation)} subjects</Text>
-                                                    <Text fontSize={'xs'}>{countValuer(user.alphaVolume)} alpha | {countValuer(user.betaVolume)} beta</Text>
-                                                </VStack>
-                                            </Button>
-                                        </Flex>
-                                    </VStack>
-                                </Flex>
-                                <Flex gap={5}>
-                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/payin')} fontSize={'2xl'}><GiPayMoney className="flip" size={30}  /></Button>
-                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/payout')} fontSize={'2xl'}><GiReceiveMoney size={30}/></Button>
-                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/settings')}><HiMiniCog color={whiteColorModeValue} size={30} /></Button>
-                                    <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={toggleColorMode}>{colorMode === "light" ? <BiSolidMoon color={whiteColorModeValue} size={30} /> : <BiSolidSun color={whiteColorModeValue} size={30} />}</Button>
-                                </Flex>
-                            </VStack>
+                                    </Flex>
+                                    <Flex gap={5}>
+                                        <VStack gap={5}>
+                                            <Flex width={"180px"} gap={5}>
+                                                <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha">
+                                                    <VStack color={"white"}>
+                                                    <Text fontWeight={'bold'}>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
+                                                    <Text fontWeight={'thin'} fontSize={'xs'}>fabricated</Text>
+                                                    </VStack>
+                                                </Button>
+                                            </Flex>
+                                            <Flex width={"180px"} gap={5}>
+                                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/transfer')}><GoArrowSwitch color={whiteColorModeValue} size={30}/></Button>
+                                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/shift')}><FaUsers color={whiteColorModeValue} size={30}/></Button>
+                                            </Flex>
+                                        </VStack>
+                                        <VStack gap={5}>
+                                            <Flex width={"180px"} gap={5}>
+                                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/logs')}><BsFillJournalBookmarkFill color={whiteColorModeValue} size={25}/></Button>
+                                                <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/facility')}><HiBeaker color={whiteColorModeValue} size={30} /></Button>
+                                            </Flex>
+                                            <Flex width={"180px"} gap={5}>
+                                                <Button height={"80px"} width={"180px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/laboratory')}>
+                                                    <VStack color={"white"}>
+                                                        <Text fontWeight={'bold'}>{countValuer(user.alphaPopulation)} + {countValuer(user.betaPopulation)} subjects</Text>
+                                                        <Text fontSize={'xs'}>{countValuer(user.alphaVolume)} alpha | {countValuer(user.betaVolume)} beta</Text>
+                                                    </VStack>
+                                                </Button>
+                                            </Flex>
+                                        </VStack>
+                                    </Flex>
+                                    <Flex gap={5}>
+                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/payin')} fontSize={'2xl'}><GiPayMoney className="flip" size={30}  /></Button>
+                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/payout')} fontSize={'2xl'}><GiReceiveMoney size={30}/></Button>
+                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/settings')}><HiMiniCog color={whiteColorModeValue} size={30} /></Button>
+                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={toggleColorMode}>{colorMode === "light" ? <BiSolidMoon color={whiteColorModeValue} size={30} /> : <BiSolidSun color={whiteColorModeValue} size={30} />}</Button>
+                                    </Flex>
+                                    <Flex gap={5} ml={0} mr={'auto'}>
+                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/grow')} fontSize={'2xl'}><HiOutlineBriefcase className="flip" size={30}  /></Button>
+                                        <Button height={"80px"} width={"80px"} colorScheme="whiteAlpha" onClick={() => handleNavigate('/grow')} fontSize={'2xl'}><FaShop className="flip" size={30}  /></Button>
+                                    </Flex>
+                                </VStack>
                             </VStack>
                             :
                             <Flex gap={5} mt={5}>

@@ -53,7 +53,7 @@ function SuperOreTransfer(){
                 <Button borderRadius={"20px"} size={'sm'} fontSize={'2xs'}>{user.kollectibles.superOre} S.Ores</Button>
             </Flex>
             <Box px={3}>
-                <Text textAlign={'justify'} fontSize={'xs'} color={'gray'} mb={5}>Defabricator converts your Super Ores to Naive Ore. This process can be used to exchange your community rewards to Naive ore for further Research processes. A surcharge of 5% is levied and sent to the community</Text>
+                <Text textAlign={'justify'} fontSize={'xs'} color={'gray'} mb={5}>Defabricator converts your Super Ores to Naive Ore. This process can be used to exchange your community rewards to Naive ore for further Research processes. A surcharge of 10% is levied and sent to the community</Text>
                 <InputGroup px={3}>
                     <InputLeftElement pointerEvents='none'>
                     <AiOutlineUser color={primaryColour} />

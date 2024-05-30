@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
-import HomePage from "../components/HomePage";
 import Login from "../components/authentication/Login";
 import Register from "../components/authentication/Register";
 import MFA from "../components/authentication/MFA";
@@ -19,6 +18,10 @@ import Settings from "../components/settings/Settings";
 import Payout from "../components/payout/Payout";
 import Shift from "../components/shift/Shift";
 import Payin from "../components/payin/Payin";
+import Grow from "../components/grow/Grow";
+import Businessess from "../components/grow/Businesses";
+import { useParams } from 'react-router-dom';
+import BusinessDetails from "../components/grow/BusinessDetails";
 
 function Routers(){
     const toast = useToast()
@@ -81,6 +84,9 @@ function Routers(){
             <Route path="/settings" element={<Settings/>}/>
             <Route path="/payin" element={<Payin/>}/>
             <Route path="/payout" element={<Payout/>}/>
+            <Route path="/grow" element={<Grow/>}/>
+            <Route path="/grow/:id" element={<Businessess />} />
+            <Route path="/grow/:id/:bid" element={<BusinessDetails />} />
             <Route path="/*" element={<Navigate to="/login" />} />
         </Routes>
     )

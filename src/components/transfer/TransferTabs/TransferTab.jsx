@@ -15,7 +15,7 @@ function TransferTab(){
     const [transferLoader, setTransferLoader] = useState(false)
     const [isUsernameValid, setIsUsernameValid] = useState(null); 
     const [usernameFeedback, setUsernameFeedback] = useState('')
-    const [amount, setAmount] = useState(10)
+    const [amount, setAmount] = useState(100)
     const [isAmountValid, setIsAmountValid] = useState(false); 
     const [amountFeedback, setAmountFeedback] = useState('')
     const usernameInputRef = useRef(null);
@@ -115,8 +115,8 @@ function TransferTab(){
     }, [username, user.email, user.username]); 
 
     useEffect(() => {
-        if(amount < 10){
-            setAmountFeedback('Minimum transfer value is 10 Ores')
+        if(amount < 100){
+            setAmountFeedback('Minimum transfer value is 100 Ores')
             setIsAmountValid(false)
         } else {
             setAmountFeedback('')

@@ -42,31 +42,40 @@ function Payout(){
     
     const handleSubmit = async() => {
         setIsLoading(true)
-        if(isAmountValid === true){
-            await payout(user.payoutAddress, amount)
-            .then((response) => {
-                dispatch(setUserProfile({...user, kollectibles : {
-                    ...user.kollectibles, krystel : (user.kollectibles.krystel - amount)
-                }}))
-                toast({
-                    title: response.data.message,
-                    variant: 'subtle',
-                    status: 'success',
+        if(user.payoutAddress !== '' & user.payoutAddress !== undefined & user.payoutAddress !== null){
+            if(isAmountValid === true){
+                await payout(user.payoutAddress, amount)
+                .then((response) => {
+                    dispatch(setUserProfile({...user, kollectibles : {
+                        ...user.kollectibles, krystel : (user.kollectibles.krystel - amount)
+                    }}))
+                    toast({
+                        title: response.data.message,
+                        variant: 'subtle',
+                        status: 'success',
+                    })
                 })
-            })
-            .catch((error) => {
+                .catch((error) => {
+                    toast({
+                        title: error.response.data.message,
+                        variant: 'subtle',
+                        status: 'error',
+                    })
+                })
+            }
+            else{
                 toast({
-                    title: error.response.data.message,
+                    title: 'Invalid Amount!',
                     variant: 'subtle',
                     status: 'error',
                 })
-            })
-        }
-        else{
+            }
+
+        } else{
             toast({
-                title: 'Invalid Amount!',
+                title: 'Invalid Address',
                 variant: 'subtle',
-                status: 'error',
+                status: 'warning',
             })
         }
         setIsLoading(false)
@@ -98,7 +107,7 @@ function Payout(){
                     <Text mx={3} color={isAmountValid ? "green" : 'red'} fontSize={'xs'} textAlign={'end'} >{amountFeedback}</Text>
                     <NumPad inputValue={amount} setInputValue={setAmount} />
                 </Stack>
-                <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} isLoading={isLoading}>Make Payout</Button>
+                <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} onClick={() => handleSubmit()} color={"white"} isLoading={isLoading}>Make Payout</Button>
             </Card>
         </>
     )

@@ -141,10 +141,10 @@ function TransferTab() {
                     <Button borderRadius={"20px"} size={'sm'} fontSize={'2xs'}>{user.kollectibles.ore} Ores</Button>
                 </Flex>
                 <Box px={3}>
-                {
+                {/* {
                     user.payoutAddress.length !== 0 ?
                         user.fabricationCount > 0 ?
-                            user.researchers.length > 0?
+                            user.researchers.length > 0? */}
                                 <>
                                     <InputGroup px={3}>
                                         <InputLeftElement pointerEvents='none'>
@@ -171,7 +171,7 @@ function TransferTab() {
 
                                     <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={transferLoader}>Send</Button>
                                 </>
-                            : <>
+                            {/* : <>
                                 <Text textAlign={'justify'} fontSize={'xs'} color={'gray'} mb={5}>
                                     Transfer will be enabled only if you have researchers under you.
                                 </Text>
@@ -186,7 +186,7 @@ function TransferTab() {
                             Transfer will be enabled after Payout address is added.
                         </Text>
                     </>
-                }
+                } */}
                 </Box>
             </Card>
         </>

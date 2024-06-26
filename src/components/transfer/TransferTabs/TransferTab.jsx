@@ -121,7 +121,7 @@ function TransferTab() {
             setAmountFeedback('Minimum transfer value is 100 Ores')
             setIsAmountValid(false)
         } else {
-            setAmountFeedback('')
+            setAmountFeedback(`You are authorising a transfer of ${amount} Ores ($ ${(amount/10).toFixed(2)})`)
             setIsAmountValid(true)
         }
         if (user.isAuthenticated) {
@@ -138,13 +138,13 @@ function TransferTab() {
             <Card p={5} mb={5}>
                 <Flex px={3} justifyContent={"space-between"} mb={3}>
                     <Text my={"auto"} fontSize={'sm'} color={primaryColour} fontWeight={'bold'}>Transfer Ores</Text>
-                    <Button borderRadius={"20px"} size={'sm'} fontSize={'2xs'}>{user.kollectibles.ore} Ores</Button>
+                    <Button borderRadius={"20px"} size={'sm'} fontSize={'2xs'}>{user.kollectibles.ore.toFixed(2)} Ores</Button>
                 </Flex>
                 <Box px={3}>
-                {/* {
+                {
                     user.payoutAddress.length !== 0 ?
                         user.fabricationCount > 0 ?
-                            user.researchers.length > 0? */}
+                            user.researchers.length > 0? 
                                 <>
                                     <InputGroup px={3}>
                                         <InputLeftElement pointerEvents='none'>
@@ -162,16 +162,15 @@ function TransferTab() {
                                             <AiOutlineUser color={primaryColour} />
                                         </InputLeftElement>
                                         <Input type='text' ref={amountInputRef} color={primaryColour} value={amount} onChange={handleAmountChange} placeholder='Amount' fontSize={"sm"} fontWeight={'medium'} _placeholder={{ fontSize: "sm", fontWeight: 'normal' }} variant={'flushed'} focusBorderColor={primaryColour} readOnly />
-                                        <InputRightElement color={primaryColour}>
-                                            {isAmountValid ? <BiCheck role="button" color="green" /> : <BiInfoCircle role="button" color="red" />}
+                                        <InputRightElement color={primaryColour} gap={2} mr={3}>
+                                            {isAmountValid ? <BiCheck role="button" color="green" /> : <BiInfoCircle role="button" color="red" />} 
                                         </InputRightElement>
                                     </InputGroup>
                                     <Text mx={3} mt={2} mb={5} textAlign={'right'} color={primaryColour} fontSize={'xs'}>{amountFeedback}</Text>
                                     <NumPad inputValue={amount} setInputValue={setAmount} />
-
-                                    <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={transferLoader}>Send</Button>
+                                    <Flex><Button marginTop={5} size={'sm'} ml={'auto'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={transferLoader}>Send</Button></Flex>
                                 </>
-                            {/* : <>
+                            : <>
                                 <Text textAlign={'justify'} fontSize={'xs'} color={'gray'} mb={5}>
                                     Transfer will be enabled only if you have researchers under you.
                                 </Text>
@@ -186,7 +185,7 @@ function TransferTab() {
                             Transfer will be enabled after Payout address is added.
                         </Text>
                     </>
-                } */}
+                }
                 </Box>
             </Card>
         </>

@@ -18,11 +18,18 @@ function Dashboard(){
             <Box width={maxWidthLayoutSm} mx="auto" pt={"80px"}>
                 <PrimaryCard/>
                 {/* <Countdown minutes={84}/> */}
-                <Flex p={5} bg={'white'} boxShadow={"md"} justifyContent={'center'} gap={2} fontSize={'sm'}>
-                    <Text color={primaryColour} fontWeight={'bold'}>Total Supply:</Text>
-                    <Text>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
-                    <Text color={"blackAlpha.600"}>(~ ${(user.kollectibles.totalKrystels/10000).toFixed(2)})</Text>
-                </Flex>
+                <Box p={5} bg={'white'} boxShadow={"md"} justifyContent={'center'} gap={2} fontSize={'sm'}>
+                    <Flex justifyContent={'center'} fontSize={'xs'} gap={2}>
+                        <Text color={primaryColour} fontWeight={'bold'}>Total Supply:</Text>
+                        <Text>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
+                        <Text color={"blackAlpha.600"}>(~ ${(user.kollectibles.totalKrystels/10000).toFixed(2)})</Text>
+                    </Flex>
+                    <Flex mt={2} justifyContent={'center'} gap={2} fontSize={'md'}>
+                        <Text color={primaryColour} fontWeight={'bold'}>Total Yield:</Text>
+                        <Text>{krystelValuer(user.kollectibles.totalKrystels + (user.kollectibles.totalSuperOre*10000))}</Text>
+                        <Text color={"blackAlpha.600"}>(~ ${((user.kollectibles.totalKrystels + (user.kollectibles.totalSuperOre*10000))/10000).toFixed(2)})</Text>
+                    </Flex>
+                </Box>
                 <SecondaryCard/>
             </Box>
         </>

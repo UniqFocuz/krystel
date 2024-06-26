@@ -102,8 +102,8 @@ function Login(){
         setloader(true)
           await login(cred.username, cred.password)
           .then((response) => {
-
             localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem('inspectorToken', response.data.inspectorToken);
             if(response.data.otp_verification){
                 setTimeout(() => {
                     setloader(false)
@@ -128,7 +128,7 @@ function Login(){
           })
           .catch((error) => {
             toast({
-              title: `Invalid Password!`,
+              title: error.response.data.error,
               variant: 'subtle',
               status: 'error',
             })

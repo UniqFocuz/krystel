@@ -48,12 +48,14 @@ function Facility() {
                     </Flex>
                 </Card>
                 <Card borderTopRadius={0} padding={5} marginBottom={20} height={"550px"} overflowX={"auto"}>
-                    <Tabs size='md' variant='soft-rounded' colorScheme="orange">
-                        <TabList gap={2}>
+                    <Tabs variant='soft-rounded' colorScheme="orange">
+                        <TabList gap={2} overflow={'auto'} 
+                            css={{'::-webkit-scrollbar': {width: '0.5em',},'::-webkit-scrollbar-thumb': {backgroundColor: 'transparent',},}}>
                             <Tab><BiStar/></Tab>
-                            <Tab><Text fontSize={"xs"}>Super Fabricator</Text></Tab>
+                            <Tab><Text fontSize={"xs"} whiteSpace="nowrap">Super Fabricator</Text></Tab>
                             <Tab><Text fontSize={"xs"}>Defabricator</Text></Tab>
                             <Tab><Text fontSize={"xs"}>Fragmentor</Text></Tab>
+                            <Tab isDisabled><Text fontSize={"xs"}>IPCE</Text></Tab>
                         </TabList>
                         <TabPanels my={5}>
                             <TabPanel p={0}>
@@ -67,6 +69,8 @@ function Facility() {
                             </TabPanel>
                             <TabPanel p={0}>
                                 <FragmentationTab/>
+                            </TabPanel>
+                            <TabPanel p={0}>
                             </TabPanel>
                         </TabPanels>
                     </Tabs>

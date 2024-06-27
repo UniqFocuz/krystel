@@ -42,8 +42,6 @@ const AccessParams = () => {
 }
 
 const InspectParams = () => {
-    console.log(localStorage.getItem('inspectorToken'));
-    console.log("HI")
     return {
         headers : {
             "X-Inspector" : localStorage.getItem('inspectorToken'),

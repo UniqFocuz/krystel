@@ -36,7 +36,17 @@ export const validatePreRegisterEmail = (email) => {
 const AccessParams = () => {
     return {
         headers: {
-            Authorization : `Bearer ${localStorage.getItem('accessToken')}`
+            Authorization : `Bearer ${localStorage.getItem('accessToken')}`,
+        }
+    }
+}
+
+const InspectParams = () => {
+    console.log(localStorage.getItem('inspectorToken'));
+    return {
+        headers : {
+            "X-INSPECTOR" : localStorage.getItem('inspectorToken'),
+            withCredentials: true
         }
     }
 }
@@ -56,7 +66,7 @@ export const pingLogin = () => {
 }
 
 export const login = (username, password) => {
-    return axios.post(`${baseURL}/auth/login`, {username, password})
+    return axios.post(`${baseURL}/auth/login`, {username, password}, InspectParams())
 }
 
 export const pingMfa = () => {

@@ -9,9 +9,8 @@ import { setUserProfile } from "../../redux/userProfile/actions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PageLoader from "./misc/PageLoader";
-import { BiLeaf, BiPulse, BiSolidLeaf } from "react-icons/bi";
 import HUDLoader from "./misc/HUDLoader";
-
+import { GiLaurelsTrophy } from "react-icons/gi";
 function PrimaryCard() {
     const dispatch = useDispatch()
     const toast = useToast()
@@ -116,7 +115,30 @@ function PrimaryCard() {
                                         </Button>
                                     </Flex>
                                     <Flex color={"white"} mt={6}>
-                                        <HUDLoader/>
+                                        {
+                                            user.fabCount >= 2 ?
+                                            <Flex width={"200px"} justifyContent={'center'}>
+                                                <Box m={'auto'} textAlign={'center'}>
+                                                    <Text display={'flex'} mb={2} justifyContent={'center'} textAlign={'center'}><GiLaurelsTrophy fontSize={60}/></Text>
+                                                    <Text fontSize={'sm'} fontWeight={'bold'}>{
+                                                        user.fabCount >= 1000 ? <>Agate</> :
+                                                        user.fabCount >= 500 ? <>Agate</>:
+                                                        user.fabCount >= 200 ? <>Agate</>:
+                                                        user.fabCount >= 100 ? <>Agate</>:
+                                                        user.fabCount >= 50 ? <>Agate</>:
+                                                        user.fabCount >= 25 ? <>Agate</> :
+                                                        user.fabCount >= 2 ? <>Super Fabricator</>
+                                                        : <></>
+
+                                                    }</Text>
+                                                    <Text fontSize={'lg'}>Total: <b>0 gem6</b></Text>
+                                                    <Text fontSize={'xs'}>Recent Royalty: <b>0 gem6</b></Text>
+                                                    <Button size={'xs'} mt={3} color={whiteColorModeValue}>Claim Royalty</Button>
+                                                </Box>
+                                            </Flex>
+                                            : <HUDLoader/>
+                                        }
+                                        
                                         <Box display={"flex"} width={"50%"}>
                                             <Box margin={"auto"} textAlign={"end"}>
                                                 <Text fontSize={'3xl'} >{krystelValuer(user.currentFabrication.fabricatedVolume)}</Text>

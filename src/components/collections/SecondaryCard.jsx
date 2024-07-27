@@ -101,7 +101,11 @@ function SecondaryCard(){
                     </Box>
                     <Box my={'auto'} mr={'auto'} width={"55%"} display={"flex"} justifyContent={'start'} gap={3}>
                         <Text color={'brown'} fontSize={'sm'} my={'auto'} fontWeight={'bold'}> Fuel</Text>
-                        <Button my={'auto'} size="xs" onClick={() => handleFuelRefill()}>Refill</Button>
+                        {
+                            user.fabCount < 2 &&
+                            <Button my={'auto'} size="xs" onClick={() => handleFuelRefill()}>Refill</Button>
+                        }
+                        
                     </Box>
                     <Box my={'auto'} textAlign={"end"} justifyContent={'end'}>
                         <Text fontWeight={'bolder'} fontSize={'sm'} color={"blackAlpha.800"}>{parseInt(user.consumption)} gal</Text>

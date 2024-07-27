@@ -121,12 +121,12 @@ function PrimaryCard() {
                                                 <Box m={'auto'} textAlign={'center'}>
                                                     <Text display={'flex'} mb={2} justifyContent={'center'} textAlign={'center'}><GiLaurelsTrophy fontSize={60}/></Text>
                                                     <Text fontSize={'sm'} fontWeight={'bold'}>{
-                                                        user.fabCount >= 1000 ? <>Agate</> :
-                                                        user.fabCount >= 500 ? <>Agate</>:
-                                                        user.fabCount >= 200 ? <>Agate</>:
+                                                        user.fabCount >= 1000 ? <>Painite</> :
+                                                        user.fabCount >= 500 ? <>Zircon</>:
+                                                        user.fabCount >= 200 ? <>Obsidian</>:
                                                         user.fabCount >= 100 ? <>Agate</>:
-                                                        user.fabCount >= 50 ? <>Agate</>:
-                                                        user.fabCount >= 25 ? <>Agate</> :
+                                                        user.fabCount >= 50 ? <>Jasper</>:
+                                                        user.fabCount >= 25 ? <>Garnet</> :
                                                         user.fabCount >= 2 ? <>Super Fabricator</>
                                                         : <></>
 

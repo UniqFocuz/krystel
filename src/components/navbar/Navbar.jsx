@@ -40,7 +40,7 @@ function Navbar() {
                     <Button borderRadius={10} size={"sm"} my="auto" ml="auto" shadow={"md"} variant={'solid'} colorScheme={whiteColorModeValue} ref={btnRef} onClick={onOpen}>
                         <BsFillGrid1X2Fill color={primaryColour} />
                     </Button>
-                    <Popover>
+                    {/* <Popover>
                         <PopoverTrigger>
                             <Avatar cursor={'pointer'} size={'sm'} my={'auto'} name={user.isAuthenticated ? user.full_name : null} />
                         </PopoverTrigger>
@@ -109,7 +109,7 @@ function Navbar() {
                                 </Box>
                             </Box>
                         </PopoverContent>
-                    </Popover>
+                    </Popover> */}
                     
                 </Flex>
                 <Drawer isOpen={isOpen} placement='top' onClose={onClose} finalFocusRef={btnRef}>

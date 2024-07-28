@@ -6,7 +6,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { useSelector } from "react-redux";
 import { primaryColour } from "../../../lib/settings";
 
-function ShiftTable(){
+function ShiftTable(kit){
     const navigate = useNavigate()
     const user = useSelector((state) => state.userReducer);
     const [shifts, setShifts] = useState([])
@@ -15,7 +15,7 @@ function ShiftTable(){
     const [fetching, setFetching] = useState(false)
     const fetchShift = async(curr) => {
         setCurr(curr)
-        await fetchShifts(curr)
+        await fetchShifts(curr, kit.kit)
         .then((response) => {
             setShifts(response.data)
         })

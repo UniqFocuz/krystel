@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Text, useToast } from "@chakra-ui/react"
+import { Button, Card, Flex, Input, InputGroup, InputLeftElement, InputRightElement, Select, Text, useToast } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { primaryColour, primaryColourOpaced } from "../../../lib/settings";
@@ -10,6 +10,7 @@ import { setUserProfile } from "../../../redux/userProfile/actions";
 function KrystelizerTab(){
     const user = useSelector((state) => state.userReducer);
     const [username, setUsername] = useState('')
+    const [kit, setkit] = useState('mastery')
     const [isUsernameValid, setIsUsernameValid] = useState(null); 
     const [usernameFeedback, setUsernameFeedback] = useState('')
     const usernameInputRef = useRef(null);
@@ -20,9 +21,13 @@ function KrystelizerTab(){
         const username = e.target.value
         setUsername(username)
     }
+    const handleKitChange = (e) => {
+        const kit = e.target.value
+        setkit(kit)
+    }
     const handleUsernameSubmit = async() => {
         setBuyLoader(true)
-        await purchaseKrystelizer(username)
+        await purchaseKrystelizer(username, kit)
         .then((response) => {
             setBuyLoader(false)
             dispatch(setUserProfile({...user, kollectibles : {
@@ -85,7 +90,7 @@ function KrystelizerTab(){
         <>
         <Card p={5}>
             <Flex px={3} justifyContent={"space-between"} mb={3}>
-                <Text mb={3} my={"auto"} fontWeight={'bold'} fontSize={'sm'} color={primaryColour}>Purchase Krystelizer</Text>
+                <Text mb={3} my={"auto"} fontWeight={'bold'} fontSize={'sm'} color={primaryColour}>Purchase Kit</Text>
                 <Button borderRadius={"20px"} size={'sm'} fontSize={'2xs'}>{user.kollectibles.ore.toFixed(0)} Ores</Button>
             </Flex>
         
@@ -99,7 +104,12 @@ function KrystelizerTab(){
                 </InputRightElement>
             </InputGroup>
             <Text mt={2} mx={3} textAlign={'right'} color={primaryColour} fontSize={'xs'}>{usernameFeedback}</Text>
-            <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={buyLoader}>Buy</Button>
+            <Select px={3} value={kit} color={primaryColour}  fontSize={"sm"} fontWeight={'medium'} _placeholder={{fontSize: "sm", fontWeight: 'normal'}} variant={'flushed'} focusBorderColor={primaryColour} onChange={handleKitChange}>
+                <option value='starter'>Starter Kit</option>
+                <option value='mastery'>Fabrication Kit</option>
+                <option value='craft'>Mastery Kit</option>
+            </Select>
+            {/* <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={buyLoader}>Buy</Button> */}
         </Card>
         </>
     )

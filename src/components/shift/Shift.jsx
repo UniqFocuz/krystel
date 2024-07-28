@@ -9,6 +9,8 @@ import ShiftTable from "./ShiftTabs/ShiftTable"
 import { AiOutlineUser } from "react-icons/ai"
 import DirectTable from "./ShiftTabs/DirectTable"
 import { useEffect, useState } from "react"
+import { BsGem } from "react-icons/bs"
+import { GiGems } from "react-icons/gi"
 
 function Shift(){
     const navigate = useNavigate()
@@ -19,7 +21,6 @@ function Shift(){
     const initialTab = queryParams.get("tab");
     
     useEffect(() => {
-        console.log(initialTab)
         initialTab === "1" && setActiveTab(parseInt(initialTab))
     }, [])
     
@@ -39,11 +40,19 @@ function Shift(){
                     <Tabs size='md' variant='soft-rounded' colorScheme="orange" defaultIndex={activeTab}>
                         <TabList gap={2}>
                             <Tab><BiStar/></Tab>
+                            <Tab><BsGem/></Tab>
+                            <Tab><GiGems/></Tab>
                             <Tab><AiOutlineUser/></Tab>
                         </TabList>
                         <TabPanels my={5}>
                             <TabPanel p={0}>
-                                <ShiftTable/>
+                                <ShiftTable kit="starter"/>
+                            </TabPanel>
+                            <TabPanel p={0}>
+                                <ShiftTable kit="mastery"/>
+                            </TabPanel>
+                            <TabPanel p={0}>
+                                <ShiftTable kit="craft"/>
                             </TabPanel>
                             <TabPanel p={0}>
                                 <DirectTable/>

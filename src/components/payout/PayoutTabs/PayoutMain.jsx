@@ -107,7 +107,7 @@ function Payout(){
                     <Text mx={3} color={isAmountValid ? "green" : 'red'} fontSize={'xs'} textAlign={'end'} >{amountFeedback}</Text>
                     <NumPad inputValue={amount} setInputValue={setAmount} />
                 </Stack>
-                <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} onClick={() => handleSubmit()} color={"white"} isLoading={isLoading}>Make Payout</Button>
+                {/* <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} onClick={() => handleSubmit()} color={"white"} isLoading={isLoading}>Make Payout</Button> */}
             </Card>
         </>
     )

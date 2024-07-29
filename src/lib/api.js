@@ -182,8 +182,8 @@ export const harvestKrystel = () => {
     return axios.post(`${baseURL}/app/harvest`, {}, AccessParams())
 }
 
-export const purchaseKrystelizer = (username) => {
-    return axios.post(`${baseURL}/facility/krystelizer`, {username}, AccessParams())
+export const purchaseKrystelizer = (username, kit) => {
+    return axios.post(`${baseURL}/facility/krystelizer`, {username, kit}, AccessParams())
 }
 
 export const transferOre = (coordinate, amount) => {
@@ -214,8 +214,8 @@ export const fetchTree = (username) => {
     return axios.get(`${baseURL}/tree?username=${username}`, AccessParams())
 }
 
-export const fetchShifts = (username) => {
-    return axios.get(`${baseURL}/shifts?username=${username}`, AccessParams())
+export const fetchShifts = (username, kit) => {
+    return axios.get(`${baseURL}/shifts?username=${username}&kit=${kit}`, AccessParams())
 }
 
 export const fetchWorkers = (username) => {

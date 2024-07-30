@@ -78,14 +78,14 @@ function All({logs}){
                                             </Flex>
                                         </Badge>
                                     :
-                                    <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.user !== user.username ? "green" : "red"}>
-                                        <Flex gap={1}>{log.user !== user.username ? "+ " : "- "}
+                                    <Badge px={3} borderRadius={15} py={1} display={"flex"} my={"auto"} gap={1} variant={'subtle'} colorScheme={log.direction === 'receive' ? "green" : "red"}>
+                                        <Flex gap={1}>
                                             {
                                                 log.type === 'Super Ore' ?
-                                                <Text>{countValuer(log.amount)}</Text>
+                                                <Text>{log.direction === 'receive' ? "+ " : "- "} {countValuer(log.amount)}</Text>
                                                 : log.type === 'Power Card' ?
-                                                <Text>{log.amount}</Text>
-                                                : <Text>{countValuer(log.amount)} </Text>
+                                                <Text>{log.direction === 'receive' ? "+ " : "- "} {log.amount}</Text>
+                                                : <Text>{log.direction === 'receive' ? "+ " : "- "} {countValuer(log.amount)} </Text>
                                             }
                                         </Flex>
                                     </Badge>

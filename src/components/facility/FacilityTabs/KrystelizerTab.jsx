@@ -27,11 +27,17 @@ function KrystelizerTab(){
     }
     const handleUsernameSubmit = async() => {
         setBuyLoader(true)
+        let amnt = 1000
+        if(kit === 'starter'){
+            amnt = 250
+        } else if(kit === 'mastery'){
+            amnt = 2000
+        }
         await purchaseKrystelizer(username, kit)
         .then((response) => {
             setBuyLoader(false)
             dispatch(setUserProfile({...user, kollectibles : {
-                ...user.kollectibles, ore : user.kollectibles.ore - 1000
+                ...user.kollectibles, ore : user.kollectibles.ore - amnt
             }}))
             toast({
                 title: response.data.message,

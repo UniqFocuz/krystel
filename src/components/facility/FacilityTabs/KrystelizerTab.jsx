@@ -115,7 +115,7 @@ function KrystelizerTab(){
                 <option value='mastery'>Fabrication Kit</option>
                 <option value='craft'>Mastery Kit</option>
             </Select>
-            <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={buyLoader}>Buy</Button>
+            {/* <Button marginTop={5} size={'sm'} bg={primaryColourOpaced} _hover={{backgroundColor: primaryColour}} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={buyLoader}>Buy</Button> */}
         </Card>
         </>
     )

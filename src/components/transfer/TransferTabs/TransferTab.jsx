@@ -168,7 +168,9 @@ function TransferTab() {
                                     </InputGroup>
                                     <Text mx={3} mt={2} mb={5} textAlign={'right'} color={primaryColour} fontSize={'xs'}>{amountFeedback}</Text>
                                     <NumPad inputValue={amount} setInputValue={setAmount} />
-                                    <Flex><Button marginTop={5} size={'sm'} ml={'auto'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={transferLoader}>Send</Button></Flex>
+                                    {/* <Flex>
+                                    <Button marginTop={5} size={'sm'} ml={'auto'} bg={primaryColourOpaced} _hover={{ backgroundColor: primaryColour }} color={"white"} onClick={() => handleUsernameSubmit()} isLoading={transferLoader}>Send</Button>
+                                    </Flex> */}
                                 </>
                             : <>
                                 <Text textAlign={'justify'} fontSize={'xs'} color={'gray'} mb={5}>

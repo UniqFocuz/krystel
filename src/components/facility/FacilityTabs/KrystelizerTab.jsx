@@ -30,7 +30,7 @@ function KrystelizerTab(){
         let amnt = 1000
         if(kit === 'starter'){
             amnt = 250
-        } else if(kit === 'mastery'){
+        } else if(kit === 'craft'){
             amnt = 2000
         }
         await purchaseKrystelizer(username, kit)

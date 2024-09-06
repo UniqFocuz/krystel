@@ -32,11 +32,11 @@ function All({logs}){
                                     <WrapItem m={"auto"}>
                                         <Avatar name='Power Card' size={'md'} m={"auto"} src='' bg={"red.400"} />
                                     </WrapItem>
-                                    : log.type === 'Purchase' ?
+                                    : log.type.includes("Purchase") ?
                                     <WrapItem m={"auto"}>
                                         <Avatar name='Purchase' size={'md'} m={"auto"} src='' bg={"green.400"} />
                                     </WrapItem>
-                                    : log.type === 'Internal Conversion' ?
+                                    : log.type.includes('Internal Conversion')?
                                     <WrapItem m={"auto"}>
                                         <Avatar name='Internal Conversion' size={'md'} m={"auto"} src='' bg={"purple.400"} />
                                     </WrapItem>

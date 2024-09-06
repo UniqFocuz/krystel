@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import TransferTab from "./TransferTabs/TransferTab"
 import PageLoader from "../collections/misc/PageLoader"
 import { useSelector } from "react-redux"
+import SOTransferTab from "./TransferTabs/SOTransferTab"
 
 function Transfer(){
     const navigate = useNavigate()
@@ -25,10 +26,14 @@ function Transfer(){
                     <Tabs size='md' variant='soft-rounded' colorScheme="orange">
                         <TabList gap={2}>
                             <Tab><Text fontSize={'xs'}>Ore</Text></Tab>
+                            <Tab><Text fontSize={'xs'}>Super Ore</Text></Tab>
                         </TabList>
                         <TabPanels my={5}>
                             <TabPanel p={0}>
                                 <TransferTab/>
+                            </TabPanel>
+                            <TabPanel p={0}>
+                                <SOTransferTab/>
                             </TabPanel>
                         </TabPanels>
                     </Tabs>

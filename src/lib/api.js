@@ -190,6 +190,10 @@ export const transferOre = (coordinate, amount) => {
     return axios.post(`${baseURL}/transfer`, { coordinate, amount }, AccessParams())
 }
 
+export const soTransferOre = (coordinate, amount) => {
+    return axios.post(`${baseURL}/sotransfer`, { coordinate, amount }, AccessParams())
+}
+
 export const superOreTransfer = (amount) => {
     return axios.post(`${baseURL}/convert/superore`, { amount }, AccessParams())
 }

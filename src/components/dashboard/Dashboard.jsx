@@ -24,11 +24,11 @@ function Dashboard(){
                         <Text>{krystelValuer(user.kollectibles.totalKrystels)}</Text>
                         <Text color={"blackAlpha.600"}>(~ ${(user.kollectibles.totalKrystels/10000).toFixed(2)})</Text>
                     </Flex>
-                    {/* <Flex mt={2} justifyContent={'center'} gap={2} fontSize={18}>
+                    <Flex mt={2} justifyContent={'center'} gap={2} fontSize={18}>
                         <Text color={primaryColour} fontWeight={'bold'}>Total Yield:</Text>
                         <Text>{krystelValuer(user.kollectibles.totalKrystels + (user.kollectibles.totalSuperOre*1000))}</Text>
                         <Text color={"blackAlpha.600"}>(~ ${((user.kollectibles.totalKrystels + (user.kollectibles.totalSuperOre*1000))/10000).toFixed(2)})</Text>
-                    </Flex> */}
+                    </Flex>
                 </Box>
                 <SecondaryCard/>
             </Box>

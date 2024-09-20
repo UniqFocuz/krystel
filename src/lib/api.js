@@ -238,6 +238,10 @@ export const payout = (payout, amount) => {
     return axios.post(`${baseURL}/payout`, {payout, amount}, AccessParams())
 }
 
+export const cancelpayout = (id) => {
+    return axios.post(`${baseURL}/payoutcancel`, {id}, AccessParams())
+}
+
 // Tool API
 export const categories = () => {
     return axios.get(`${baseURL}/categories`, AccessParams())

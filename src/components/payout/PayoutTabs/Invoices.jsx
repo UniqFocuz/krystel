@@ -1,25 +1,48 @@
-import { Box, Button, Card, Flex, Text } from "@chakra-ui/react"
+import { Box, Button, Card, Flex, Text, useToast } from "@chakra-ui/react"
 import { useSelector } from "react-redux";
 import { primaryColour, primaryColourOpaced } from "../../../lib/settings";
 import { useEffect, useState } from "react";
-import { fetchPayout } from "../../../lib/api";
+import { cancelpayout, fetchPayout } from "../../../lib/api";
 import { krystelValuer } from "../../../lib/support";
 
 function Invoices(){
     const user = useSelector((state) => state.userReducer);
     const [invoices, setInvoices] = useState()
+    const toast = useToast()
+
+
+
+    const loadPage = async() => {
+        await fetchPayout()
+        .then((response) => {
+            setInvoices(response.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
     useEffect(() => {
-        const loadPage = async() => {
-            await fetchPayout()
-            .then((response) => {
-                setInvoices(response.data)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-        }
         loadPage()
     }, [])
+
+    const cancelInvoice = (id) => {
+        cancelpayout(id)
+        .then((response) => {
+            loadPage()
+            toast({
+                title: response.data.message,
+                variant: 'subtle',
+                status: 'success',
+            })
+        })
+        .catch((error) => {
+            toast({
+                title: error.response.data.message,
+                variant: 'subtle',
+                status: 'error',
+            })
+        })
+    }
     return (
         invoices &&
         <>
@@ -39,6 +62,12 @@ function Invoices(){
                         <Text fontSize={"xs"}>Payout Address</Text>
                         <Text color={primaryColour} fontSize={'md'} fontWeight={'bold'}>{item.address}</Text>
                     </Box>
+                    {
+                        item.status == 'new' &&
+                        <Flex justifyContent={'end'}>
+                            <Button py={1} px={3} borderRadius={"20px"} size={'xs'} fontWeight={"bold"} fontSize={'2xs'} onClick={() => cancelInvoice(item.withdrawId)} >Cancel Invoice</Button>
+                        </Flex>
+                    }
                 </Card>
             ))
         }

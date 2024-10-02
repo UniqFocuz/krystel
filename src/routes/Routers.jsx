@@ -22,6 +22,7 @@ import Grow from "../components/grow/Grow";
 import Businessess from "../components/grow/Businesses";
 import { useParams } from 'react-router-dom';
 import BusinessDetails from "../components/grow/BusinessDetails";
+import HomePage from "../components/HomePage";
 
 function Routers(){
     const toast = useToast()
@@ -29,7 +30,7 @@ function Routers(){
     const navigate = useNavigate()
     const location = useLocation();
     useEffect(()=>{
-        let whitelist = ["/login", "/register", "/logout", "/welcome", "/login/mfa"]
+        let whitelist = ["/", "/login", "/register", "/logout", "/welcome", "/login/mfa"]
         !whitelist.includes(location.pathname) &&
         dashboard()
         .then((response) => {
@@ -68,6 +69,7 @@ function Routers(){
     },[location.pathname, dispatch, navigate, toast])
     return (
         <Routes>
+            <Route path="/" element={<HomePage/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/logout" element={<Logout/>}/>
             <Route path="/register" element={<Register/>}/>

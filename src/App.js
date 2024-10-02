@@ -12,10 +12,14 @@ function App() {
     await loadFull(main);
   };
 
+
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Navbar/>
+        {
+          window.location.pathname !== '/' &&
+          <Navbar/>
+        }
         <div className="app-container">
           <Routers />
           <Particles id="tsparticles" init={particlesInit} options={options} />

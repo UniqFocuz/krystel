@@ -3,11 +3,12 @@ import { useDisclosure } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { primaryColour, primaryColourOpaced } from "../../lib/settings";
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const { isOpen, onToggle } = useDisclosure();
     const navbarRef = useRef(null); // Create a ref for the Navbar
-
+    const navigate = useNavigate()
     // Function to handle link clicks
     const handleLinkClick = () => {
         if (isOpen) {
@@ -53,7 +54,7 @@ const Navbar = () => {
                         <a href="#contact" onClick={handleLinkClick} style={{ textDecoration: 'none', color: 'white' }}>Contact</a>
                     </Text>
 
-                    <Button my={'auto'} fontWeight="bolder" color="white" bg="transparent" border="2px solid white" borderRadius={20} _hover={{ bg: "white", color: primaryColour }}>
+                    <Button onClick={() => navigate('/login')} my={'auto'} fontWeight="bolder" color="white" bg="transparent" border="2px solid white" borderRadius={20} _hover={{ bg: "white", color: primaryColour }}>
                         login
                     </Button>
                 </Flex>
@@ -93,7 +94,7 @@ const Navbar = () => {
                         <Text my={'auto'} color={"white"}>
                             <a href="#contact" onClick={handleLinkClick} style={{ textDecoration: 'none', color: 'white' }}>Contact</a>
                         </Text>
-                        <Button fontWeight="bolder" color="white" bg="transparent" border="2px solid white" borderRadius={20} _hover={{ bg: "white", color: primaryColour }}>
+                        <Button onClick={() => navigate('/login')} fontWeight="bolder" color="white" bg="transparent" border="2px solid white" borderRadius={20} _hover={{ bg: "white", color: primaryColour }}>
                             login
                         </Button>
                     </Flex>
